@@ -33,7 +33,7 @@ export function Header() {
           className={cn(
             "justify-start",
             pathname === link.href ? "bg-accent text-accent-foreground" : "",
-            isMobile ? "w-full text-lg py-6" : ""
+            isMobile ? "w-full text-lg py-6" : "text-base"
           )}
         >
           <Link href={link.href}>{link.label}</Link>
@@ -44,18 +44,22 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center">
-        <Link href="/" className="mr-6 flex items-center space-x-2">
-          <Image src="/assets/logo.png" alt="ENSTA Bretagne Logo" width={40} height={40} className="rounded-full" />
-          <span className="font-bold font-headline">Polyglot Hub</span>
-        </Link>
+      <div className="container flex h-16 items-center justify-between">
+        {/* Left section - Logo */}
+        <div className="flex items-center">
+          <Link href="/" className="flex items-center space-x-2">
+            <Image src="/assets/logo.png" alt="ENSTA Bretagne Logo" width={40} height={40} className="rounded-full" />
+            <span className="font-bold font-headline">Polyglot Hub</span>
+          </Link>
+        </div>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex flex-1 items-center space-x-2">
+        {/* Desktop Navigation - Centered */}
+        <nav className="hidden md:flex justify-center">
           <NavLinkItems />
         </nav>
 
-        <div className="flex flex-1 items-center justify-end space-x-2">
+        {/* Right section - Controls */}
+        <div className="flex items-center justify-end space-x-2">
           <LanguageSwitcher />
           <ThemeToggle />
 
@@ -69,7 +73,7 @@ export function Header() {
                 </Button>
               </SheetTrigger>
               <SheetContent side="right">
-                <Link href="/" className="mr-6 flex items-center space-x-2 mb-8">
+                <Link href="/" className="flex items-center space-x-2 mb-8">
                   <Image src="/assets/logo.png" alt="ENSTA Bretagne Logo" width={40} height={40} className="rounded-full" />
                   <span className="font-bold font-headline">Polyglot Hub</span>
                 </Link>
