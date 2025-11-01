@@ -11,11 +11,14 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/components/providers/ThemeProvider";
+import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 export function Header() {
   const pathname = usePathname();
   const { t } = useLanguage();
   const { theme } = useTheme();
+  const logoImage = PlaceHolderImages.find(p => p.id === "logo");
+
 
   const navLinks = [
     { href: "/", label: t.nav.home },
@@ -48,7 +51,7 @@ export function Header() {
         {/* Left section - Logo */}
         <div className="flex items-center">
           <Link href="/" className="flex items-center space-x-2">
-            <Image src="/assets/logo.png" alt="ENSTA Bretagne Logo" width={40} height={40} className="rounded-full" />
+            {logoImage && <Image src={logoImage.imageUrl} alt={logoImage.description} width={40} height={40} className="rounded-full" />}
             <span className="font-bold font-headline">Polyglot Hub</span>
           </Link>
         </div>
@@ -74,7 +77,7 @@ export function Header() {
               </SheetTrigger>
               <SheetContent side="right">
                 <Link href="/" className="flex items-center space-x-2 mb-8">
-                  <Image src="/assets/logo.png" alt="ENSTA Bretagne Logo" width={40} height={40} className="rounded-full" />
+                  {logoImage && <Image src={logoImage.imageUrl} alt={logoImage.description} width={40} height={40} className="rounded-full" />}
                   <span className="font-bold font-headline">Polyglot Hub</span>
                 </Link>
                 <nav className="flex flex-col space-y-3">
