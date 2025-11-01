@@ -80,7 +80,7 @@ export const translations = {
       },
     },
     footer: {
-      copyright: "© 2024 Polyglot School Hub. All rights reserved.",
+      copyright: "© 2024 ENSTA. All rights reserved.",
     },
   },
   fr: {
@@ -162,7 +162,7 @@ export const translations = {
       },
     },
     footer: {
-      copyright: "© 2024 Polyglot School Hub. All rights reserved.",
+      copyright: "© 2024 ENSTA. Tous droits réservés.",
     },
   },
 };
