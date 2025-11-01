@@ -54,7 +54,7 @@ export const translations = {
       phoneTitle: "Phone",
       phone: "+1 (555) 123-4567",
       emailTitle: "Email",
-      email: "contact@polyglotschool.edu",
+      email: "contact@ensta.edu.dz",
       form: {
         name: "Your Name",
         namePlaceholder: "Enter your full name",
@@ -136,7 +136,7 @@ export const translations = {
       phoneTitle: "Téléphone",
       phone: "+1 (555) 123-4567",
       emailTitle: "Courriel",
-      email: "contact@polyglotschool.edu",
+      email: "contact@ensta.edu.dz",
       form: {
         name: "Votre Nom",
         namePlaceholder: "Entrez votre nom complet",
