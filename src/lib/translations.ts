@@ -1,3 +1,4 @@
+
 export const translations = {
   en: {
     nav: {
@@ -52,7 +53,7 @@ export const translations = {
       address: "ENSTAM, Bordj El Kiffan",
       addressUrl: "https://maps.app.goo.gl/TyB2cDNA9JK7rEwA7",
       phoneTitle: "Phone",
-      phone: "+1 (555) 123-4567",
+      phone: "+213 (0)23 79 71 18 / +213 (0)44 12 11 03",
       emailTitle: "Email",
       email: "contact@ensta.edu.dz",
       form: {
@@ -134,7 +135,7 @@ export const translations = {
       address: "ENSTAM, Bordj El Kiffan",
       addressUrl: "https://maps.app.goo.gl/TyB2cDNA9JK7rEwA7",
       phoneTitle: "Téléphone",
-      phone: "+1 (555) 123-4567",
+      phone: "+213 (0)23 79 71 18 / +213 (0)44 12 11 03",
       emailTitle: "Courriel",
       email: "contact@ensta.edu.dz",
       form: {
@@ -164,3 +165,5 @@ export const translations = {
     },
   },
 };
+
+    
