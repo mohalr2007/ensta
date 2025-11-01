@@ -1,4 +1,5 @@
 
+
 export const translations = {
   en: {
     nav: {
@@ -53,7 +54,7 @@ export const translations = {
       address: "Faculté de Médecine - Ctre biomédicale, Bordj El Kiffan",
       addressUrl: "https://maps.app.goo.gl/TyB2cDNA9JK7rEwA7",
       phoneTitle: "Phone",
-      phones: ["+213 (0)23 79 71 18", "+213 (0)44 12 11 03"],
+      phones: ["+21323797118", "+21344121103"],
       emailTitle: "Email",
       email: "contact@ensta.edu.dz",
       form: {
@@ -135,7 +136,7 @@ export const translations = {
       address: "Faculté de Médecine - Ctre biomédicale, Bordj El Kiffan",
       addressUrl: "https://maps.app.goo.gl/TyB2cDNA9JK7rEwA7",
       phoneTitle: "Téléphone",
-      phones: ["+213 (0)23 79 71 18", "+213 (0)44 12 11 03"],
+      phones: ["+21323797118", "+21344121103"],
       emailTitle: "Courriel",
       email: "contact@ensta.edu.dz",
       form: {

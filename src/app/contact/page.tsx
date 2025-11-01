@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useLanguage } from "@/components/providers/LanguageProvider";
@@ -30,9 +31,11 @@ export default function ContactPage() {
 
           <div className="space-y-8">
             <div className="flex items-start gap-4">
-               <Link href={t.contact.addressUrl} target="_blank" rel="noopener noreferrer" className="bg-primary text-primary-foreground rounded-full p-3 mt-1 inline-block">
-                  <MapPin className="w-6 h-6" />
-                </Link>
+               <Button asChild variant="outline" size="icon" className="mt-1 flex-shrink-0">
+                  <Link href={t.contact.addressUrl} target="_blank" rel="noopener noreferrer">
+                    <MapPin className="w-6 h-6" />
+                  </Link>
+                </Button>
               <div>
                 <h3 className="font-semibold text-lg">{t.contact.addressTitle}</h3>
                 <Link href={t.contact.addressUrl} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
@@ -41,23 +44,27 @@ export default function ContactPage() {
               </div>
             </div>
             <div className="flex items-start gap-4">
-              <div className="bg-primary text-primary-foreground rounded-full p-3 mt-1">
-                <Phone className="w-6 h-6" />
-              </div>
+              <Button asChild variant="outline" size="icon" className="mt-1 flex-shrink-0">
+                <Link href={`tel:${t.contact.phones[0]}`}>
+                  <Phone className="w-6 h-6" />
+                </Link>
+              </Button>
               <div>
                 <h3 className="font-semibold text-lg">{t.contact.phoneTitle}</h3>
                 {t.contact.phones.map((phone, index) => (
-                  <p key={index} className="text-muted-foreground">{phone}</p>
+                  <a key={index} href={`tel:${phone}`} className="block text-muted-foreground hover:text-primary transition-colors">{phone}</a>
                 ))}
               </div>
             </div>
             <div className="flex items-start gap-4">
-              <div className="bg-primary text-primary-foreground rounded-full p-3 mt-1">
-                <Mail className="w-6 h-6" />
-              </div>
+              <Button asChild variant="outline" size="icon" className="mt-1 flex-shrink-0">
+                <Link href={`mailto:${t.contact.email}`}>
+                  <Mail className="w-6 h-6" />
+                </Link>
+              </Button>
               <div>
                 <h3 className="font-semibold text-lg">{t.contact.emailTitle}</h3>
-                <p className="text-muted-foreground">{t.contact.email}</p>
+                <a href={`mailto:${t.contact.email}`} className="text-muted-foreground hover:text-primary transition-colors">{t.contact.email}</a>
               </div>
             </div>
           </div>
