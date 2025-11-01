@@ -22,7 +22,7 @@ export function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center space-x-2 mb-4 md:mb-0">
             {logoImage && <Image src={logoImage.imageUrl} alt={logoImage.description} width={24} height={24} className="rounded-full" />}
-            <span className="font-bold font-headline text-lg">Polyglot School Hub</span>
+            <span className="font-bold font-headline text-lg">ENSTA</span>
           </div>
           <p className="text-center md:text-left text-sm">
             {t.footer.copyright}
