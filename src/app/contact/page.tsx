@@ -31,11 +31,9 @@ export default function ContactPage() {
 
           <div className="space-y-8">
             <div className="flex items-start gap-4">
-               <Button asChild variant="outline" size="icon" className="mt-1 flex-shrink-0">
-                  <Link href={t.contact.addressUrl} target="_blank" rel="noopener noreferrer">
-                    <MapPin className="w-6 h-6" />
-                  </Link>
-                </Button>
+               <Link href={t.contact.addressUrl} target="_blank" rel="noopener noreferrer" className="mt-1 flex-shrink-0 bg-primary text-primary-foreground p-3 rounded-full hover:bg-primary/90 transition-colors">
+                  <MapPin className="w-6 h-6" />
+               </Link>
               <div>
                 <h3 className="font-semibold text-lg">{t.contact.addressTitle}</h3>
                 <Link href={t.contact.addressUrl} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
@@ -44,11 +42,9 @@ export default function ContactPage() {
               </div>
             </div>
             <div className="flex items-start gap-4">
-              <Button asChild variant="outline" size="icon" className="mt-1 flex-shrink-0">
-                <Link href={`tel:${t.contact.phones[0]}`}>
+               <Link href={`tel:${t.contact.phones[0]}`} className="mt-1 flex-shrink-0 bg-primary text-primary-foreground p-3 rounded-full hover:bg-primary/90 transition-colors">
                   <Phone className="w-6 h-6" />
                 </Link>
-              </Button>
               <div>
                 <h3 className="font-semibold text-lg">{t.contact.phoneTitle}</h3>
                 {t.contact.phones.map((phone, index) => (
@@ -57,11 +53,9 @@ export default function ContactPage() {
               </div>
             </div>
             <div className="flex items-start gap-4">
-              <Button asChild variant="outline" size="icon" className="mt-1 flex-shrink-0">
-                <Link href={`mailto:${t.contact.email}`}>
+              <Link href={`mailto:${t.contact.email}`} className="mt-1 flex-shrink-0 bg-primary text-primary-foreground p-3 rounded-full hover:bg-primary/90 transition-colors">
                   <Mail className="w-6 h-6" />
-                </Link>
-              </Button>
+              </Link>
               <div>
                 <h3 className="font-semibold text-lg">{t.contact.emailTitle}</h3>
                 <a href={`mailto:${t.contact.email}`} className="text-muted-foreground hover:text-primary transition-colors">{t.contact.email}</a>
