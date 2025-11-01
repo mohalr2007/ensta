@@ -52,7 +52,7 @@ export function Header() {
         <div className="flex items-center">
           <Link href="/" className="flex items-center space-x-2">
             {logoImage && <Image src={logoImage.imageUrl} alt={logoImage.description} width={40} height={40} className="rounded-full" />}
-            <span className="font-bold font-headline">Polyglot Hub</span>
+            <span className="font-bold font-headline">ENSTA</span>
           </Link>
         </div>
 
@@ -78,7 +78,7 @@ export function Header() {
               <SheetContent side="right">
                 <Link href="/" className="flex items-center space-x-2 mb-8">
                   {logoImage && <Image src={logoImage.imageUrl} alt={logoImage.description} width={40} height={40} className="rounded-full" />}
-                  <span className="font-bold font-headline">Polyglot Hub</span>
+                  <span className="font-bold font-headline">ENSTA</span>
                 </Link>
                 <nav className="flex flex-col space-y-3">
                   <NavLinkItems isMobile={true} />
