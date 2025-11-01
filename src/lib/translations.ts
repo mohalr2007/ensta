@@ -50,8 +50,8 @@ export const translations = {
       title: "Get in Touch",
       subtitle: "We'd love to hear from you. Please fill out the form below or contact us using the information provided.",
       addressTitle: "Our Address",
-      address: "ENSTAM, Bordj El Kiffan",
-      addressUrl: "https://maps.app.goo.gl/TyB2cDNA9JK7rEwA7",
+      address: "Faculté de Médecine - Ctre biomédicale, Bordj El Kiffan",
+      addressUrl: "https://maps.app.goo.gl/u21T8b8A4nJc2xVs6",
       phoneTitle: "Phone",
       phones: ["+213 (0)23 79 71 18", "+213 (0)44 12 11 03"],
       emailTitle: "Email",
@@ -132,8 +132,8 @@ export const translations = {
       title: "Contactez-Nous",
       subtitle: "Nous serions ravis de vous entendre. Veuillez remplir le formulaire ci-dessous ou nous contacter en utilisant les informations fournies.",
       addressTitle: "Notre Adresse",
-      address: "ENSTAM, Bordj El Kiffan",
-      addressUrl: "https://maps.app.goo.gl/TyB2cDNA9JK7rEwA7",
+      address: "Faculté de Médecine - Ctre biomédicale, Bordj El Kiffan",
+      addressUrl: "https://maps.app.goo.gl/u21T8b8A4nJc2xVs6",
       phoneTitle: "Téléphone",
       phones: ["+213 (0)23 79 71 18", "+213 (0)44 12 11 03"],
       emailTitle: "Courriel",
@@ -165,5 +165,3 @@ export const translations = {
     },
   },
 };
-
-    
