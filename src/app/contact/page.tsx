@@ -30,6 +30,18 @@ export default function ContactPage() {
           </div>
 
           <div className="space-y-8">
+            <div className="rounded-lg overflow-hidden shadow-lg h-64">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3197.835935564883!2d3.190678675402099!3d36.72620797227749!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128e51b3a3255a69%3A0x9593a1290391d8a!2sFacult%C3%A9%20de%20M%C3%A9decine%20-%20Ctre%20biom%C3%A9dicale!5e0!3m2!1sen!2sdz!4v1721323385756!5m2!1sen!2sdz"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen={true}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+
             <div className="flex items-start gap-4">
                <Link href={t.contact.addressUrl} target="_blank" rel="noopener noreferrer" className="mt-1 flex-shrink-0 bg-primary text-primary-foreground p-3 rounded-full hover:bg-primary/90 transition-colors">
                   <MapPin className="w-6 h-6" />
@@ -42,9 +54,9 @@ export default function ContactPage() {
               </div>
             </div>
             <div className="flex items-start gap-4">
-               <Link href={`tel:${t.contact.phones[0]}`} className="mt-1 flex-shrink-0 bg-primary text-primary-foreground p-3 rounded-full hover:bg-primary/90 transition-colors">
+               <a href={`tel:${t.contact.phones[0]}`} className="mt-1 flex-shrink-0 bg-primary text-primary-foreground p-3 rounded-full hover:bg-primary/90 transition-colors">
                   <Phone className="w-6 h-6" />
-                </Link>
+                </a>
               <div>
                 <h3 className="font-semibold text-lg">{t.contact.phoneTitle}</h3>
                 {t.contact.phones.map((phone, index) => (
@@ -53,9 +65,9 @@ export default function ContactPage() {
               </div>
             </div>
             <div className="flex items-start gap-4">
-              <Link href={`mailto:${t.contact.email}`} className="mt-1 flex-shrink-0 bg-primary text-primary-foreground p-3 rounded-full hover:bg-primary/90 transition-colors">
+              <a href={`mailto:${t.contact.email}`} className="mt-1 flex-shrink-0 bg-primary text-primary-foreground p-3 rounded-full hover:bg-primary/90 transition-colors">
                   <Mail className="w-6 h-6" />
-              </Link>
+              </a>
               <div>
                 <h3 className="font-semibold text-lg">{t.contact.emailTitle}</h3>
                 <a href={`mailto:${t.contact.email}`} className="text-muted-foreground hover:text-primary transition-colors">{t.contact.email}</a>
