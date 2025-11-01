@@ -1,68 +1,29 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
+import type { ThemeProviderProps } from "next-themes/dist/types";
 
-type Theme = "dark" | "light";
-
-type ThemeProviderProps = {
+type CustomThemeProviderProps = {
   children: React.ReactNode;
-  defaultTheme?: Theme;
-  storageKey?: string;
-  enableSystem?: boolean; // Keep for compatibility, but logic simplifies to light/dark
-  attribute?: string;
 };
 
 type ThemeProviderState = {
-  theme: Theme;
-  setTheme: (theme: Theme) => void;
   toggleTheme: () => void;
 };
 
-const initialState: ThemeProviderState = {
-  theme: "light",
-  setTheme: () => null,
-  toggleTheme: () => null,
-};
-
-const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
+const ThemeProviderContext = createContext<ThemeProviderState | undefined>(
+  undefined
+);
 
 export function ThemeProvider({
   children,
-  defaultTheme = "light",
-  storageKey = "polyglot-theme",
-  attribute = "class",
   ...props
-}: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(
-    () => (typeof window !== 'undefined' ? (localStorage.getItem(storageKey) as Theme) || defaultTheme : defaultTheme)
-  );
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const root = window.document.documentElement;
-
-    root.classList.remove("light", "dark");
-    root.classList.add(theme);
-
-    localStorage.setItem(storageKey, theme);
-  }, [theme, storageKey]);
-
-  const toggleTheme = () => {
-    setTheme(prevTheme => (prevTheme === "light" ? "dark" : "light"));
-  };
-  
-  const value = {
-    theme,
-    setTheme: (theme: Theme) => {
-      setTheme(theme);
-    },
-    toggleTheme,
-  };
-
+}: CustomThemeProviderProps & ThemeProviderProps) {
   return (
-    <ThemeProviderContext.Provider {...props} value={value}>
-      {children}
-    </ThemeProviderContext.Provider>
+    <NextThemesProvider {...props}>
+        {children}
+    </NextThemesProvider>
   );
 }
 

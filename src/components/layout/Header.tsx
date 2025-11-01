@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { cn } from "@/lib/utils";
-import { useTheme } from "@/components/providers/ThemeProvider";
+import { useTheme } from "next-themes";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 export function Header() {
