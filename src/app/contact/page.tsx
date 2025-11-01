@@ -50,7 +50,7 @@ export default function ContactPage() {
         <div className="mt-20 md:mt-24">
             <div className="w-full h-[400px] rounded-lg overflow-hidden shadow-xl">
                 <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3198.236349581423!2d3.190696315609408!3d36.71694247996538!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128e51a66f272e27%3A0x8878d6b334a11f2a!2sFaculty%20of%20Medicine%20of%20Algiers!5e0!3m2!1sen!2sus!4v1628000000000!5m2!1sen!2sus"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3197.886333465135!2d3.184398976159504!3d36.72520697226684!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128e5a778461872b%3A0x4c55b13a73562639!2sENSTAM!5e0!3m2!1sen!2sdz!4v1720546197592!5m2!1sen!2sdz"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
