@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -12,12 +13,14 @@ import { useLanguage } from "@/components/providers/LanguageProvider";
 import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
+import { useState } from "react";
 
 export function Header() {
   const pathname = usePathname();
   const { t } = useLanguage();
   const { theme } = useTheme();
   const logoImage = PlaceHolderImages.find(p => p.id === "logo");
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
 
   const navLinks = [
@@ -38,6 +41,7 @@ export function Header() {
             pathname === link.href ? "bg-accent text-accent-foreground" : "",
             isMobile ? "w-full text-lg py-6" : "text-base"
           )}
+          onClick={() => isMobile && setMobileMenuOpen(false)}
         >
           <Link href={link.href}>{link.label}</Link>
         </Button>
@@ -47,28 +51,27 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between">
-        {/* Left section - Logo */}
-        <div className="flex items-center">
+      <div className="container flex h-16 items-center">
+        {/* Left section - Logo and Desktop Nav */}
+        <div className="flex items-center gap-6">
           <Link href="/" className="flex items-center space-x-2">
             {logoImage && <Image src={logoImage.imageUrl} alt={logoImage.description} width={40} height={40} className="rounded-full" />}
-            <span className="font-bold font-headline">ENSTA</span>
+            <span className="font-bold font-headline hidden sm:inline-block">ENSTA</span>
           </Link>
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-4">
+            <NavLinkItems />
+          </nav>
         </div>
 
-        {/* Desktop Navigation - Centered */}
-        <nav className="hidden md:flex justify-center">
-          <NavLinkItems />
-        </nav>
-
         {/* Right section - Controls */}
-        <div className="flex items-center justify-end space-x-2">
+        <div className="flex flex-1 items-center justify-end space-x-2">
           <LanguageSwitcher />
           <ThemeToggle />
 
           {/* Mobile Navigation */}
           <div className="md:hidden">
-            <Sheet>
+            <Sheet open={isMobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon">
                   <Menu className="h-6 w-6" />
@@ -76,7 +79,7 @@ export function Header() {
                 </Button>
               </SheetTrigger>
               <SheetContent side="right">
-                <Link href="/" className="flex items-center space-x-2 mb-8">
+                <Link href="/" className="flex items-center space-x-2 mb-8" onClick={() => setMobileMenuOpen(false)}>
                   {logoImage && <Image src={logoImage.imageUrl} alt={logoImage.description} width={40} height={40} className="rounded-full" />}
                   <span className="font-bold font-headline">ENSTA</span>
                 </Link>

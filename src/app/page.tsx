@@ -45,7 +45,7 @@ export default function Home() {
           src="/assets/logo.png"
           alt="Polyglot School Hub Logo"
           fill
-          className="object-contain"
+          className="object-cover"
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-r from-primary/70 via-secondary/70 to-accent/70 flex flex-col items-center justify-center text-center p-4">
@@ -81,7 +81,7 @@ export default function Home() {
       {/* Announcements Section */}
       <section className="w-full bg-slate-50 dark:bg-slate-900/50 py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 px-4">
             <h2 className="text-3xl md:text-4xl font-headline font-bold text-foreground">
               {t.home.announcementsTitle}
             </h2>
