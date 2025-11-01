@@ -19,7 +19,7 @@ export function Footer() {
       <div className="container py-8">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center space-x-2 mb-4 md:mb-0">
-            <Image src="https://i.ibb.co/68R12p3/ensta-logo.png" alt="ENSTA Bretagne Logo" width={24} height={24} className="rounded-full" />
+            <Image src="/assets/logo.png" alt="ENSTA Bretagne Logo" width={24} height={24} className="rounded-full" />
             <span className="font-bold font-headline text-lg">Polyglot School Hub</span>
           </div>
           <p className="text-center md:text-left text-sm">

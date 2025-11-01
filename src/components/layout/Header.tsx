@@ -46,7 +46,7 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center">
         <Link href="/" className="mr-6 flex items-center space-x-2">
-          <Image src="https://i.ibb.co/68R12p3/ensta-logo.png" alt="ENSTA Bretagne Logo" width={40} height={40} className="rounded-full" />
+          <Image src="/assets/logo.png" alt="ENSTA Bretagne Logo" width={40} height={40} className="rounded-full" />
           <span className="font-bold font-headline">Polyglot Hub</span>
         </Link>
 
@@ -70,7 +70,7 @@ export function Header() {
               </SheetTrigger>
               <SheetContent side="right">
                 <Link href="/" className="mr-6 flex items-center space-x-2 mb-8">
-                  <Image src="https://i.ibb.co/68R12p3/ensta-logo.png" alt="ENSTA Bretagne Logo" width={40} height={40} className="rounded-full" />
+                  <Image src="/assets/logo.png" alt="ENSTA Bretagne Logo" width={40} height={40} className="rounded-full" />
                   <span className="font-bold font-headline">Polyglot Hub</span>
                 </Link>
                 <nav className="flex flex-col space-y-3">
