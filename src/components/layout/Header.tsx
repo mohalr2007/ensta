@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BookOpen, Menu } from "lucide-react";
+import Image from "next/image";
+import { Menu } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { Button } from "@/components/ui/button";
@@ -43,7 +44,7 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center">
         <Link href="/" className="mr-6 flex items-center space-x-2">
-          <BookOpen className="h-6 w-6 text-primary" />
+          <Image src="https://i.ibb.co/wYpC3n4/logo-ensta-b.png" alt="ENSTA Bretagne Logo" width={40} height={40} />
           <span className="font-bold font-headline">Polyglot Hub</span>
         </Link>
 
@@ -67,7 +68,7 @@ export function Header() {
               </SheetTrigger>
               <SheetContent side="right">
                 <Link href="/" className="mr-6 flex items-center space-x-2 mb-8">
-                  <BookOpen className="h-6 w-6 text-primary" />
+                  <Image src="https://i.ibb.co/wYpC3n4/logo-ensta-b.png" alt="ENSTA Bretagne Logo" width={40} height={40} />
                   <span className="font-bold font-headline">Polyglot Hub</span>
                 </Link>
                 <nav className="flex flex-col space-y-3">

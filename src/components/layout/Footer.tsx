@@ -1,8 +1,9 @@
 "use client";
 
 import { useLanguage } from "@/components/providers/LanguageProvider";
-import { BookOpen, Facebook, Twitter, Instagram } from "lucide-react";
+import { Facebook, Twitter, Instagram } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export function Footer() {
   const { t } = useLanguage();
@@ -18,7 +19,7 @@ export function Footer() {
       <div className="container py-8">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center space-x-2 mb-4 md:mb-0">
-            <BookOpen className="h-6 w-6" />
+            <Image src="https://i.ibb.co/wYpC3n4/logo-ensta-b.png" alt="ENSTA Bretagne Logo" width={24} height={24} />
             <span className="font-bold font-headline text-lg">Polyglot School Hub</span>
           </div>
           <p className="text-center md:text-left text-sm">
