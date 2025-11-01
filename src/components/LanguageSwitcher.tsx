@@ -23,9 +23,11 @@ export function LanguageSwitcher() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => setLanguage("en")} disabled={language === "en"}>
+          <span className="mr-2">🇬🇧</span>
           English
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setLanguage("fr")} disabled={language === "fr"}>
+          <span className="mr-2">🇫🇷</span>
           Français
         </DropdownMenuItem>
       </DropdownMenuContent>
