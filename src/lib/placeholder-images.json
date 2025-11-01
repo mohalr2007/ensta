@@ -1,3 +1,34 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero",
+      "description": "A diverse group of students collaborating in a modern library.",
+      "imageUrl": "https://images.unsplash.com/photo-1637068302763-a8284115e920?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxzdHVkZW50cyUyMGxpYnJhcnl8ZW58MHx8fHwxNzYxOTA2Njc0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "students library"
+    },
+    {
+      "id": "announcement1",
+      "description": "Students participating in a science fair.",
+      "imageUrl": "https://images.unsplash.com/photo-1554475901-4538ddfbccc2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzY2llbmNlJTIwZmFpcnxlbnwwfHx8fDE3NjE5NDc2NjV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "science fair"
+    },
+    {
+      "id": "announcement2",
+      "description": "School sports team celebrating a victory.",
+      "imageUrl": "https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxzcG9ydHMlMjB0ZWFtfGVufDB8fHx8MTc2MTkxOTU0M3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "sports team"
+    },
+    {
+      "id": "announcement3",
+      "description": "Students performing in a school play.",
+      "imageUrl": "https://images.unsplash.com/photo-1619211142200-0d30ded30ca8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxzY2hvb2wlMjBwbGF5fGVufDB8fHx8MTc2MjAwNTQ4OXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "school play"
+    },
+    {
+      "id": "about-history",
+      "description": "An old, historic picture of the school building.",
+      "imageUrl": "https://images.unsplash.com/photo-1655911204432-04323935f032?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxoaXN0b3JpYyUyMGJ1aWxkaW5nfGVufDB8fHx8MTc2MTg5NzU3MHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "historic building"
+    }
+  ]
 }
