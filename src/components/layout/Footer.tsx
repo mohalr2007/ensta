@@ -5,10 +5,25 @@ import { Facebook, Twitter, Instagram } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
+import { useEffect, useState } from "react";
+
+function FooterContent() {
+  const { t } = useLanguage();
+  return (
+    <p className="text-center md:text-left text-sm">
+      {t.footer.copyright}
+    </p>
+  );
+}
 
 export function Footer() {
-  const { t } = useLanguage();
   const logoImage = PlaceHolderImages.find(p => p.id === "logo");
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
 
   const socialLinks = [
     { icon: Facebook, href: "#" },
@@ -24,9 +39,7 @@ export function Footer() {
             {logoImage && <Image src={logoImage.imageUrl} alt={logoImage.description} width={24} height={24} className="rounded-full" />}
             <span className="font-bold font-headline text-lg">ENSTA</span>
           </div>
-          <p className="text-center md:text-left text-sm">
-            {t.footer.copyright}
-          </p>
+          {isClient ? <FooterContent /> : <div className="text-center md:text-left text-sm h-5 w-64 animate-pulse rounded-md bg-muted-foreground/30" />}
           <div className="flex space-x-4 mt-4 md:mt-0">
             {socialLinks.map((link, index) => (
               <Link key={index} href={link.href} className="hover:text-primary transition-colors">
