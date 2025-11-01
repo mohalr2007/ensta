@@ -30,11 +30,9 @@ export default function ContactPage() {
 
           <div className="space-y-8">
             <div className="flex items-start gap-4">
-              <Button asChild size="icon" variant="outline" className="mt-1 flex-shrink-0">
-                <Link href={t.contact.addressUrl} target="_blank" rel="noopener noreferrer">
-                  <MapPin className="w-6 h-6 text-primary" />
+               <Link href={t.contact.addressUrl} target="_blank" rel="noopener noreferrer" className="bg-primary text-primary-foreground rounded-full p-3 mt-1 inline-block">
+                  <MapPin className="w-6 h-6" />
                 </Link>
-              </Button>
               <div>
                 <h3 className="font-semibold text-lg">{t.contact.addressTitle}</h3>
                 <Link href={t.contact.addressUrl} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
