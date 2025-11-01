@@ -10,10 +10,12 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { cn } from "@/lib/utils";
+import { useTheme } from "@/components/providers/ThemeProvider";
 
 export function Header() {
   const pathname = usePathname();
   const { t } = useLanguage();
+  const { theme } = useTheme();
 
   const navLinks = [
     { href: "/", label: t.nav.home },
