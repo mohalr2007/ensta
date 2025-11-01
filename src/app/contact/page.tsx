@@ -46,7 +46,9 @@ export default function ContactPage() {
               </div>
               <div>
                 <h3 className="font-semibold text-lg">{t.contact.phoneTitle}</h3>
-                <p className="text-muted-foreground">{t.contact.phone}</p>
+                {t.contact.phones.map((phone, index) => (
+                  <p key={index} className="text-muted-foreground">{phone}</p>
+                ))}
               </div>
             </div>
             <div className="flex items-start gap-4">
