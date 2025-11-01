@@ -7,6 +7,7 @@ import { useLanguage } from "@/components/providers/LanguageProvider";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { ArrowRight, Megaphone, Calendar as CalendarIcon, Lightbulb } from "lucide-react";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 export default function Home() {
   const { t } = useLanguage();
@@ -50,14 +51,14 @@ export default function Home() {
             priority
           />
         )}
-        <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-center p-4">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/70 via-secondary/70 to-accent/70 flex flex-col items-center justify-center text-center p-4">
           <h1 className="text-4xl md:text-6xl font-headline font-bold drop-shadow-lg">
             {t.home.heroTitle}
           </h1>
           <p className="mt-4 text-lg md:text-xl max-w-2xl drop-shadow-md">
             {t.home.heroSubtitle}
           </p>
-          <Button asChild size="lg" className="mt-8 bg-primary hover:bg-primary/90 text-primary-foreground">
+          <Button asChild size="lg" className={cn("mt-8 text-white bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90")}>
             <Link href="/about">
               {t.home.learnMore} <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
@@ -70,7 +71,7 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
           {features.map((feature, index) => (
             <div key={index} className="flex flex-col items-center">
-              <div className="bg-primary text-primary-foreground rounded-full p-4 mb-4">
+              <div className="bg-gradient-to-br from-primary to-secondary text-primary-foreground rounded-full p-4 mb-4">
                  <feature.icon className="h-8 w-8" />
               </div>
               <h3 className="text-xl font-headline font-semibold text-foreground">{feature.title}</h3>
@@ -81,7 +82,7 @@ export default function Home() {
       </section>
 
       {/* Announcements Section */}
-      <section className="w-full bg-secondary/10 py-20">
+      <section className="w-full bg-slate-50 dark:bg-slate-900/50 py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-headline font-bold text-foreground">
