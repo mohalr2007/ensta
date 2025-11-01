@@ -3,15 +3,10 @@
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { ContactForm } from "./ContactForm";
+import Link from "next/link";
 
 export default function ContactPage() {
   const { t } = useLanguage();
-
-  const contactDetails = [
-    { icon: MapPin, title: t.contact.addressTitle, value: t.contact.address },
-    { icon: Phone, title: t.contact.phoneTitle, value: t.contact.phone },
-    { icon: Mail, title: t.contact.emailTitle, value: t.contact.email },
-  ];
 
   return (
     <>
@@ -33,17 +28,35 @@ export default function ContactPage() {
           </div>
 
           <div className="space-y-8">
-            {contactDetails.map((detail, index) => (
-              <div key={index} className="flex items-start gap-4">
-                <div className="bg-primary text-primary-foreground rounded-full p-3 mt-1">
-                  <detail.icon className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-lg">{detail.title}</h3>
-                  <p className="text-muted-foreground">{detail.value}</p>
-                </div>
+            <div className="flex items-start gap-4">
+              <div className="bg-primary text-primary-foreground rounded-full p-3 mt-1">
+                <MapPin className="w-6 h-6" />
               </div>
-            ))}
+              <div>
+                <h3 className="font-semibold text-lg">{t.contact.addressTitle}</h3>
+                <Link href={t.contact.addressUrl} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                  {t.contact.address}
+                </Link>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <div className="bg-primary text-primary-foreground rounded-full p-3 mt-1">
+                <Phone className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg">{t.contact.phoneTitle}</h3>
+                <p className="text-muted-foreground">{t.contact.phone}</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <div className="bg-primary text-primary-foreground rounded-full p-3 mt-1">
+                <Mail className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg">{t.contact.emailTitle}</h3>
+                <p className="text-muted-foreground">{t.contact.email}</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
