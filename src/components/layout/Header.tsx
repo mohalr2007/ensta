@@ -59,7 +59,7 @@ export function Header() {
       <div className="container flex h-16 items-center">
         {/* Left section - Logo and Desktop Nav */}
         <div className="flex items-center gap-6">
-          <Link href={`/home${speciality ? `?speciality=${speciality}` : ''}`} className="flex items-center space-x-2">
+          <Link href="/" className="flex items-center space-x-2">
             {logoImage && <Image src={logoImage.imageUrl} alt={logoImage.description} width={40} height={40} className="rounded-full" />}
             <span className="font-bold font-headline hidden sm:inline-block">
               ENSTA {speciality && <span className="uppercase text-primary">{speciality}</span>}
@@ -86,7 +86,7 @@ export function Header() {
                 </Button>
               </SheetTrigger>
               <SheetContent side="right">
-                <Link href={`/home${speciality ? `?speciality=${speciality}` : ''}`} className="flex items-center space-x-2 mb-8" onClick={() => setMobileMenuOpen(false)}>
+                <Link href="/" className="flex items-center space-x-2 mb-8" onClick={() => setMobileMenuOpen(false)}>
                   {logoImage && <Image src={logoImage.imageUrl} alt={logoImage.description} width={40} height={40} className="rounded-full" />}
                   <span className="font-bold font-headline">
                     ENSTA {speciality && <span className="uppercase text-primary">{speciality}</span>}
