@@ -11,11 +11,6 @@ const enstaLogoUrl = 'https://elearning.ensta.edu.dz/pluginfile.php/1/theme_acad
 export const metadata: Metadata = {
   title: "ENSTA",
   description: "A modern school hub with bilingual support.",
-  icons: {
-    icon: [
-      { url: enstaLogoUrl, href: enstaLogoUrl },
-    ],
-  },
 };
 
 export default function RootLayout({
@@ -26,6 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="icon" href={enstaLogoUrl} type="image/png" sizes="any" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
