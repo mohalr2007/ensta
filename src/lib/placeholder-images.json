@@ -3,14 +3,14 @@
     {
       "id": "logo",
       "description": "ENSTA Logo",
-      "imageUrl": "https://i.ibb.co/b3x251f/logo.png",
+      "imageUrl": "https://elearning.ensta.edu.dz/pluginfile.php/1/theme_academi/footerlogo/1715699273/ENSTA%20logo.png",
       "imageHint": "logo"
     },
     {
       "id": "hero",
       "description": "A diverse group of students collaborating in a modern library.",
-      "imageUrl": "https://i.ibb.co/b3x251f/logo.png",
-      "imageHint": "school website"
+      "imageUrl": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzdHVkZW50cyUyMGNvbGxhYm9yYXRpbmd8ZW58MHx8fHwxNzYyMDExOTU4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "students collaborating"
     },
     {
       "id": "announcement1",
