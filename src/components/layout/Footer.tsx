@@ -27,7 +27,7 @@ function FooterContent() {
   const socialLinks = [
     { icon: Facebook, href: "https://www.facebook.com/ENSTA.Alger/", name: "Facebook" },
     { icon: XIcon, href: "https://x.com/ENSTA_Alger", name: "X" },
-    { icon: Linkedin, href: "#", name: "LinkedIn" },
+    { icon: Linkedin, href: "https://www.linkedin.com/school/ensta-alger/", name: "LinkedIn" },
     { icon: Youtube, href: "#", name: "YouTube" },
   ];
 
