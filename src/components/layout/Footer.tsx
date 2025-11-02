@@ -25,7 +25,7 @@ function FooterContent() {
   const { t } = useLanguage();
   const logoImage = PlaceHolderImages.find(p => p.id === "logo");
   const socialLinks = [
-    { icon: Facebook, href: "#" },
+    { icon: Facebook, href: "https://www.facebook.com/ENSTA.Alger/" },
     { icon: XIcon, href: "#" },
   ];
 
@@ -40,7 +40,7 @@ function FooterContent() {
         </p>
         <div className="flex space-x-4 mt-4 md:mt-0">
           {socialLinks.map((link, index) => (
-            <Link key={index} href={link.href} className="hover:text-primary transition-colors">
+            <Link key={index} href={link.href} className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">
               <link.icon className="h-5 w-5" />
             </Link>
           ))}
