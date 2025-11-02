@@ -11,6 +11,9 @@ const enstaLogoUrl = 'https://elearning.ensta.edu.dz/pluginfile.php/1/theme_acad
 export const metadata: Metadata = {
   title: "ENSTA",
   description: "A modern school hub with bilingual support.",
+  icons: {
+    icon: enstaLogoUrl,
+  },
 };
 
 export default function RootLayout({
