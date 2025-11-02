@@ -41,7 +41,7 @@ export default function SpecialitySelectionPage() {
                 alt={logoImage.description}
                 width={80}
                 height={80}
-                className="mb-6 rounded-full shadow-lg transition-transform duration-300 ease-in-out hover:scale-110"
+                className="mb-6 rounded-full shadow-lg transition-transform duration-700 ease-in-out hover:rotate-[360deg] hover:scale-125"
             />
         )}
         <h1 className="text-4xl md:text-5xl font-bold font-headline mb-3">
