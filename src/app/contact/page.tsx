@@ -13,10 +13,14 @@ export default function ContactPage() {
   const searchParams = useSearchParams();
   const speciality = searchParams.get('speciality');
 
-  const mapUrl = speciality === 'st'
+  const isSt = speciality === 'st';
+
+  const mapUrl = isSt
     ? "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3195.2479627091916!2d3.0587414756553097!3d36.78860477225033!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128fb301a7a8063d%3A0x4c8a4c0183459a2!2s%C3%89cole%20nationale%20Sup%C3%A9rieure%20de%20technologie%20avanc%C3%A9e!5e0!3m2!1sfr!2sdz!4v1762110639738!5m2!1sfr!2sdz"
     : "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3195.7628605838518!2d3.256288575654727!3d36.77625597225385!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128e457e206a4adf%3A0x2dedffeaea98475f!2sNational%20Higher%20School%20of%20Advanced%20Technologies!5e0!3m2!1sfr!2sdz!4v1762009406950!5m2!1sfr!2sdz";
 
+  const address = isSt ? t.contact.address_st : t.contact.address_mi;
+  const addressUrl = isSt ? t.contact.addressUrl_st : t.contact.addressUrl_mi;
 
   return (
     <>
@@ -51,13 +55,13 @@ export default function ContactPage() {
             </div>
 
             <div className="flex items-start gap-4">
-               <Link href={t.contact.addressUrl} target="_blank" rel="noopener noreferrer" className="mt-1 flex-shrink-0 bg-primary text-primary-foreground p-3 rounded-full hover:bg-primary/90 transition-colors">
+               <Link href={addressUrl} target="_blank" rel="noopener noreferrer" className="mt-1 flex-shrink-0 bg-primary text-primary-foreground p-3 rounded-full hover:bg-primary/90 transition-colors">
                   <MapPin className="w-6 h-6" />
                </Link>
               <div>
                 <h3 className="font-semibold text-lg">{t.contact.addressTitle}</h3>
-                <Link href={t.contact.addressUrl} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
-                  {t.contact.address}
+                <Link href={addressUrl} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                  {address}
                 </Link>
               </div>
             </div>
