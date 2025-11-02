@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: "ENSTA",
   description: "A modern school hub with bilingual support.",
   icons: {
-    icon: 'https://i.ibb.co/MQm6p1P/Capture-d-cran-2025-11-01-155054.png',
+    icon: 'https://i.ibb.co/b3x251f/logo.png',
   },
 };
 
