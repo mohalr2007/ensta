@@ -9,6 +9,9 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Polyglot School Hub",
   description: "A modern school hub with bilingual support.",
+  icons: {
+    icon: 'https://i.ibb.co/MQm6p1P/Capture-d-cran-2025-11-01-155054.png',
+  },
 };
 
 export default function RootLayout({
