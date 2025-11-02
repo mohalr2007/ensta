@@ -34,15 +34,15 @@ function FooterContent() {
   ];
 
   return (
-    <div className="flex flex-col md:flex-row justify-between items-center w-full">
-        <div className="flex items-center space-x-2 mb-4 md:mb-0">
+    <div className="flex flex-col sm:flex-row justify-between items-center w-full gap-6 sm:gap-4">
+        <div className="flex items-center space-x-2">
           {logoImage && <Image src={logoImage.imageUrl} alt={logoImage.description} width={24} height={24} className="rounded-full" />}
           <span className="font-bold font-headline text-lg">ENSTA</span>
         </div>
-        <p className="text-center md:text-left text-sm">
+        <p className="text-center text-sm order-last sm:order-none">
           {t.footer.copyright}
         </p>
-        <div className="flex space-x-4 mt-4 md:mt-0">
+        <div className="flex space-x-4">
           {socialLinks.map((link, index) => (
             <Link key={index} href={link.href} className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer" aria-label={`Visit our ${link.name} page`}>
               <link.icon className="h-5 w-5" />
@@ -56,7 +56,7 @@ function FooterContent() {
 export function Footer() {
   return (
     <footer className="bg-secondary text-secondary-foreground">
-      <div className="container py-8 flex justify-center items-center">
+      <div className="container py-6 sm:py-8 flex justify-center items-center">
         <FooterContent />
       </div>
     </footer>

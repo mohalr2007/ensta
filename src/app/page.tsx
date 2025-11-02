@@ -34,7 +34,7 @@ export default function SpecialitySelectionPage() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-background text-foreground p-4">
-      <div className="text-center mb-12 flex flex-col items-center">
+      <div className="text-center mb-10 sm:mb-12 flex flex-col items-center">
         {logoImage && (
             <Image
                 src={logoImage.imageUrl}
@@ -44,29 +44,29 @@ export default function SpecialitySelectionPage() {
                 className="mb-6 rounded-full shadow-lg transition-transform duration-700 ease-in-out hover:rotate-[360deg] hover:scale-125"
             />
         )}
-        <h1 className="text-4xl md:text-5xl font-bold font-headline mb-3">
+        <h1 className="text-4xl sm:text-5xl font-bold font-headline mb-3">
           Welcome to ENSTA
         </h1>
-        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+        <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
           Please select your specialization to enter the student portal.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 w-full max-w-4xl">
         {specialities.map((spec) => (
           <Link href={spec.href} key={spec.name}>
              <div className={`group rounded-xl overflow-hidden shadow-2xl transform hover:-translate-y-2 transition-all duration-300 ease-in-out ${spec.bgColor} ${spec.textColor} flex flex-col justify-between h-full`}>
-                <div className="p-8">
+                <div className="p-6 sm:p-8">
                   <div className="flex items-center gap-4 mb-4">
-                    <spec.icon className="w-12 h-12" />
-                    <h2 className="text-3xl font-bold font-headline">{spec.name}</h2>
+                    <spec.icon className="w-10 h-10 sm:w-12 sm:h-12" />
+                    <h2 className="text-2xl sm:text-3xl font-bold font-headline">{spec.name}</h2>
                   </div>
-                  <p className="text-lg opacity-90">{spec.description}</p>
+                  <p className="text-base sm:text-lg opacity-90">{spec.description}</p>
                 </div>
-                <div className="px-8 py-4 bg-black bg-opacity-20">
+                <div className="px-6 sm:px-8 py-4 bg-black bg-opacity-20">
                   <div className="flex justify-between items-center">
-                      <span className="text-xl font-semibold">Enter Portal</span>
-                      <span className="text-3xl font-bold opacity-50 transition-transform duration-300 group-hover:translate-x-2">&rarr;</span>
+                      <span className="text-lg sm:text-xl font-semibold">Enter Portal</span>
+                      <span className="text-2xl sm:text-3xl font-bold opacity-50 transition-transform duration-300 group-hover:translate-x-2">&rarr;</span>
                   </div>
                 </div>
              </div>
@@ -74,7 +74,7 @@ export default function SpecialitySelectionPage() {
         ))}
       </div>
 
-      <div className="mt-16 text-center text-muted-foreground">
+      <div className="mt-12 sm:mt-16 text-center text-muted-foreground">
         <p>&copy; 2024 ENSTA. All rights reserved.</p>
       </div>
     </div>
