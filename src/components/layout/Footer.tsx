@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useLanguage } from "@/components/providers/LanguageProvider";
@@ -7,6 +8,7 @@ import Image from "next/image";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { useEffect, useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { usePathname } from "next/navigation";
 
 // X logo SVG component
 const XIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -53,10 +55,16 @@ function FooterContent() {
 
 export function Footer() {
   const [isClient, setIsClient] = useState(false);
+  const pathname = usePathname();
+
 
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  if (pathname === '/') {
+    return null;
+  }
 
   return (
     <footer className="bg-secondary text-secondary-foreground">
