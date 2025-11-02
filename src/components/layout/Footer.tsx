@@ -54,36 +54,10 @@ function FooterContent() {
 }
 
 export function Footer() {
-  const [isClient, setIsClient] = useState(false);
-  const pathname = usePathname();
-
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  if (pathname === '/') {
-    return null;
-  }
-
   return (
     <footer className="bg-secondary text-secondary-foreground">
       <div className="container py-8 flex justify-center items-center">
-        {isClient ? <FooterContent /> : (
-          <div className="flex flex-col md:flex-row justify-between items-center w-full">
-            <div className="flex items-center space-x-2 mb-4 md:mb-0">
-              <Skeleton className="h-6 w-6 rounded-full" />
-              <Skeleton className="h-5 w-20" />
-            </div>
-            <Skeleton className="h-5 w-64" />
-            <div className="flex space-x-4 mt-4 md:mt-0">
-              <Skeleton className="h-5 w-5" />
-              <Skeleton className="h-5 w-5" />
-              <Skeleton className="h-5 w-5" />
-              <Skeleton className="h-5 w-5" />
-            </div>
-          </div>
-        )}
+        <FooterContent />
       </div>
     </footer>
   );
