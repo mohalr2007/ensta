@@ -1,7 +1,7 @@
 "use client";
 
 import { useLanguage } from "@/components/providers/LanguageProvider";
-import { Facebook, Twitter, Instagram } from "lucide-react";
+import { Facebook, Twitter } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
@@ -14,7 +14,6 @@ function FooterContent() {
   const socialLinks = [
     { icon: Facebook, href: "#" },
     { icon: Twitter, href: "#" },
-    { icon: Instagram, href: "#" },
   ];
 
   return (
