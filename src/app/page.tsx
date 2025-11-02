@@ -13,6 +13,7 @@ import { cn } from "@/lib/utils";
 export default function Home() {
   const { t } = useLanguage();
 
+  const heroImage = PlaceHolderImages.find(p => p.id === 'hero');
   const announcementImages = [
     PlaceHolderImages.find(p => p.id === "announcement1"),
     PlaceHolderImages.find(p => p.id === "announcement2"),
@@ -41,13 +42,16 @@ export default function Home() {
     <div className="flex flex-col items-center">
       {/* Hero Section */}
       <section className="w-full relative h-[60vh] text-white">
-        <Image
-          src="/assets/logo.png"
-          alt="Polyglot School Hub Logo"
-          fill
-          className="object-cover"
-          priority
-        />
+        {heroImage && (
+          <Image
+            src={heroImage.imageUrl}
+            alt={heroImage.description}
+            data-ai-hint={heroImage.imageHint}
+            fill
+            className="object-cover"
+            priority
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-r from-primary/70 via-secondary/70 to-accent/70 flex flex-col items-center justify-center text-center p-4">
           <h1 className="text-4xl md:text-6xl font-headline font-bold drop-shadow-lg">
             {t.home.heroTitle}
