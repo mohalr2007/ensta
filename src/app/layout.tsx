@@ -6,11 +6,15 @@ import { Footer } from "@/components/layout/Footer";
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 
+const enstaLogoUrl = 'https://elearning.ensta.edu.dz/pluginfile.php/1/theme_academi/footerlogo/1715699273/ENSTA%20logo.png';
+
 export const metadata: Metadata = {
   title: "ENSTA",
   description: "A modern school hub with bilingual support.",
   icons: {
-    icon: 'https://elearning.ensta.edu.dz/pluginfile.php/1/theme_academi/footerlogo/1715699273/ENSTA%20logo.png',
+    icon: [
+      { url: enstaLogoUrl, href: enstaLogoUrl },
+    ],
   },
 };
 
