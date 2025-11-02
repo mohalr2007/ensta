@@ -9,9 +9,12 @@ import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { ArrowRight, Megaphone, Calendar as CalendarIcon, Lightbulb } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { useSearchParams } from "next/navigation";
 
 export default function Home() {
   const { t } = useLanguage();
+  const searchParams = useSearchParams();
+  const speciality = searchParams.get('speciality');
 
   const heroImage = PlaceHolderImages.find(p => p.id === 'hero');
   const announcementImages = [
@@ -60,7 +63,7 @@ export default function Home() {
             {t.home.heroSubtitle}
           </p>
           <Button asChild size="lg" className={cn("mt-8 text-white bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90")}>
-            <Link href="/about">
+            <Link href={`/about${speciality ? `?speciality=${speciality}` : ''}`}>
               {t.home.learnMore} <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>

@@ -6,9 +6,12 @@ import { Mail, Phone, MapPin } from "lucide-react";
 import { ContactForm } from "./ContactForm";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { useSearchParams } from "next/navigation";
 
 export default function ContactPage() {
   const { t } = useLanguage();
+  const searchParams = useSearchParams();
+  const speciality = searchParams.get('speciality');
 
   return (
     <>

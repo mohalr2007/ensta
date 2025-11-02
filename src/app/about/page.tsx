@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from "next/image";
@@ -5,10 +6,14 @@ import { useLanguage } from "@/components/providers/LanguageProvider";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Target, Eye, Landmark } from "lucide-react";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
+import { useSearchParams } from "next/navigation";
 
 export default function AboutPage() {
   const { t } = useLanguage();
   const historyImage = PlaceHolderImages.find(p => p.id === 'about-history');
+  const searchParams = useSearchParams();
+  const speciality = searchParams.get('speciality');
+
 
   return (
     <>
