@@ -9,9 +9,6 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "ENSTA",
   description: "A modern school hub with bilingual support.",
-  icons: {
-    icon: "/favicon.png",
-  },
 };
 
 export default function RootLayout({
