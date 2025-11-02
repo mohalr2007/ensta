@@ -1,7 +1,7 @@
 "use client";
 
 import { useLanguage } from "@/components/providers/LanguageProvider";
-import { Facebook } from "lucide-react";
+import { Facebook, Linkedin, Youtube } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
@@ -25,8 +25,10 @@ function FooterContent() {
   const { t } = useLanguage();
   const logoImage = PlaceHolderImages.find(p => p.id === "logo");
   const socialLinks = [
-    { icon: Facebook, href: "https://www.facebook.com/ENSTA.Alger/" },
-    { icon: XIcon, href: "https://x.com/ENSTA_Alger" },
+    { icon: Facebook, href: "https://www.facebook.com/ENSTA.Alger/", name: "Facebook" },
+    { icon: XIcon, href: "https://x.com/ENSTA_Alger", name: "X" },
+    { icon: Linkedin, href: "#", name: "LinkedIn" },
+    { icon: Youtube, href: "#", name: "YouTube" },
   ];
 
   return (
@@ -40,7 +42,7 @@ function FooterContent() {
         </p>
         <div className="flex space-x-4 mt-4 md:mt-0">
           {socialLinks.map((link, index) => (
-            <Link key={index} href={link.href} className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">
+            <Link key={index} href={link.href} className="hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer" aria-label={`Visit our ${link.name} page`}>
               <link.icon className="h-5 w-5" />
             </Link>
           ))}
@@ -67,6 +69,7 @@ export function Footer() {
             </div>
             <Skeleton className="h-5 w-64" />
             <div className="flex space-x-4 mt-4 md:mt-0">
+              <Skeleton className="h-5 w-5" />
               <Skeleton className="h-5 w-5" />
               <Skeleton className="h-5 w-5" />
               <Skeleton className="h-5 w-5" />
