@@ -26,7 +26,7 @@ function FooterContent() {
   const logoImage = PlaceHolderImages.find(p => p.id === "logo");
   const socialLinks = [
     { icon: Facebook, href: "https://www.facebook.com/ENSTA.Alger/" },
-    { icon: XIcon, href: "#" },
+    { icon: XIcon, href: "https://x.com/ENSTA_Alger" },
   ];
 
   return (
