@@ -6,13 +6,11 @@ import { Footer } from "@/components/layout/Footer";
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 
-const enstaLogoUrl = 'https://elearning.ensta.edu.dz/pluginfile.php/1/theme_academi/footerlogo/1715699273/ENSTA%20logo.png';
-
 export const metadata: Metadata = {
   title: "ENSTA",
   description: "A modern school hub with bilingual support.",
   icons: {
-    icon: enstaLogoUrl,
+    icon: "/favicon.png",
   },
 };
 
@@ -24,7 +22,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="icon" href={enstaLogoUrl} type="image/png" sizes="any" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
