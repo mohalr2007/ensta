@@ -8,7 +8,7 @@ export const translations = {
       contact: "Contact",
     },
     home: {
-      heroTitle: "Welcome to Polyglot School Hub",
+      heroTitle: "Welcome to ENSTA",
       heroSubtitle: "Excellence in education, diversity in culture. Join a community of learners and leaders.",
       learnMore: "Learn More",
       announcementsTitle: "Latest Announcements",
@@ -38,14 +38,14 @@ export const translations = {
       feature3Desc: "Explore the diverse academic and extracurricular programs we offer.",
     },
     about: {
-      title: "About Polyglot School Hub",
+      title: "About ENSTA",
       subtitle: "A tradition of excellence and a future of innovation.",
       missionTitle: "Our Mission",
       missionText: "To foster a nurturing and challenging environment where students can achieve their full academic and personal potential, while developing a lifelong love for learning and a respect for cultural diversity.",
       visionTitle: "Our Vision",
       visionText: "To be a leading educational institution recognized for its innovative teaching methods, bilingual programs, and for preparing students to be compassionate, responsible global citizens.",
       historyTitle: "Our History",
-      historyText: "Founded in 1985, Polyglot School Hub has grown from a small community school into a celebrated center for academic excellence. For over three decades, we have been committed to providing a world-class education.",
+      historyText: "Founded in 1985, ENSTA has grown from a small community school into a celebrated center for academic excellence. For over three decades, we have been committed to providing a world-class education.",
     },
     contact: {
       title: "Get in Touch",
@@ -90,7 +90,7 @@ export const translations = {
       contact: "Contact",
     },
     home: {
-      heroTitle: "Bienvenue au Polyglot School Hub",
+      heroTitle: "Bienvenue à ENSTA",
       heroSubtitle: "L'excellence dans l'éducation, la diversité dans la culture. Rejoignez une communauté d'apprenants et de leaders.",
       learnMore: "En Savoir Plus",
       announcementsTitle: "Dernières Annonces",
@@ -120,14 +120,14 @@ export const translations = {
       feature3Desc: "Explorez les divers programmes académiques et parascolaires que nous proposons.",
     },
     about: {
-      title: "À Propos de Polyglot School Hub",
+      title: "À Propos de ENSTA",
       subtitle: "Une tradition d'excellence et un avenir d'innovation.",
       missionTitle: "Notre Mission",
       missionText: "Favoriser un environnement stimulant et bienveillant où les élèves peuvent atteindre leur plein potentiel académique et personnel, tout en développant un amour durable pour l'apprentissage et le respect de la diversité culturelle.",
       visionTitle: "Notre Vision",
       visionText: "Être une institution éducative de premier plan, reconnue pour ses méthodes d'enseignement novatrices, ses programmes bilingues et sa capacité à préparer les élèves à devenir des citoyens du monde compatissants et responsables.",
       historyTitle: "Notre Histoire",
-      historyText: "Fondé en 1985, le Polyglot School Hub est passé d'une petite école communautaire à un centre d'excellence académique réputé. Depuis plus de trois décennies, nous nous engageons à offrir une éducation de classe mondiale.",
+      historyText: "Fondé en 1985, le ENSTA est passé d'une petite école communautaire à un centre d'excellence académique réputé. Depuis plus de trois décennies, nous nous engageons à offrir une éducation de classe mondiale.",
     },
     contact: {
       title: "Contactez-Nous",
