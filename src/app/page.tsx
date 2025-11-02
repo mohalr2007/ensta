@@ -3,6 +3,8 @@
 
 import { Calculator, FlaskConical } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export default function SpecialitySelectionPage() {
   const specialities = [
@@ -28,9 +30,20 @@ export default function SpecialitySelectionPage() {
     },
   ];
 
+  const logoImage = PlaceHolderImages.find(p => p.id === 'logo');
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-background text-foreground p-4">
-      <div className="text-center mb-12">
+      <div className="text-center mb-12 flex flex-col items-center">
+        {logoImage && (
+            <Image
+                src={logoImage.imageUrl}
+                alt={logoImage.description}
+                width={80}
+                height={80}
+                className="mb-6 rounded-full"
+            />
+        )}
         <h1 className="text-4xl md:text-5xl font-bold font-headline mb-3">
           Welcome to ENSTA
         </h1>
