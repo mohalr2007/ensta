@@ -13,6 +13,11 @@ export default function ContactPage() {
   const searchParams = useSearchParams();
   const speciality = searchParams.get('speciality');
 
+  const mapUrl = speciality === 'st'
+    ? "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3195.2479627091916!2d3.0587414756553097!3d36.78860477225033!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128fb301a7a8063d%3A0x4c8a4c0183459a2!2s%C3%89cole%20nationale%20Sup%C3%A9rieure%20de%20technologie%20avanc%C3%A9e!5e0!3m2!1sfr!2sdz!4v1762110639738!5m2!1sfr!2sdz"
+    : "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3195.7628605838518!2d3.256288575654727!3d36.77625597225385!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128e457e206a4adf%3A0x2dedffeaea98475f!2sNational%20Higher%20School%20of%20Advanced%20Technologies!5e0!3m2!1sfr!2sdz!4v1762009406950!5m2!1sfr!2sdz";
+
+
   return (
     <>
       <div className="bg-secondary/10">
@@ -35,7 +40,7 @@ export default function ContactPage() {
           <div className="space-y-8">
             <div className="rounded-lg overflow-hidden shadow-lg h-64">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3195.7628605838518!2d3.256288575654727!3d36.77625597225385!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128e457e206a4adf%3A0x2dedffeaea98475f!2sNational%20Higher%20School%20of%20Advanced%20Technologies!5e0!3m2!1sfr!2sdz!4v1762009406950!5m2!1sfr!2sdz"
+                src={mapUrl}
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
