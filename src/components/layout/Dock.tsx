@@ -6,7 +6,7 @@ import { Children, cloneElement, useEffect, useMemo, useRef, useState, isValidEl
 import './Dock.css';
 import { cn } from '@/lib/utils';
 
-function DockItem({ children, className = '', onClick, mouseX, spring, distance, magnification, baseItemSize, isComponent }) {
+function DockItem({ children, className = '', onClick, mouseX, spring, distance, magnification, baseItemSize }) {
   const ref = useRef<HTMLDivElement>(null);
   const isHovered = useMotionValue(0);
 
@@ -20,20 +20,6 @@ function DockItem({ children, className = '', onClick, mouseX, spring, distance,
 
   const targetSize = useTransform(mouseDistance, [-distance, 0, distance], [baseItemSize, magnification, baseItemSize]);
   const size = useSpring(targetSize, spring);
-
-  const itemContent = useMemo(() => {
-    if (isComponent) {
-      // For components like LanguageSwitcher, just render them directly
-      return children;
-    }
-    // For regular items, wrap them with label logic
-    return Children.map(children, child => {
-      if (isValidElement(child)) {
-        return cloneElement(child as React.ReactElement<any>, { isHovered });
-      }
-      return child;
-    });
-  }, [children, isComponent, isHovered]);
 
   return (
     <motion.div
@@ -52,7 +38,12 @@ function DockItem({ children, className = '', onClick, mouseX, spring, distance,
       role="button"
       aria-haspopup="true"
     >
-      {itemContent}
+      {Children.map(children, child => {
+        if (isValidElement(child)) {
+          return cloneElement(child as React.ReactElement<any>, { isHovered });
+        }
+        return child;
+      })}
     </motion.div>
   );
 }
@@ -61,6 +52,7 @@ function DockLabel({ children, className = '', isHovered }) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    if (!isHovered) return;
     const unsubscribe = isHovered.on('change', latest => {
       setIsVisible(latest === 1);
     });
@@ -133,16 +125,9 @@ export function Dock({
               distance={distance}
               magnification={magnification}
               baseItemSize={baseItemSize}
-              isComponent={item.isComponent}
             >
-              {item.isComponent ? (
-                <DockIcon>{item.icon}</DockIcon>
-              ) : (
-                <>
-                  <DockIcon>{item.icon}</DockIcon>
-                  <DockLabel isHovered={undefined}>{item.label}</DockLabel>
-                </>
-              )}
+              <DockIcon>{item.icon}</DockIcon>
+              {!item.isComponent && <DockLabel>{item.label}</DockLabel>}
             </DockItem>
           );
         })}
