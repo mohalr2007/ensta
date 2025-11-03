@@ -44,20 +44,46 @@ export function ContactForm({ speciality }: { speciality: string | null }) {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // The Google Sheet submission logic has been removed.
-    // To reconnect, add your fetch logic here.
-    console.log("Form submitted with values:", values);
-    
-    // Simulate a successful submission
-    await new Promise(resolve => setTimeout(resolve, 500));
+    const scriptURL = process.env.NEXT_PUBLIC_GOOGLE_SHEET_URL;
+    if (!scriptURL) {
+      console.error("Google Sheet URL is not defined in environment variables.");
+      toast({
+        variant: "destructive",
+        title: t.contact.form.errorTitle,
+        description: "The form is not configured. Please contact support.",
+      });
+      return;
+    }
 
-    toast({
-      title: t.contact.form.successTitle,
-      description: t.contact.form.successDescription,
-    });
-    form.reset();
-    // Manually reset the specialization field since it's controlled
-    form.setValue('speciality', speciality || '');
+    try {
+      const formData = new FormData();
+      formData.append('name', values.name);
+      formData.append('email', values.email);
+      formData.append('subject', values.subject);
+      formData.append('message', values.message);
+      formData.append('speciality', values.speciality || 'N/A');
+
+      const response = await fetch(scriptURL, {
+        method: 'POST',
+        body: formData,
+        mode: 'no-cors', // Use no-cors for requests to Google Scripts to avoid CORS errors
+      });
+
+      toast({
+        title: t.contact.form.successTitle,
+        description: t.contact.form.successDescription,
+      });
+      form.reset();
+      form.setValue('speciality', speciality || '');
+
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast({
+        variant: "destructive",
+        title: t.contact.form.errorTitle,
+        description: t.contact.form.errorDescription,
+      });
+    }
   }
 
   return (
@@ -124,7 +150,7 @@ export function ContactForm({ speciality }: { speciality: string | null }) {
                 />
               </FormControl>
               <FormMessage />
-            </FormItem>
+            </Item>
           )}
         />
         <Button type="submit" size="lg" disabled={form.formState.isSubmitting}>
