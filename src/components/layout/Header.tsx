@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { cn } from "@/lib/utils";
 
 type NavItem = {
   label: string;
@@ -23,6 +24,7 @@ export function Header({ navItems }: { navItems: NavItem[] }) {
   const speciality = searchParams.get('speciality');
   const logoImage = PlaceHolderImages.find(p => p.id === "logo");
   const isMobile = useIsMobile();
+  const pathname = usePathname();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-40 bg-background/80 backdrop-blur-sm border-b">
@@ -34,8 +36,29 @@ export function Header({ navItems }: { navItems: NavItem[] }) {
             ENSTA {speciality && <span className="uppercase text-primary">{speciality}</span>}
           </span>
         </Link>
+        
+        {/* Center section - Desktop Nav */}
+        <nav className="hidden md:flex items-center gap-2">
+            {navItems.map((item) => {
+              const href = item.onClick.toString().match(/'([^']+)'/)?.[1] || '/';
+              const isActive = pathname === href;
+              return (
+                <Button
+                    key={item.label}
+                    variant="ghost"
+                    onClick={item.onClick}
+                    className={cn(
+                        "font-medium",
+                        isActive && "text-primary bg-primary/10",
+                    )}
+                >
+                    {item.label}
+                </Button>
+              )
+            })}
+        </nav>
 
-        {/* Right section - Desktop Nav & Controls */}
+        {/* Right section - Controls & Mobile Menu */}
         <div className="flex items-center gap-2">
           {isMobile ? (
             <Sheet>

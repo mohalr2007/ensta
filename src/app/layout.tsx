@@ -9,11 +9,8 @@ import { Header } from "@/components/layout/Header";
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { Dock } from "@/components/layout/Dock";
+import { useEffect, useState }from "react";
 import { Home, Info, Mail } from "lucide-react";
-import { useIsMobile } from "@/hooks/use-mobile";
-
 
 const metadataConfig: Metadata = {
   title: "ENSTA",
@@ -27,7 +24,6 @@ function MainContent({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const { t } = useLanguage();
   const [isClient, setIsClient] = useState(false);
-  const isMobile = useIsMobile();
 
 
   useEffect(() => {
@@ -36,22 +32,22 @@ function MainContent({ children }: { children: React.ReactNode }) {
 
   const navItems = [
     {
-      icon: <Home />,
+      icon: <Home className="w-5 h-5 mr-2" />,
       label: t.nav.home,
       onClick: () => router.push(`/home${speciality ? `?speciality=${speciality}` : ''}`),
     },
     {
-      icon: <Info />,
+      icon: <Info className="w-5 h-5 mr-2" />,
       label: t.nav.about,
       onClick: () => router.push(`/about${speciality ? `?speciality=${speciality}` : ''}`),
     },
     {
-      icon: <Mail />,
+      icon: <Mail className="w-5 h-5 mr-2" />,
       label: t.nav.contact,
       onClick: () => router.push(`/contact${speciality ? `?speciality=${speciality}` : ''}`),
     },
   ];
-
+  
   const showNav = isClient && pathname !== '/';
 
   return (
@@ -61,7 +57,6 @@ function MainContent({ children }: { children: React.ReactNode }) {
         {children}
       </main>
       {showNav && <Footer />}
-      {showNav && !isMobile && <Dock items={navItems} />}
     </div>
   );
 }
