@@ -5,17 +5,19 @@ import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from
 import { Children, cloneElement, useEffect, useMemo, useRef, useState, isValidElement } from 'react';
 import './Dock.css';
 import { cn } from '@/lib/utils';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 function DockItem({ children, className = '', onClick, mouseX, spring, distance, magnification, baseItemSize }) {
   const ref = useRef<HTMLDivElement>(null);
   const isHovered = useMotionValue(0);
 
   const mouseDistance = useTransform(mouseX, val => {
+    if (val === Infinity) return Infinity;
     const rect = ref.current?.getBoundingClientRect() ?? {
       x: 0,
       width: baseItemSize
     };
-    return val - rect.x - baseItemSize / 2;
+    return val - rect.x - rect.width / 2;
   });
 
   const targetSize = useTransform(mouseDistance, [-distance, 0, distance], [baseItemSize, magnification, baseItemSize]);
@@ -50,14 +52,17 @@ function DockItem({ children, className = '', onClick, mouseX, spring, distance,
 
 function DockLabel({ children, className = '', isHovered }) {
   const [isVisible, setIsVisible] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
-    if (!isHovered) return;
+    if (isMobile || !isHovered) return;
     const unsubscribe = isHovered.on('change', latest => {
       setIsVisible(latest === 1);
     });
     return () => unsubscribe();
-  }, [isHovered]);
+  }, [isHovered, isMobile]);
+
+  if (isMobile) return null;
 
   return (
     <AnimatePresence>
@@ -95,29 +100,43 @@ type DockItemProps = {
 export function Dock({
   items,
   className = '',
-  spring = { stiffness: 500, damping: 30 },
-  magnification = 70,
-  distance = 150,
-  baseItemSize = 50,
 }) {
+  const isMobile = useIsMobile();
   const mouseX = useMotionValue(Infinity);
+
+  const baseItemSize = isMobile ? 44 : 50;
+  const magnification = isMobile ? 60 : 70;
+  const distance = isMobile ? 100 : 150;
+  const spring = { stiffness: isMobile ? 500 : 400, damping: isMobile ? 30 : 25 };
 
   return (
     <div className="dock-outer">
       <motion.div
-        onMouseMove={({ clientX }) => mouseX.set(clientX)}
-        onMouseLeave={() => mouseX.set(Infinity)}
+        onMouseMove={({ clientX }) => !isMobile && mouseX.set(clientX)}
+        onMouseLeave={() => !isMobile && mouseX.set(Infinity)}
+        onTouchStart={e => {
+            if (isMobile) {
+                mouseX.set(e.touches[0].clientX);
+            }
+        }}
+        onTouchMove={e => {
+            if (isMobile) {
+                mouseX.set(e.touches[0].clientX);
+            }
+        }}
+        onTouchEnd={() => isMobile && mouseX.set(Infinity)}
+        onTouchCancel={() => isMobile && mouseX.set(Infinity)}
         className={cn("dock-panel", className)}
         role="toolbar"
         aria-label="Application dock"
       >
-        {items.map((item, index) => {
+        {items.map((item) => {
           if (item.isSeparator) {
-            return <div key={`separator-${index}`} className="dock-separator" />;
+            return <div key={item.id} className="dock-separator" />;
           }
           return (
             <DockItem
-              key={item.id || index}
+              key={item.id}
               onClick={item.onClick}
               className={item.className}
               mouseX={mouseX}
@@ -127,7 +146,7 @@ export function Dock({
               baseItemSize={baseItemSize}
             >
               <DockIcon>{item.icon}</DockIcon>
-              {!item.isComponent && <DockLabel>{item.label}</DockLabel>}
+              {!item.isComponent && <DockLabel isHovered={undefined}>{item.label}</DockLabel>}
             </DockItem>
           );
         })}
