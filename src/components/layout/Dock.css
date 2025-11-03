@@ -22,13 +22,13 @@
 .dock-panel {
   display: flex;
   align-items: flex-end;
-  gap: 0.75rem; /* Reduced gap */
-  border-radius: 1.25rem; /* Slightly larger radius */
+  gap: 0.5rem; /* Reduced gap */
+  border-radius: 1rem; /* Slightly smaller radius */
   background-color: hsl(var(--background) / 0.7);
   border: 1px solid hsl(var(--border));
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  padding: 0.5rem; /* Uniform padding */
+  padding: 0.4rem; /* Reduced padding */
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
   pointer-events: auto;
   transition: background-color 0.3s ease;
@@ -83,7 +83,7 @@
 
 .dock-separator {
   width: 1px;
-  height: 30px; /* Adjust height */
+  height: 24px; /* Adjust height */
   background-color: hsl(var(--border));
   margin: 0 0.25rem; /* Add some space around it */
   align-self: center;
