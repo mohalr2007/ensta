@@ -39,7 +39,7 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
           <div className="lg:col-span-2">
             <h2 className="text-2xl md:text-3xl font-bold font-headline mb-6">{t.contact.form.submit}</h2>
-            <ContactForm />
+            <ContactForm speciality={speciality} />
           </div>
 
           <div className="space-y-8">

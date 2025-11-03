@@ -1,3 +1,4 @@
+
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,8 +18,9 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/components/providers/LanguageProvider";
+import { Badge } from "@/components/ui/badge";
 
-export function ContactForm() {
+export function ContactForm({ speciality }: { speciality: string | null }) {
   const { toast } = useToast();
   const { t } = useLanguage();
 
@@ -27,6 +29,7 @@ export function ContactForm() {
     email: z.string().email({ message: t.contact.form.validation.email }),
     subject: z.string().min(5, { message: t.contact.form.validation.subject }),
     message: z.string().min(10, { message: t.contact.form.validation.message }),
+    speciality: z.string().optional(),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -36,6 +39,7 @@ export function ContactForm() {
       email: "",
       subject: "",
       message: "",
+      speciality: speciality || "",
     },
   });
 
@@ -54,6 +58,12 @@ export function ContactForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        {speciality && (
+          <div className="flex items-center gap-2">
+            <FormLabel>{t.contact.form.specialization}</FormLabel>
+            <Badge variant="secondary" className="uppercase text-base">{speciality}</Badge>
+          </div>
+        )}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <FormField
             control={form.control}
