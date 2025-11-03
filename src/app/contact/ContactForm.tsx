@@ -55,35 +55,32 @@ export function ContactForm({ speciality }: { speciality: string | null }) {
       return;
     }
 
-    try {
-      const formData = new FormData();
-      formData.append('name', values.name);
-      formData.append('email', values.email);
-      formData.append('subject', values.subject);
-      formData.append('message', values.message);
-      formData.append('speciality', values.speciality || 'N/A');
+    const formData = new FormData();
+    formData.append('name', values.name);
+    formData.append('email', values.email);
+    formData.append('subject', values.subject);
+    formData.append('message', values.message);
+    formData.append('speciality', values.speciality || 'N/A');
 
-      const response = await fetch(scriptURL, {
+    try {
+      // We use 'no-cors' mode to submit to Google Apps Script.
+      // This means we won't be able to read the response directly,
+      // but it prevents CORS errors and allows the submission to go through.
+      // The Apps Script will still run and add a row to the sheet.
+      await fetch(scriptURL, {
         method: 'POST',
         body: formData,
+        mode: 'no-cors', // This is the crucial part to bypass CORS issues with Google Scripts
       });
 
-      // Google Apps Script responses need to be handled carefully
-      // We will parse the response text to check for a success JSON object
-      const responseText = await response.text();
-      const result = JSON.parse(responseText);
-
-
-      if (result.result === "success") {
-        toast({
-          title: t.contact.form.successTitle,
-          description: t.contact.form.successDescription,
-        });
-        form.reset();
-        form.setValue('speciality', speciality || '');
-      } else {
-        throw new Error(result.error || "An unknown error occurred.");
-      }
+      // Since we can't read the response in 'no-cors' mode, we optimistically
+      // show a success message. The script itself has error handling.
+      toast({
+        title: t.contact.form.successTitle,
+        description: t.contact.form.successDescription,
+      });
+      form.reset();
+      form.setValue('speciality', speciality || '');
 
     } catch (error: any) {
       console.error("Error submitting form:", error);
