@@ -2,7 +2,7 @@
 'use client';
 
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from 'framer-motion';
-import { Children, cloneElement, useEffect, useMemo, useRef, useState, isValidElement } from 'react';
+import { Children, cloneElement, useEffect, useRef, useState, isValidElement } from 'react';
 import './Dock.css';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -105,7 +105,7 @@ export function Dock({
   const mouseX = useMotionValue(Infinity);
 
   const baseItemSize = isMobile ? 38 : 48;
-  const magnification = isMobile ? 52 : 64;
+  const magnification = isMobile ? 42 : 64;
   const distance = isMobile ? 80 : 120;
   const spring = { stiffness: 500, damping: 30 };
 
@@ -134,23 +134,9 @@ export function Dock({
           if (item.isSeparator) {
             return <div key={item.id} className="dock-separator" />;
           }
-          const dockItem = (
-            <DockItem
-              key={item.id}
-              onClick={item.onClick}
-              className={item.className}
-              mouseX={mouseX}
-              spring={spring}
-              distance={distance}
-              magnification={magnification}
-              baseItemSize={baseItemSize}
-            >
-              <DockIcon>{item.icon}</DockIcon>
-              {!item.isComponent && <DockLabel isHovered={undefined}>{item.label}</DockLabel>}
-            </DockItem>
-          );
-          
-          const isHovered = (dockItem.props.children as React.ReactElement[])[1]?.props.isHovered;
+
+          // A motion value to track hover state for the label
+          const isHovered = useMotionValue(0);
 
           return (
             <DockItem
@@ -163,8 +149,8 @@ export function Dock({
               magnification={magnification}
               baseItemSize={baseItemSize}
             >
-                <DockIcon>{item.icon}</DockIcon>
-                {!item.isComponent && <DockLabel isHovered={isHovered}>{item.label}</DockLabel>}
+              <DockIcon>{item.icon}</DockIcon>
+              {!item.isComponent && <DockLabel isHovered={isHovered}>{item.label}</DockLabel>}
             </DockItem>
           );
         })}
