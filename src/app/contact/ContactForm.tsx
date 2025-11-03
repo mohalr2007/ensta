@@ -4,6 +4,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import axios from "axios";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -44,15 +45,35 @@ export function ContactForm({ speciality }: { speciality: string | null }) {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // Mock API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    console.log(values);
-    
-    toast({
-      title: t.contact.form.successTitle,
-      description: t.contact.form.successDescription,
-    });
-    form.reset();
+    const scriptURL = process.env.NEXT_PUBLIC_GOOGLE_SHEET_WEB_APP_URL;
+
+    if (!scriptURL) {
+      console.error("Google Sheet web app URL is not defined.");
+      toast({
+        variant: "destructive",
+        title: t.contact.form.errorTitle,
+        description: "The form submission endpoint is not configured.",
+      });
+      return;
+    }
+
+    try {
+      await axios.post(scriptURL, values);
+      
+      toast({
+        title: t.contact.form.successTitle,
+        description: t.contact.form.successDescription,
+      });
+      form.reset();
+
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast({
+        variant: "destructive",
+        title: t.contact.form.errorTitle,
+        description: t.contact.form.errorDescription,
+      });
+    }
   }
 
   return (
