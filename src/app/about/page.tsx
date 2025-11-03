@@ -4,7 +4,7 @@
 import Image from "next/image";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Target, Eye, Landmark } from "lucide-react";
+import { Target, Eye, Landmark, BrainCircuit, ShieldCheck } from "lucide-react";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { useSearchParams } from "next/navigation";
 
@@ -14,6 +14,20 @@ export default function AboutPage() {
   const searchParams = useSearchParams();
   const speciality = searchParams.get('speciality');
 
+  const miSpecializations = [
+    {
+      ...t.about.miSpecializations[0],
+      icon: BrainCircuit,
+      image: PlaceHolderImages.find(p => p.id === 'mi-ai'),
+    },
+    {
+      ...t.about.miSpecializations[1],
+      icon: ShieldCheck,
+      image: PlaceHolderImages.find(p => p.id === 'mi-security'),
+    }
+  ];
+
+  const isMi = speciality === 'mi';
 
   return (
     <>
@@ -81,6 +95,41 @@ export default function AboutPage() {
             )}
           </div>
         </div>
+        
+        {isMi && (
+          <div className="mt-16 md:mt-24">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold font-headline">{t.about.miSpecializationsTitle}</h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {miSpecializations.map((spec) => (
+                <Card key={spec.title} className="group overflow-hidden text-center transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border-2 border-transparent hover:border-primary">
+                  {spec.image && (
+                    <div className="relative h-56 w-full">
+                      <Image
+                        src={spec.image.imageUrl}
+                        alt={spec.image.description}
+                        data-ai-hint={spec.image.imageHint}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                  )}
+                  <CardContent className="p-6">
+                    <div className="flex justify-center items-center mb-4">
+                      <div className="bg-primary/10 text-primary p-3 rounded-full animate-pulse">
+                        <spec.icon className="h-8 w-8" />
+                      </div>
+                    </div>
+                    <p className="text-sm font-semibold text-primary">Domaine MI</p>
+                    <h3 className="text-xl font-bold font-headline mt-2">{spec.title}</h3>
+                    <p className="mt-2 text-destructive font-semibold">{spec.tag}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

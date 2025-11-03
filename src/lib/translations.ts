@@ -46,6 +46,17 @@ export const translations = {
       visionText: "To be a leading educational institution recognized for its innovative teaching methods, bilingual programs, and for preparing students to be compassionate, responsible global citizens.",
       historyTitle: "Our History",
       historyText: "Founded in 1985, ENSTA has grown from a small community school into a celebrated center for academic excellence. For over three decades, we have been committed to providing a world-class education.",
+      miSpecializationsTitle: "MI Domain Specializations",
+      miSpecializations: [
+        {
+          title: "Artificial Intelligence and Applications",
+          tag: "New 2025-2026"
+        },
+        {
+          title: "Systems Security",
+          tag: "New 2025-2026"
+        }
+      ]
     },
     contact: {
       title: "Get in Touch",
@@ -130,6 +141,17 @@ export const translations = {
       visionText: "Être une institution éducative de premier plan, reconnue pour ses méthodes d'enseignement novatrices, ses programmes bilingues et sa capacité à préparer les élèves à devenir des citoyens du monde compatissants et responsables.",
       historyTitle: "Notre Histoire",
       historyText: "Fondé en 1985, le ENSTA est passé d'une petite école communautaire à un centre d'excellence académique réputé. Depuis plus de trois décennies, nous nous engageons à offrir une éducation de classe mondiale.",
+      miSpecializationsTitle: "Spécialisations du Domaine MI",
+      miSpecializations: [
+        {
+          title: "Intelligence Artificielle et Applications",
+          tag: "Nouvelle 2025-2026"
+        },
+        {
+          title: "Sécurité des Systèmes",
+          tag: "Nouvelle 2025-2026"
+        }
+      ]
     },
     contact: {
       title: "Contactez-Nous",
