@@ -1,10 +1,8 @@
-
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -19,12 +17,23 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { Badge } from "@/components/ui/badge";
+import { sendContactForm } from "@/app/actions/sendContactForm";
+
+// This schema must match the one in the server action
+const formSchema = z.object({
+  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
+  email: z.string().email({ message: "Please enter a valid email address." }),
+  subject: z.string().min(5, { message: "Subject must be at least 5 characters." }),
+  message: z.string().min(10, { message: "Message must be at least 10 characters." }),
+  speciality: z.string().optional(),
+});
 
 export function ContactForm({ speciality }: { speciality: string | null }) {
   const { toast } = useToast();
   const { t } = useLanguage();
 
-  const formSchema = z.object({
+  // Use the new translated validation messages
+  const translatedFormSchema = z.object({
     name: z.string().min(2, { message: t.contact.form.validation.name }),
     email: z.string().email({ message: t.contact.form.validation.email }),
     subject: z.string().min(5, { message: t.contact.form.validation.subject }),
@@ -32,8 +41,8 @@ export function ContactForm({ speciality }: { speciality: string | null }) {
     speciality: z.string().optional(),
   });
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof translatedFormSchema>>({
+    resolver: zodResolver(translatedFormSchema),
     defaultValues: {
       name: "",
       email: "",
@@ -43,51 +52,22 @@ export function ContactForm({ speciality }: { speciality: string | null }) {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    const scriptURL = process.env.NEXT_PUBLIC_GOOGLE_SHEET_URL;
-    if (!scriptURL) {
-      console.error("Google Sheet URL is not defined in environment variables.");
-      toast({
-        variant: "destructive",
-        title: t.contact.form.errorTitle,
-        description: "The form is not configured. Please contact support.",
-      });
-      return;
-    }
+  async function onSubmit(values: z.infer<typeof translatedFormSchema>) {
+    // Call the server action
+    const result = await sendContactForm(values);
 
-    const formData = new FormData();
-    formData.append('name', values.name);
-    formData.append('email', values.email);
-    formData.append('subject', values.subject);
-    formData.append('message', values.message);
-    formData.append('speciality', values.speciality || 'N/A');
-
-    try {
-      // We use 'no-cors' mode to submit to Google Apps Script.
-      // This means we won't be able to read the response directly,
-      // but it prevents CORS errors and allows the submission to go through.
-      // The Apps Script will still run and add a row to the sheet.
-      await fetch(scriptURL, {
-        method: 'POST',
-        body: formData,
-        mode: 'no-cors', // This is the crucial part to bypass CORS issues with Google Scripts
-      });
-
-      // Since we can't read the response in 'no-cors' mode, we optimistically
-      // show a success message. The script itself has error handling.
+    if (result.success) {
       toast({
         title: t.contact.form.successTitle,
         description: t.contact.form.successDescription,
       });
       form.reset();
       form.setValue('speciality', speciality || '');
-
-    } catch (error: any) {
-      console.error("Error submitting form:", error);
+    } else {
       toast({
         variant: "destructive",
         title: t.contact.form.errorTitle,
-        description: error.message || t.contact.form.errorDescription,
+        description: result.message || t.contact.form.errorDescription,
       });
     }
   }
