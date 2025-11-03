@@ -96,9 +96,9 @@ export function Dock({
   items,
   className = '',
   spring = { stiffness: 500, damping: 30 },
-  magnification = 60,
+  magnification = 70,
   distance = 150,
-  baseItemSize = 44,
+  baseItemSize = 50,
 }) {
   const mouseX = useMotionValue(Infinity);
 
