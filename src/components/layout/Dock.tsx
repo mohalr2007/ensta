@@ -135,7 +135,6 @@ export function Dock({
             return <div key={item.id} className="dock-separator" />;
           }
 
-          // A motion value to track hover state for the label
           const isHovered = useMotionValue(0);
 
           return (
