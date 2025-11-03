@@ -11,7 +11,6 @@ import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState }from "react";
 import { Home, Info, Mail, Languages, Sun, Moon, Menu } from "lucide-react";
 import { Dock } from "@/components/layout/Dock";
-import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -59,10 +58,33 @@ function MainContent({ children }: { children: React.ReactNode }) {
       onClick: () => router.push(`/contact${speciality ? `?speciality=${speciality}` : ''}`),
     },
   ];
+
+  const logoItem = {
+    id: 'logo',
+    icon: (
+      <div className="flex flex-col items-center justify-center">
+        {logoImage && (
+          <Image
+            src={logoImage.imageUrl}
+            alt={logoImage.description}
+            width={32}
+            height={32}
+            className="rounded-full"
+          />
+        )}
+        {speciality && (
+          <span className="text-xs font-bold uppercase text-primary mt-1">
+            {speciality}
+          </span>
+        )}
+      </div>
+    ),
+    label: "Go to Home",
+    isComponent: true,
+    onClick: () => router.push('/'),
+  };
   
-  const dockItems = [
-    ...navItems,
-    { isSeparator: true },
+  const controlItems = [
     {
       id: 'lang-switcher',
       icon: <LanguageSwitcher />,
@@ -75,6 +97,14 @@ function MainContent({ children }: { children: React.ReactNode }) {
       label: 'Theme',
       isComponent: true,
     },
+  ];
+
+  const dockItems = [
+    ...navItems,
+    { isSeparator: true },
+    logoItem,
+    { isSeparator: true },
+    ...controlItems,
   ];
   
   const showNav = isClient && pathname !== '/';
