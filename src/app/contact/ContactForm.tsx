@@ -63,10 +63,9 @@ export function ContactForm({ speciality }: { speciality: string | null }) {
       formData.append('message', values.message);
       formData.append('speciality', values.speciality || 'N/A');
 
-      const response = await fetch(scriptURL, {
+      await fetch(scriptURL, {
         method: 'POST',
         body: formData,
-        mode: 'no-cors', // Use no-cors for requests to Google Scripts to avoid CORS errors
       });
 
       toast({
