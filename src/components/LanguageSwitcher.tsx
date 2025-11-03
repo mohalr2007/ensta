@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Languages } from "lucide-react";
@@ -16,12 +17,12 @@ export function LanguageSwitcher() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon">
-          <Languages className="h-[1.2rem] w-[1.2rem]" />
+        <Button variant="ghost" size="icon" className="w-full h-full">
+          <Languages className="h-5 w-5" />
           <span className="sr-only">Toggle language</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" className="mb-2">
         <DropdownMenuItem onClick={() => setLanguage("en")} disabled={language === "en"}>
           <span className="mr-2">🇺🇸</span>
           English

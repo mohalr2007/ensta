@@ -1,0 +1,83 @@
+
+.dock-outer {
+  margin: 0 0.5rem;
+  display: flex;
+  max-width: 100%;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  pointer-events: none;
+}
+
+.dock-panel {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem; /* Reduced gap */
+  border-radius: 1.25rem; /* Slightly larger radius */
+  background-color: hsl(var(--background) / 0.7);
+  border: 1px solid hsl(var(--border));
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 0.5rem; /* Uniform padding */
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+  pointer-events: auto;
+  transition: background-color 0.3s ease;
+}
+
+.dark .dock-panel {
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.dock-item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem; /* Consistent rounding */
+  cursor: pointer;
+  outline: none;
+  color: hsl(var(--foreground));
+  transition: background-color 0.2s, color 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dock-item:hover {
+  background-color: hsl(var(--accent) / 0.5);
+}
+
+.dock-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.dock-label {
+  position: absolute;
+  top: -2.25rem; /* Positioned higher */
+  left: 50%;
+  width: fit-content;
+  white-space: pre;
+  border-radius: 0.5rem;
+  border: 1px solid hsl(var(--border));
+  background-color: hsl(var(--background));
+  padding: 0.25rem 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: hsl(var(--foreground));
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transform: translateX(-50%);
+}
+
+.dock-separator {
+  width: 1px;
+  height: 30px; /* Adjust height */
+  background-color: hsl(var(--border));
+  margin: 0 0.25rem; /* Add some space around it */
+  align-self: center;
+}

@@ -6,6 +6,8 @@ import { Facebook, Linkedin, Youtube } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { cn } from "@/lib/utils";
 
 // X logo SVG component
 const XIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -32,10 +34,10 @@ function FooterContent() {
 
   return (
     <div className="flex flex-col sm:flex-row justify-between items-center w-full gap-6 sm:gap-4">
-        <div className="flex items-center space-x-2">
+        <Link href="/" className="flex items-center space-x-2">
           {logoImage && <Image src={logoImage.imageUrl} alt={logoImage.description} width={24} height={24} className="rounded-full" />}
           <span className="font-bold font-headline text-lg">ENSTA</span>
-        </div>
+        </Link>
         <p className="text-center text-sm order-last sm:order-none">
           {t.footer.copyright}
         </p>
@@ -51,8 +53,9 @@ function FooterContent() {
 }
 
 export function Footer() {
+  const isMobile = useIsMobile();
   return (
-    <footer className="bg-secondary text-secondary-foreground pb-24 sm:pb-8">
+    <footer className={cn("bg-secondary text-secondary-foreground", isMobile ? 'pb-24' : 'pb-8')}>
       <div className="container py-6 sm:py-8 flex justify-center items-center">
         <FooterContent />
       </div>
