@@ -3,33 +3,26 @@
 
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
-import { LanguageProvider } from "@/components/providers/LanguageProvider";
+import { LanguageProvider, useLanguage } from "@/components/providers/LanguageProvider";
 import { Footer } from "@/components/layout/Footer";
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Dock } from "@/components/layout/Dock";
 import { Home, Info, Mail } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useLanguage } from "@/components/providers/LanguageProvider";
 
 const metadataConfig: Metadata = {
   title: "ENSTA",
   description: "A modern school hub with bilingual support.",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+function MainContent({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const speciality = searchParams.get('speciality');
   const router = useRouter();
   const { t } = useLanguage();
-
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -55,6 +48,20 @@ export default function RootLayout({
   ];
 
   return (
+    <div className="flex flex-col min-h-screen">
+      <main className="flex-grow">{children}</main>
+      {isClient && pathname !== '/' && <Footer />}
+      {isClient && pathname !== '/' && <Dock items={navItems} />}
+    </div>
+  );
+}
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
     <html lang="en" suppressHydrationWarning>
       <head>
         <title>{String(metadataConfig.title)}</title>
@@ -67,11 +74,7 @@ export default function RootLayout({
       <body className="font-body antialiased">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <LanguageProvider>
-            <div className="flex flex-col min-h-screen">
-              <main className="flex-grow">{children}</main>
-              {isClient && pathname !== '/' && <Footer />}
-            </div>
-            {isClient && pathname !== '/' && <Dock items={navItems} />}
+            <MainContent>{children}</MainContent>
             <Toaster />
           </LanguageProvider>
         </ThemeProvider>
