@@ -63,24 +63,30 @@ export function ContactForm({ speciality }: { speciality: string | null }) {
       formData.append('message', values.message);
       formData.append('speciality', values.speciality || 'N/A');
 
-      await fetch(scriptURL, {
+      const response = await fetch(scriptURL, {
         method: 'POST',
         body: formData,
       });
+      
+      const result = await response.json();
 
-      toast({
-        title: t.contact.form.successTitle,
-        description: t.contact.form.successDescription,
-      });
-      form.reset();
-      form.setValue('speciality', speciality || '');
+      if (result.result === "success") {
+        toast({
+          title: t.contact.form.successTitle,
+          description: t.contact.form.successDescription,
+        });
+        form.reset();
+        form.setValue('speciality', speciality || '');
+      } else {
+        throw new Error(result.error || "An unknown error occurred.");
+      }
 
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error submitting form:", error);
       toast({
         variant: "destructive",
         title: t.contact.form.errorTitle,
-        description: t.contact.form.errorDescription,
+        description: error.message || t.contact.form.errorDescription,
       });
     }
   }
