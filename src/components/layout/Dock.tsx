@@ -95,7 +95,7 @@ type DockItemProps = {
 export function Dock({
   items,
   className = '',
-  spring = { mass: 0.1, stiffness: 150, damping: 12 },
+  spring = { stiffness: 500, damping: 30 },
   magnification = 60,
   distance = 150,
   baseItemSize = 44,
