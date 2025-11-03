@@ -33,7 +33,7 @@ export default function SpecialitySelectionPage() {
   const logoImage = PlaceHolderImages.find(p => p.id === 'logo');
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-background text-foreground p-4 -mt-16">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-background text-foreground p-4">
       <div className="text-center mb-10 sm:mb-12 flex flex-col items-center">
         {logoImage && (
             <Image
