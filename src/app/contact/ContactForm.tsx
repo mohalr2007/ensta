@@ -58,13 +58,23 @@ export function ContactForm({ speciality }: { speciality: string | null }) {
     }
 
     try {
-      await axios.post(scriptURL, values);
+      const formData = new FormData();
+      Object.entries(values).forEach(([key, value]) => {
+        formData.append(key, value);
+      });
+
+      await fetch(scriptURL, {
+        method: 'POST',
+        body: formData,
+      });
       
       toast({
         title: t.contact.form.successTitle,
         description: t.contact.form.successDescription,
       });
       form.reset();
+      // Manually reset the specialization field since it's controlled
+      form.setValue('speciality', speciality || '');
 
     } catch (error) {
       console.error("Error submitting form:", error);
