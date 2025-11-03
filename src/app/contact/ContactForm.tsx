@@ -44,46 +44,20 @@ export function ContactForm({ speciality }: { speciality: string | null }) {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const scriptURL = process.env.NEXT_PUBLIC_GOOGLE_SHEET_WEB_APP_URL;
+    // The Google Sheet submission logic has been removed.
+    // To reconnect, add your fetch logic here.
+    console.log("Form submitted with values:", values);
+    
+    // Simulate a successful submission
+    await new Promise(resolve => setTimeout(resolve, 500));
 
-    if (!scriptURL) {
-      console.error("Google Sheet web app URL is not defined.");
-      toast({
-        variant: "destructive",
-        title: t.contact.form.errorTitle,
-        description: "The form submission endpoint is not configured.",
-      });
-      return;
-    }
-
-    try {
-      const formData = new FormData();
-      Object.entries(values).forEach(([key, value]) => {
-        formData.append(key, value);
-      });
-
-      await fetch(scriptURL, {
-        method: 'POST',
-        body: formData,
-        mode: 'no-cors',
-      });
-      
-      toast({
-        title: t.contact.form.successTitle,
-        description: t.contact.form.successDescription,
-      });
-      form.reset();
-      // Manually reset the specialization field since it's controlled
-      form.setValue('speciality', speciality || '');
-
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      toast({
-        variant: "destructive",
-        title: t.contact.form.errorTitle,
-        description: t.contact.form.errorDescription,
-      });
-    }
+    toast({
+      title: t.contact.form.successTitle,
+      description: t.contact.form.successDescription,
+    });
+    form.reset();
+    // Manually reset the specialization field since it's controlled
+    form.setValue('speciality', speciality || '');
   }
 
   return (
