@@ -104,10 +104,10 @@ export function Dock({
   const isMobile = useIsMobile();
   const mouseX = useMotionValue(Infinity);
 
-  const baseItemSize = isMobile ? 44 : 50;
-  const magnification = isMobile ? 60 : 70;
-  const distance = isMobile ? 100 : 150;
-  const spring = { stiffness: isMobile ? 500 : 400, damping: isMobile ? 30 : 25 };
+  const baseItemSize = isMobile ? 38 : 48;
+  const magnification = isMobile ? 52 : 64;
+  const distance = isMobile ? 80 : 120;
+  const spring = { stiffness: 500, damping: 30 };
 
   return (
     <div className="dock-outer">
@@ -134,7 +134,7 @@ export function Dock({
           if (item.isSeparator) {
             return <div key={item.id} className="dock-separator" />;
           }
-          return (
+          const dockItem = (
             <DockItem
               key={item.id}
               onClick={item.onClick}
@@ -147,6 +147,24 @@ export function Dock({
             >
               <DockIcon>{item.icon}</DockIcon>
               {!item.isComponent && <DockLabel isHovered={undefined}>{item.label}</DockLabel>}
+            </DockItem>
+          );
+          
+          const isHovered = (dockItem.props.children as React.ReactElement[])[1]?.props.isHovered;
+
+          return (
+            <DockItem
+              key={item.id}
+              onClick={item.onClick}
+              className={item.className}
+              mouseX={mouseX}
+              spring={spring}
+              distance={distance}
+              magnification={magnification}
+              baseItemSize={baseItemSize}
+            >
+                <DockIcon>{item.icon}</DockIcon>
+                {!item.isComponent && <DockLabel isHovered={isHovered}>{item.label}</DockLabel>}
             </DockItem>
           );
         })}
