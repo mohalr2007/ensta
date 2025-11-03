@@ -4,7 +4,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import axios from "axios";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -66,6 +65,7 @@ export function ContactForm({ speciality }: { speciality: string | null }) {
       await fetch(scriptURL, {
         method: 'POST',
         body: formData,
+        mode: 'no-cors',
       });
       
       toast({
