@@ -78,8 +78,8 @@ function MainContent({ children }: { children: React.ReactNode }) {
           <Image
             src={logoImage.imageUrl}
             alt={logoImage.description}
-            width={32}
-            height={32}
+            width={28}
+            height={28}
             className="rounded-full"
           />
         )}
@@ -91,6 +91,7 @@ function MainContent({ children }: { children: React.ReactNode }) {
   };
   
   const controlItems = [
+    ...(specialityItem ? [specialityItem] : []),
     {
       id: 'lang-switcher',
       icon: <LanguageSwitcher />,
@@ -107,7 +108,6 @@ function MainContent({ children }: { children: React.ReactNode }) {
 
   const dockItems = [
     ...navItems,
-    ...(specialityItem ? [specialityItem] : []),
     { isSeparator: true, id: 'sep1' },
     logoItem,
     { isSeparator: true, id: 'sep2' },
