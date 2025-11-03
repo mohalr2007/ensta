@@ -6,9 +6,6 @@ import { Facebook, Linkedin, Youtube } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
-import { useEffect, useState } from "react";
-import { Skeleton } from "@/components/ui/skeleton";
-import { usePathname } from "next/navigation";
 
 // X logo SVG component
 const XIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -55,7 +52,7 @@ function FooterContent() {
 
 export function Footer() {
   return (
-    <footer className="bg-secondary text-secondary-foreground">
+    <footer className="bg-secondary text-secondary-foreground pb-24 sm:pb-8">
       <div className="container py-6 sm:py-8 flex justify-center items-center">
         <FooterContent />
       </div>

@@ -5,12 +5,15 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { LanguageProvider, useLanguage } from "@/components/providers/LanguageProvider";
 import { Footer } from "@/components/layout/Footer";
+import { Header } from "@/components/layout/Header";
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Dock } from "@/components/layout/Dock";
 import { Home, Info, Mail } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
+
 
 const metadataConfig: Metadata = {
   title: "ENSTA",
@@ -24,6 +27,8 @@ function MainContent({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const { t } = useLanguage();
   const [isClient, setIsClient] = useState(false);
+  const isMobile = useIsMobile();
+
 
   useEffect(() => {
     setIsClient(true);
@@ -47,11 +52,16 @@ function MainContent({ children }: { children: React.ReactNode }) {
     },
   ];
 
+  const showNav = isClient && pathname !== '/';
+
   return (
     <div className="flex flex-col min-h-screen">
-      <main className="flex-grow">{children}</main>
-      {isClient && pathname !== '/' && <Footer />}
-      {isClient && pathname !== '/' && <Dock items={navItems} />}
+      {showNav && <Header navItems={navItems} />}
+      <main className="flex-grow pt-16">
+        {children}
+      </main>
+      {showNav && <Footer />}
+      {showNav && !isMobile && <Dock items={navItems} />}
     </div>
   );
 }
