@@ -67,8 +67,12 @@ export function ContactForm({ speciality }: { speciality: string | null }) {
         method: 'POST',
         body: formData,
       });
-      
-      const result = await response.json();
+
+      // Google Apps Script responses need to be handled carefully
+      // We will parse the response text to check for a success JSON object
+      const responseText = await response.text();
+      const result = JSON.parse(responseText);
+
 
       if (result.result === "success") {
         toast({
@@ -155,7 +159,7 @@ export function ContactForm({ speciality }: { speciality: string | null }) {
                 />
               </FormControl>
               <FormMessage />
-            </Item>
+            </FormItem>
           )}
         />
         <Button type="submit" size="lg" disabled={form.formState.isSubmitting}>
