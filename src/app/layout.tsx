@@ -9,14 +9,12 @@ import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState }from "react";
-import { Home, Info, Mail } from "lucide-react";
+import { Home, Info, Mail, GraduationCap } from "lucide-react";
 import { Dock } from "@/components/layout/Dock";
 import Image from "next/image";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { cn } from "@/lib/utils";
 
 
 const metadataConfig: Metadata = {
@@ -31,7 +29,6 @@ function MainContent({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const { t } = useLanguage();
   const [isClient, setIsClient] = useState(false);
-  const isMobile = useIsMobile();
 
   useEffect(() => {
     setIsClient(true);
@@ -60,6 +57,19 @@ function MainContent({ children }: { children: React.ReactNode }) {
     },
   ];
 
+  const specialityItem = speciality ? {
+    id: 'speciality',
+    icon: (
+      <div className="flex flex-col items-center justify-center text-primary font-bold uppercase text-xs">
+        <GraduationCap className="w-4 h-4 mb-0.5" />
+        {speciality}
+      </div>
+    ),
+    label: `Specialization: ${speciality.toUpperCase()}`,
+    isComponent: true,
+    onClick: () => {}, // No action on click for now
+  } : null;
+
   const logoItem = {
     id: 'logo',
     icon: (
@@ -72,11 +82,6 @@ function MainContent({ children }: { children: React.ReactNode }) {
             height={32}
             className="rounded-full"
           />
-        )}
-        {speciality && (
-          <span className="text-xs font-bold uppercase text-primary mt-1">
-            {speciality}
-          </span>
         )}
       </div>
     ),
@@ -102,6 +107,7 @@ function MainContent({ children }: { children: React.ReactNode }) {
 
   const dockItems = [
     ...navItems,
+    ...(specialityItem ? [specialityItem] : []),
     { isSeparator: true, id: 'sep1' },
     logoItem,
     { isSeparator: true, id: 'sep2' },
