@@ -34,7 +34,7 @@ export async function chat(
       outputSchema: ChatOutputSchema,
     },
     async ({ history, message }) => {
-      // The AI model expects a `prompt` object containing a `messages` array.
+      // The AI model expects a `prompt` containing a `messages` array.
       // We combine the existing chat history with the new user message here.
       const { output } = await ai.generate({
         model: 'googleai/gemini-2.5-flash',
