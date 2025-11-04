@@ -9,12 +9,13 @@ import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState }from "react";
-import { Home, Info, Mail, GraduationCap } from "lucide-react";
+import { Home, Info, Mail, GraduationCap, MessageSquare } from "lucide-react";
 import { Dock } from "@/components/layout/Dock";
 import Image from "next/image";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { Chatbot } from "@/components/chatbot/Chatbot";
 
 
 const metadataConfig: Metadata = {
@@ -29,6 +30,7 @@ function MainContent({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const { t } = useLanguage();
   const [isClient, setIsClient] = useState(false);
+  const [isChatbotOpen, setIsChatbotOpen] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
@@ -67,7 +69,6 @@ function MainContent({ children }: { children: React.ReactNode }) {
     ),
     label: `Specialization: ${speciality.toUpperCase()}`,
     isComponent: true,
-    onClick: () => {}, // No action on click for now
   } : null;
 
   const logoItem = {
@@ -104,6 +105,13 @@ function MainContent({ children }: { children: React.ReactNode }) {
       label: 'Theme',
       isComponent: true,
     },
+    {
+        id: 'chatbot',
+        icon: <MessageSquare className="w-5 h-5" />,
+        label: 'Chatbot',
+        onClick: () => {}, // Short click does nothing for now
+        onLongPress: () => setIsChatbotOpen(true),
+    }
   ];
 
   const dockItems = [
@@ -127,6 +135,7 @@ function MainContent({ children }: { children: React.ReactNode }) {
           <Footer />
         </>
       )}
+      <Chatbot isOpen={isChatbotOpen} onClose={() => setIsChatbotOpen(false)} />
     </div>
   );
 }

@@ -7,9 +7,29 @@ import './Dock.css';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
 
-function DockItem({ children, className = '', onClick, mouseX, spring, distance, magnification, baseItemSize }) {
+function DockItem({ children, className = '', onClick, onLongPress, mouseX, spring, distance, magnification, baseItemSize }) {
   const ref = useRef<HTMLDivElement>(null);
   const isHovered = useMotionValue(0);
+  const pressTimeout = useRef<NodeJS.Timeout | null>(null);
+
+  const handlePressStart = () => {
+    pressTimeout.current = setTimeout(() => {
+      if (onLongPress) {
+        onLongPress();
+      }
+      pressTimeout.current = null; // Reset after firing
+    }, 1000); // 1 second for long press
+  };
+
+  const handlePressEnd = () => {
+    if (pressTimeout.current) {
+      clearTimeout(pressTimeout.current);
+      pressTimeout.current = null;
+      if (onClick) {
+        onClick(); // It was a short click
+      }
+    }
+  };
 
   const mouseDistance = useTransform(mouseX, val => {
     if (val === Infinity) return Infinity;
@@ -34,7 +54,10 @@ function DockItem({ children, className = '', onClick, mouseX, spring, distance,
       onHoverEnd={() => isHovered.set(0)}
       onFocus={() => isHovered.set(1)}
       onBlur={() => isHovered.set(0)}
-      onClick={onClick}
+      onMouseDown={handlePressStart}
+      onMouseUp={handlePressEnd}
+      onTouchStart={handlePressStart}
+      onTouchEnd={handlePressEnd}
       className={cn("dock-item", className)}
       tabIndex={0}
       role="button"
@@ -92,6 +115,7 @@ type DockItemProps = {
   icon: React.ReactNode;
   label?: string;
   onClick?: () => void;
+  onLongPress?: () => void;
   className?: string;
   isSeparator?: boolean;
   isComponent?: boolean;
@@ -135,12 +159,11 @@ export function Dock({
             return <div key={item.id} className="dock-separator" />;
           }
 
-          const isHovered = useMotionValue(0);
-
           return (
             <DockItem
               key={item.id}
               onClick={item.onClick}
+              onLongPress={item.onLongPress}
               className={item.className}
               mouseX={mouseX}
               spring={spring}
@@ -149,7 +172,7 @@ export function Dock({
               baseItemSize={baseItemSize}
             >
               <DockIcon>{item.icon}</DockIcon>
-              {!item.isComponent && <DockLabel isHovered={isHovered}>{item.label}</DockLabel>}
+              {!item.isComponent && <DockLabel isHovered={useMotionValue(0)}>{item.label}</DockLabel>}
             </DockItem>
           );
         })}
