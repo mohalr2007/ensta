@@ -28,7 +28,7 @@ export default function SpecialitySelectionPage() {
       bgColor: 'bg-green-500',
       textColor: 'text-green-50',
       hoverColor: 'hover:bg-green-600',
-      bgImage: null,
+      bgImage: "https://i.ibb.co/dsNQCFj/5784977299248712920.jpg",
     },
   ];
 
