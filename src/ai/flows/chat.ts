@@ -33,11 +33,11 @@ export async function chat(
     },
     async ({ history, message }) => {
       const { output } = await ai.generate({
+        model: 'googleai/gemini-2.5-flash',
         prompt: {
-          history: history,
+          history,
           messages: [{ role: 'user', content: [{ text: message }] }],
         },
-        model: 'googleai/gemini-2.5-flash',
       });
 
       return {
