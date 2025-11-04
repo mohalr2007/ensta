@@ -15,7 +15,7 @@ import Image from "next/image";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { Chatbot } from "@/components/chatbot/Chatbot";
+import Script from "next/script";
 
 
 const metadataConfig: Metadata = {
@@ -30,7 +30,6 @@ function MainContent({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const { t } = useLanguage();
   const [isClient, setIsClient] = useState(false);
-  const [isChatbotOpen, setIsChatbotOpen] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
@@ -109,8 +108,13 @@ function MainContent({ children }: { children: React.ReactNode }) {
         id: 'chatbot',
         icon: <MessageSquare className="w-5 h-5" />,
         label: 'Chatbot',
-        onClick: () => {}, // Short click does nothing for now
-        onLongPress: () => setIsChatbotOpen(true),
+        onClick: () => {
+            // @ts-ignore
+            if (window.chatbase) {
+                // @ts-ignore
+                window.chatbase('open');
+            }
+        },
     }
   ];
 
@@ -135,7 +139,6 @@ function MainContent({ children }: { children: React.ReactNode }) {
           <Footer />
         </>
       )}
-      <Chatbot isOpen={isChatbotOpen} onClose={() => setIsChatbotOpen(false)} />
     </div>
   );
 }
@@ -162,6 +165,40 @@ export default function RootLayout({
             <Toaster />
           </LanguageProvider>
         </ThemeProvider>
+        <Script id="chatbase-embed">
+        {`
+            (function(){
+                if(!window.chatbase || window.chatbase("getState") !== "initialized") {
+                    window.chatbase = (...arguments) => {
+                        if(!window.chatbase.q) {
+                            window.chatbase.q = [];
+                        }
+                        window.chatbase.q.push(arguments);
+                    };
+                    window.chatbase = new Proxy(window.chatbase, {
+                        get(target, prop) {
+                            if(prop === "q") {
+                                return target.q;
+                            }
+                            return (...args) => target(prop, ...args);
+                        }
+                    });
+                }
+                const onLoad = function() {
+                    const script = document.createElement("script");
+                    script.src = "https://www.chatbase.co/embed.min.js";
+                    script.id = "eTD69Wu1TTnWLrVc8PnZO";
+                    script.domain = "www.chatbase.co";
+                    document.body.appendChild(script);
+                };
+                if(document.readyState === "complete") {
+                    onLoad();
+                } else {
+                    window.addEventListener("load", onLoad);
+                }
+            })();
+        `}
+        </Script>
       </body>
     </html>
   );

@@ -12,7 +12,9 @@ function DockItem({ children, className = '', onClick, onLongPress, mouseX, spri
   const isHovered = useMotionValue(0);
   const pressTimeout = useRef<NodeJS.Timeout | null>(null);
 
-  const handlePressStart = () => {
+  const handlePressStart = (e: React.MouseEvent | React.TouchEvent) => {
+    // Prevent default context menu on long touch
+    e.preventDefault();
     pressTimeout.current = setTimeout(() => {
       if (onLongPress) {
         onLongPress();
