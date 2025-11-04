@@ -7,7 +7,7 @@
  */
 
 import { ai } from '@/ai/genkit';
-import { z } from 'genkit';
+import { z } from 'zod';
 import { MessageData } from '@genkit-ai/google-genai';
 
 // This is the schema for the data coming from the client.
