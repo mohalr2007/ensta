@@ -16,7 +16,10 @@ export default function Home() {
   const searchParams = useSearchParams();
   const speciality = searchParams.get('speciality');
 
-  const heroImage = PlaceHolderImages.find(p => p.id === 'hero');
+  const isMi = speciality === 'mi';
+
+  const heroImage = PlaceHolderImages.find(p => p.id === (isMi ? 'hero-mi' : 'hero-st'));
+
   const announcementImages = [
     PlaceHolderImages.find(p => p.id === "announcement1"),
     PlaceHolderImages.find(p => p.id === "announcement2"),
