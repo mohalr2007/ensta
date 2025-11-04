@@ -17,6 +17,7 @@ export default function SpecialitySelectionPage() {
       bgColor: 'bg-blue-500',
       textColor: 'text-blue-50',
       hoverColor: 'hover:bg-blue-600',
+      bgImage: "https://i.ibb.co/3s6Dkvj/DALL-E-2024-05-24-19-14-38-A-dynamic-and-futuristic-image-representing-the-field-of-Mathematics-and-C.png",
     },
     {
       name: 'Sciences et Technologies',
@@ -27,6 +28,7 @@ export default function SpecialitySelectionPage() {
       bgColor: 'bg-green-500',
       textColor: 'text-green-50',
       hoverColor: 'hover:bg-green-600',
+      bgImage: null,
     },
   ];
 
@@ -55,15 +57,19 @@ export default function SpecialitySelectionPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 w-full max-w-4xl">
         {specialities.map((spec) => (
           <Link href={spec.href} key={spec.name}>
-             <div className={`group rounded-xl overflow-hidden shadow-2xl transform hover:-translate-y-2 transition-all duration-300 ease-in-out ${spec.bgColor} ${spec.textColor} flex flex-col justify-between h-full`}>
-                <div className="p-6 sm:p-8">
+             <div 
+                className={`group relative rounded-xl overflow-hidden shadow-2xl transform hover:-translate-y-2 transition-all duration-300 ease-in-out ${spec.bgColor} ${spec.textColor} flex flex-col justify-between h-full`}
+                style={spec.bgImage ? { backgroundImage: `url(${spec.bgImage})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}}
+              >
+                <div className="absolute inset-0 bg-black/50"></div>
+                <div className="relative z-10 p-6 sm:p-8">
                   <div className="flex items-center gap-4 mb-4">
                     <spec.icon className="w-10 h-10 sm:w-12 sm:h-12" />
                     <h2 className="text-2xl sm:text-3xl font-bold font-headline">{spec.name}</h2>
                   </div>
                   <p className="text-base sm:text-lg opacity-90">{spec.description}</p>
                 </div>
-                <div className="px-6 sm:px-8 py-4 bg-black bg-opacity-20">
+                <div className="relative z-10 px-6 sm:px-8 py-4 bg-black bg-opacity-20">
                   <div className="flex justify-between items-center">
                       <span className="text-lg sm:text-xl font-semibold">Enter Portal</span>
                       <span className="text-2xl sm:text-3xl font-bold opacity-50 transition-transform duration-300 group-hover:translate-x-2">&rarr;</span>
