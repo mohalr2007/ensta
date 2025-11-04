@@ -8,14 +8,14 @@ import { Footer } from "@/components/layout/Footer";
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { useEffect, useState }from "react";
+import { useEffect, useState } from "react";
 import { Home, Info, Mail, GraduationCap, MessageSquare } from "lucide-react";
 import { Dock } from "@/components/layout/Dock";
 import Image from "next/image";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import Script from "next/script";
+import { Chatbot } from "@/components/chatbot/Chatbot";
 
 
 const metadataConfig: Metadata = {
@@ -30,6 +30,7 @@ function MainContent({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const { t } = useLanguage();
   const [isClient, setIsClient] = useState(false);
+  const [isChatbotOpen, setChatbotOpen] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
@@ -108,13 +109,7 @@ function MainContent({ children }: { children: React.ReactNode }) {
         id: 'chatbot',
         icon: <MessageSquare className="w-5 h-5" />,
         label: 'Chatbot',
-        onClick: () => {
-            // @ts-ignore
-            if (window.chatbase) {
-                // @ts-ignore
-                window.chatbase('open');
-            }
-        },
+        onClick: () => setChatbotOpen(prev => !prev),
     }
   ];
 
@@ -135,6 +130,7 @@ function MainContent({ children }: { children: React.ReactNode }) {
       </main>
       {showNav && (
         <>
+          <Chatbot isOpen={isChatbotOpen} onClose={() => setChatbotOpen(false)} />
           <Dock items={dockItems} />
           <Footer />
         </>
@@ -165,40 +161,6 @@ export default function RootLayout({
             <Toaster />
           </LanguageProvider>
         </ThemeProvider>
-        <Script id="chatbase-embed">
-        {`
-            (function(){
-                if(!window.chatbase || window.chatbase("getState") !== "initialized") {
-                    window.chatbase = (...arguments) => {
-                        if(!window.chatbase.q) {
-                            window.chatbase.q = [];
-                        }
-                        window.chatbase.q.push(arguments);
-                    };
-                    window.chatbase = new Proxy(window.chatbase, {
-                        get(target, prop) {
-                            if(prop === "q") {
-                                return target.q;
-                            }
-                            return (...args) => target(prop, ...args);
-                        }
-                    });
-                }
-                const onLoad = function() {
-                    const script = document.createElement("script");
-                    script.src = "https://www.chatbase.co/embed.min.js";
-                    script.id = "eTD69Wu1TTnWLrVc8PnZO";
-                    script.domain = "www.chatbase.co";
-                    document.body.appendChild(script);
-                };
-                if(document.readyState === "complete") {
-                    onLoad();
-                } else {
-                    window.addEventListener("load", onLoad);
-                }
-            })();
-        `}
-        </Script>
       </body>
     </html>
   );
