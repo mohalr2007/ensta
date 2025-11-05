@@ -12,24 +12,21 @@ import { cn } from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 export default function Home() {
   const { t } = useLanguage();
   const searchParams = useSearchParams();
   const speciality = searchParams.get('speciality');
-  const [isClient, setIsClient] = useState(false);
-  const isMobile = useIsMobile();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setIsClient(true);
+    setMounted(true);
   }, []);
 
   const isMi = speciality === 'mi';
 
-  // Select the correct image based on device type (mobile/desktop)
-  const heroImageId = isMi ? (isMobile ? 'hero-mi-mobile' : 'hero-mi') : (isMobile ? 'hero-st-mobile' : 'hero-st');
-  const heroImage = PlaceHolderImages.find(p => p.id === heroImageId);
+  const heroImageDesktop = PlaceHolderImages.find(p => p.id === (isMi ? 'hero-mi' : 'hero-st'));
+  const heroImageMobile = PlaceHolderImages.find(p => p.id === (isMi ? 'hero-mi-mobile' : 'hero-st-mobile'));
 
   const announcementImages = [
     PlaceHolderImages.find(p => p.id === "announcement1"),
@@ -59,19 +56,35 @@ export default function Home() {
     <div className="flex flex-col items-center">
       {/* Hero Section */}
       <section className="w-full relative h-[60vh] text-white">
-        {!isClient ? (
+        {!mounted ? (
           <Skeleton className="w-full h-full" />
         ) : (
-          heroImage && (
-            <Image
-              src={heroImage.imageUrl}
-              alt={heroImage.description}
-              data-ai-hint={heroImage.imageHint}
-              fill
-              className="object-cover object-center"
-              priority
-            />
-          )
+          <>
+            {heroImageDesktop && (
+              <div className="hidden md:block w-full h-full">
+                <Image
+                  src={heroImageDesktop.imageUrl}
+                  alt={heroImageDesktop.description}
+                  data-ai-hint={heroImageDesktop.imageHint}
+                  fill
+                  className="object-cover object-center"
+                  priority
+                />
+              </div>
+            )}
+            {heroImageMobile && (
+              <div className="block md:hidden w-full h-full">
+                <Image
+                  src={heroImageMobile.imageUrl}
+                  alt={heroImageMobile.description}
+                  data-ai-hint={heroImageMobile.imageHint}
+                  fill
+                  className="object-cover object-center"
+                  priority
+                />
+              </div>
+            )}
+          </>
         )}
         <div className="absolute inset-0 bg-gradient-to-r from-primary/40 via-secondary/40 to-accent/40 flex flex-col items-center justify-center text-center p-4">
           <h1 className="text-4xl md:text-6xl font-headline font-bold drop-shadow-lg">
