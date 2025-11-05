@@ -130,8 +130,8 @@ export function Dock({
   const isMobile = useIsMobile();
   const mouseX = useMotionValue(Infinity);
 
-  const baseItemSize = isMobile ? 32 : 48;
-  const magnification = isMobile ? 36 : 64;
+  const baseItemSize = isMobile ? 36 : 48;
+  const magnification = isMobile ? 42 : 64;
   const distance = isMobile ? 80 : 120;
   const spring = { stiffness: 500, damping: 30 };
 

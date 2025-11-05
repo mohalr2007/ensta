@@ -55,7 +55,7 @@ function FooterContent() {
 export function Footer() {
   const isMobile = useIsMobile();
   return (
-    <footer className={cn("bg-secondary text-secondary-foreground", isMobile ? 'pb-24' : 'pb-8')}>
+    <footer className={cn("bg-secondary text-secondary-foreground", isMobile ? 'pb-24' : '')}>
       <div className="container py-6 sm:py-8 flex justify-center items-center">
         <FooterContent />
       </div>
