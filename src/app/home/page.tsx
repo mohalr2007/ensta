@@ -11,17 +11,20 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const { t } = useLanguage();
   const searchParams = useSearchParams();
   const speciality = searchParams.get('speciality');
+  const [isClient, setIsClient] = useState(false);
 
-  // isMi will be determined after the component mounts and searchParams are available
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const isMi = speciality === 'mi';
-
-  const heroImageDesktop = PlaceHolderImages.find(p => p.id === (isMi ? 'hero-mi' : 'hero-st'));
-  const heroImageMobile = PlaceHolderImages.find(p => p.id === (isMi ? 'hero-mi-mobile' : 'hero-st-mobile'));
+  const heroImage = PlaceHolderImages.find(p => p.id === (isMi ? 'hero-mi' : 'hero-st'));
 
   const announcementImages = [
     PlaceHolderImages.find(p => p.id === "announcement1"),
@@ -47,12 +50,12 @@ export default function Home() {
     },
   ];
 
-  // Show a skeleton loader until speciality is determined on the client
-  if (!speciality) {
+  if (!isClient) {
     return (
        <div className="flex flex-col items-center">
           <section className="w-full relative h-[60vh] text-white">
              <Skeleton className="w-full h-full" />
+             <div className="absolute inset-0 bg-gradient-to-r from-primary/40 via-secondary/40 to-accent/40" />
           </section>
        </div>
     )
@@ -62,21 +65,11 @@ export default function Home() {
     <div className="flex flex-col items-center">
       {/* Hero Section */}
       <section className="w-full relative h-[60vh] text-white">
-        <div className="hidden md:block w-full h-full">
-          {heroImageDesktop && <Image
-            src={heroImageDesktop.imageUrl}
-            alt={heroImageDesktop.description}
-            data-ai-hint={heroImageDesktop.imageHint}
-            fill
-            className="object-cover object-center"
-            priority
-          />}
-        </div>
-        <div className="block md:hidden w-full h-full">
-          {heroImageMobile && <Image
-            src={heroImageMobile.imageUrl}
-            alt={heroImageMobile.description}
-            data-ai-hint={heroImageMobile.imageHint}
+        <div className="w-full h-full">
+          {heroImage && <Image
+            src={heroImage.imageUrl}
+            alt={heroImage.description}
+            data-ai-hint={heroImage.imageHint}
             fill
             className="object-cover object-center"
             priority
