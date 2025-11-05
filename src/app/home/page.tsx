@@ -17,6 +17,7 @@ export default function Home() {
   const searchParams = useSearchParams();
   const speciality = searchParams.get('speciality');
 
+  // isMi will be determined after the component mounts and searchParams are available
   const isMi = speciality === 'mi';
 
   const heroImageDesktop = PlaceHolderImages.find(p => p.id === (isMi ? 'hero-mi' : 'hero-st'));
@@ -46,7 +47,8 @@ export default function Home() {
     },
   ];
 
-  if (!heroImageDesktop || !heroImageMobile) {
+  // Show a skeleton loader until speciality is determined on the client
+  if (!speciality) {
     return (
        <div className="flex flex-col items-center">
           <section className="w-full relative h-[60vh] text-white">
@@ -61,24 +63,24 @@ export default function Home() {
       {/* Hero Section */}
       <section className="w-full relative h-[60vh] text-white">
         <div className="hidden md:block w-full h-full">
-          <Image
+          {heroImageDesktop && <Image
             src={heroImageDesktop.imageUrl}
             alt={heroImageDesktop.description}
             data-ai-hint={heroImageDesktop.imageHint}
             fill
             className="object-cover object-center"
             priority
-          />
+          />}
         </div>
         <div className="block md:hidden w-full h-full">
-          <Image
+          {heroImageMobile && <Image
             src={heroImageMobile.imageUrl}
             alt={heroImageMobile.description}
             data-ai-hint={heroImageMobile.imageHint}
             fill
             className="object-cover object-center"
             priority
-          />
+          />}
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-primary/40 via-secondary/40 to-accent/40 flex flex-col items-center justify-center text-center p-4">
           <h1 className="text-4xl md:text-6xl font-headline font-bold drop-shadow-lg">
