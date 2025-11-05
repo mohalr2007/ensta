@@ -12,21 +12,24 @@ import { cn } from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export default function Home() {
   const { t } = useLanguage();
   const searchParams = useSearchParams();
   const speciality = searchParams.get('speciality');
   const [isClient, setIsClient] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-
   const isMi = speciality === 'mi';
 
-  const heroImage = PlaceHolderImages.find(p => p.id === (isMi ? 'hero-mi' : 'hero-st'));
+  // Select the correct image based on device type (mobile/desktop)
+  const heroImageId = isMi ? (isMobile ? 'hero-mi-mobile' : 'hero-mi') : (isMobile ? 'hero-st-mobile' : 'hero-st');
+  const heroImage = PlaceHolderImages.find(p => p.id === heroImageId);
 
   const announcementImages = [
     PlaceHolderImages.find(p => p.id === "announcement1"),

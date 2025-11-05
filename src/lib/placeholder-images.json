@@ -15,7 +15,19 @@
     {
       "id": "hero-mi",
       "description": "Entrance of the National Higher School of Advanced Technologies",
-      "imageUrl": "https://i.ibb.co/ZpsKZXZc/487183919-1222830883087895-7293116505289254963-n.jpg",
+      "imageUrl": "https://i.ibb.co/ZpsKZXZ/487183919-1222830883087895-7293116505289254963-n.jpg",
+      "imageHint": "school entrance"
+    },
+    {
+      "id": "hero-st-mobile",
+      "description": "A tall, vertical shot of a modern science laboratory with glowing beakers, suitable for mobile screens.",
+      "imageUrl": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx2ZXJ0aWNhbCUyMHNjaWVuY2UlMjBsYWJ8ZW58MHx8fHwxNzYyMzE1MjEwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "science lab"
+    },
+    {
+      "id": "hero-mi-mobile",
+      "description": "A tall, vertical shot of the school entrance, suitable for mobile screens.",
+      "imageUrl": "https://i.ibb.co/6yYQzL1/Screenshot-2024-06-25-010411.png",
       "imageHint": "school entrance"
     },
     {
