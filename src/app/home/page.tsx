@@ -10,11 +10,19 @@ import { ArrowRight, Megaphone, Calendar as CalendarIcon, Lightbulb } from "luci
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Home() {
   const { t } = useLanguage();
   const searchParams = useSearchParams();
   const speciality = searchParams.get('speciality');
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
 
   const isMi = speciality === 'mi';
 
@@ -48,15 +56,19 @@ export default function Home() {
     <div className="flex flex-col items-center">
       {/* Hero Section */}
       <section className="w-full relative h-[60vh] text-white">
-        {heroImage && (
-          <Image
-            src={heroImage.imageUrl}
-            alt={heroImage.description}
-            data-ai-hint={heroImage.imageHint}
-            fill
-            className="object-cover"
-            priority
-          />
+        {!isClient ? (
+          <Skeleton className="w-full h-full" />
+        ) : (
+          heroImage && (
+            <Image
+              src={heroImage.imageUrl}
+              alt={heroImage.description}
+              data-ai-hint={heroImage.imageHint}
+              fill
+              className="object-cover"
+              priority
+            />
+          )
         )}
         <div className="absolute inset-0 bg-gradient-to-r from-primary/70 via-secondary/70 to-accent/70 flex flex-col items-center justify-center text-center p-4">
           <h1 className="text-4xl md:text-6xl font-headline font-bold drop-shadow-lg">
