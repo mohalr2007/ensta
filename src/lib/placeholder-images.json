@@ -15,7 +15,7 @@
     {
       "id": "hero-mi",
       "description": "Entrance of the National Higher School of Advanced Technologies",
-      "imageUrl": "https://i.ibb.co/TnGQ1kQ/5789406492862647489-1.jpg",
+      "imageUrl": "https://i.ibb.co/F4DB8zNM/5784977299248712920.jpg",
       "imageHint": "school entrance"
     },
     {
@@ -45,13 +45,13 @@
     {
       "id": "mi-ai",
       "description": "A robot and human hand connecting, symbolizing artificial intelligence.",
-      "imageUrl": "https://images.unsplash.com/photo-1535223289827-42f1e9919769?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxhcnRpZmljaWFsJTIwaW50ZWxsaWdlbmNlfGVufDB8fHx8MTc2MjIyMTU5Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1535223289827-42f1e9919769?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxhcnRpZmljaWFsJTIwaW50ZWxsaWdlbmNlfGVufDB8fHx8MTc2MjIyMTU5Nnww&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "artificial intelligence"
     },
     {
       "id": "mi-security",
       "description": "A person holding a digital lock icon, symbolizing cybersecurity.",
-      "imageUrl": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjeWJlcnNlY3VyaXR5fGVufDB8fHx8MTc2MjIyMTY0Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjeWJlcnNlY3VyaXR5fGVufDB8fHx8MTc2MjIyMTY0Nnww&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "system security"
     }
   ]
