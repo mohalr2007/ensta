@@ -8,9 +8,9 @@
     },
     {
       "id": "hero-st",
-      "description": "A diverse group of students collaborating in a modern library.",
-      "imageUrl": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzdHVkZW50cyUyMGNvbGxhYm9yYXRpbmd8ZW58MHx8fHwxNzYyMDExOTU4fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "students collaborating"
+      "description": "Students working in a modern science laboratory with beakers and equipment.",
+      "imageUrl": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxzb2Z0d2FyZSUyMGRldmVsb3BlcnN8ZW58MHx8fHwxNzYyMzkxNjAxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "science laboratory"
     },
     {
       "id": "hero-mi",
