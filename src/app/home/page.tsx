@@ -10,18 +10,12 @@ import { ArrowRight, Megaphone, Calendar as CalendarIcon, Lightbulb } from "luci
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Home() {
   const { t } = useLanguage();
   const searchParams = useSearchParams();
   const speciality = searchParams.get('speciality');
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const isMi = speciality === 'mi';
 
@@ -52,40 +46,40 @@ export default function Home() {
     },
   ];
 
+  if (!heroImageDesktop || !heroImageMobile) {
+    return (
+       <div className="flex flex-col items-center">
+          <section className="w-full relative h-[60vh] text-white">
+             <Skeleton className="w-full h-full" />
+          </section>
+       </div>
+    )
+  }
+
   return (
     <div className="flex flex-col items-center">
       {/* Hero Section */}
       <section className="w-full relative h-[60vh] text-white">
-        {!mounted ? (
-          <Skeleton className="w-full h-full" />
-        ) : (
-          <>
-            {heroImageDesktop && (
-              <div className="hidden md:block w-full h-full">
-                <Image
-                  src={heroImageDesktop.imageUrl}
-                  alt={heroImageDesktop.description}
-                  data-ai-hint={heroImageDesktop.imageHint}
-                  fill
-                  className="object-cover object-center"
-                  priority
-                />
-              </div>
-            )}
-            {heroImageMobile && (
-              <div className="block md:hidden w-full h-full">
-                <Image
-                  src={heroImageMobile.imageUrl}
-                  alt={heroImageMobile.description}
-                  data-ai-hint={heroImageMobile.imageHint}
-                  fill
-                  className="object-cover object-center"
-                  priority
-                />
-              </div>
-            )}
-          </>
-        )}
+        <div className="hidden md:block w-full h-full">
+          <Image
+            src={heroImageDesktop.imageUrl}
+            alt={heroImageDesktop.description}
+            data-ai-hint={heroImageDesktop.imageHint}
+            fill
+            className="object-cover object-center"
+            priority
+          />
+        </div>
+        <div className="block md:hidden w-full h-full">
+          <Image
+            src={heroImageMobile.imageUrl}
+            alt={heroImageMobile.description}
+            data-ai-hint={heroImageMobile.imageHint}
+            fill
+            className="object-cover object-center"
+            priority
+          />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-r from-primary/40 via-secondary/40 to-accent/40 flex flex-col items-center justify-center text-center p-4">
           <h1 className="text-4xl md:text-6xl font-headline font-bold drop-shadow-lg">
             {t.home.heroTitle}
