@@ -84,12 +84,38 @@ function ContactPageContent() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  {addressUrl ? (
-                    <Link href={addressUrl} target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-primary">
-                      {address}
+                  {isSt ? (
+                     <Link href={t.contact.addressUrl_st} target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-primary">
+                      {t.contact.address_st}
                     </Link>
-                  ) : address}
+                  ) : isMi ? (
+                    <Link href={t.contact.addressUrl_mi} target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-primary">
+                      {t.contact.address_mi}
+                    </Link>
+                  ) : (
+                    <>
+                      <Link href={t.contact.addressUrl_st} target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-primary block mb-2">
+                        ST: {t.contact.address_st}
+                      </Link>
+                      <Link href={t.contact.addressUrl_mi} target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-primary block">
+                        MI: {t.contact.address_mi}
+                      </Link>
+                    </>
+                  )}
                 </p>
+                 {(isSt || (!isMi && !isSt)) && (
+                  <div className="mt-4 rounded-lg overflow-hidden border">
+                    <iframe 
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3195.247961551969!2d3.0613164000000004!3d36.78860480000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128fb301a7a8063d%3A0x4c8a4c0183459a2!2s%C3%89cole%20nationale%20Sup%C3%A9rieure%20de%20technologie%20avanc%C3%A9e!5e0!3m2!1sfr!2sdz!4v1762470127419!5m2!1sfr!2sdz" 
+                      width="100%" 
+                      height="250" 
+                      style={{border:0}} 
+                      allowFullScreen="" 
+                      loading="lazy" 
+                      referrerPolicy="no-referrer-when-downgrade">
+                    </iframe>
+                  </div>
+                )}
               </CardContent>
             </Card>
 
