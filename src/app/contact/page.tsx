@@ -75,63 +75,67 @@ function ContactPageContent() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
           <div className="space-y-8">
              {(isSt || noSpeciality) && (
-              <Card>
-                <CardHeader className="flex-row items-center gap-4">
-                    <div className="bg-primary/10 text-primary p-3 rounded-full">
-                        <MapPin className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <CardTitle className="text-xl font-headline">{t.contact.addressTitle}</CardTitle>
-                      <CardDescription>Campus ST (Bab El Oued)</CardDescription>
-                    </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="rounded-lg overflow-hidden border mb-4">
-                    <iframe 
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3195.247961551969!2d3.0613164000000004!3d36.78860480000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128fb301a7a8063d%3A0x4c8a4c0183459a2!2s%C3%89cole%20nationale%20Sup%C3%A9rieure%20de%20technologie%20avanc%C3%A9e!5e0!3m2!1sfr!2sdz!4v1762470127419!5m2!1sfr!2sdz" 
-                      width="100%" 
-                      height="200" 
-                      style={{border:0}} 
-                      allowFullScreen={true}
-                      loading="lazy" 
-                      referrerPolicy="no-referrer-when-downgrade">
-                    </iframe>
-                  </div>
-                  <Link href={t.contact.addressUrl_st} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:underline hover:text-primary">
-                    {t.contact.address_st}
-                  </Link>
-                </CardContent>
-              </Card>
+              <div className="space-y-4">
+                <Card>
+                  <CardHeader className="flex-row items-start gap-4">
+                      <div className="bg-primary/10 text-primary p-3 rounded-full">
+                          <MapPin className="h-6 w-6" />
+                      </div>
+                      <div>
+                        <CardTitle className="text-xl font-headline">{t.contact.addressTitle}</CardTitle>
+                        <CardDescription>Campus ST (Bab El Oued)</CardDescription>
+                      </div>
+                  </CardHeader>
+                  <CardContent>
+                    <Link href={t.contact.addressUrl_st} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:underline hover:text-primary">
+                      {t.contact.address_st}
+                    </Link>
+                  </CardContent>
+                </Card>
+                <div className="rounded-lg overflow-hidden border">
+                  <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3195.247961551969!2d3.0613164000000004!3d36.78860480000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128fb301a7a8063d%3A0x4c8a4c0183459a2!2s%C3%89cole%20nationale%20Sup%C3%A9rieure%20de%20technologie%20avanc%C3%A9e!5e0!3m2!1sfr!2sdz!4v1762470127419!5m2!1sfr!2sdz" 
+                    width="100%" 
+                    height="250" 
+                    style={{border:0}} 
+                    allowFullScreen={true}
+                    loading="lazy" 
+                    referrerPolicy="no-referrer-when-downgrade">
+                  </iframe>
+                </div>
+              </div>
             )}
 
             {(isMi || noSpeciality) && (
-               <Card>
-                <CardHeader className="flex-row items-center gap-4">
-                    <div className="bg-primary/10 text-primary p-3 rounded-full">
-                        <MapPin className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <CardTitle className="text-xl font-headline">{t.contact.addressTitle}</CardTitle>
-                      <CardDescription>Campus MI (Dergana)</CardDescription>
-                    </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="rounded-lg overflow-hidden border mb-4">
-                    <iframe 
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3195.7628594271096!2d3.2588635000000004!3d36.776256000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128e457e206a4adf%3A0x2dedffeaea98475f!2sNational%20Higher%20School%20of%20Advanced%20Technologies!5e0!3m2!1sfr!2sdz!4v1762470240518!5m2!1sfr!2sdz"
-                      width="100%" 
-                      height="200" 
-                      style={{border:0}} 
-                      allowFullScreen={true} 
-                      loading="lazy" 
-                      referrerPolicy="no-referrer-when-downgrade">
-                    </iframe>
-                  </div>
-                  <Link href={t.contact.addressUrl_mi} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:underline hover:text-primary">
-                    {t.contact.address_mi}
-                  </Link>
-                </CardContent>
-              </Card>
+              <div className="space-y-4">
+                 <Card>
+                  <CardHeader className="flex-row items-start gap-4">
+                      <div className="bg-primary/10 text-primary p-3 rounded-full">
+                          <MapPin className="h-6 w-6" />
+                      </div>
+                      <div>
+                        <CardTitle className="text-xl font-headline">{t.contact.addressTitle}</CardTitle>
+                        <CardDescription>Campus MI (Dergana)</CardDescription>
+                      </div>
+                  </CardHeader>
+                  <CardContent>
+                    <Link href={t.contact.addressUrl_mi} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:underline hover:text-primary">
+                      {t.contact.address_mi}
+                    </Link>
+                  </CardContent>
+                </Card>
+                <div className="rounded-lg overflow-hidden border">
+                  <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3195.7628594271096!2d3.2588635000000004!3d36.776256000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128e457e206a4adf%3A0x2dedffeaea98475f!2sNational%20Higher%20School%20of%20Advanced%20Technologies!5e0!3m2!1sfr!2sdz!4v1762470240518!5m2!1sfr!2sdz"
+                    width="100%" 
+                    height="250" 
+                    style={{border:0}} 
+                    allowFullScreen={true} 
+                    loading="lazy" 
+                    referrerPolicy="no-referrer-when-downgrade">
+                  </iframe>
+                </div>
+              </div>
             )}
             
             <Card>
@@ -214,5 +218,3 @@ export default function ContactPage() {
         </Suspense>
     );
 }
-
-    
