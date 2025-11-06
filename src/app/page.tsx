@@ -5,8 +5,12 @@ import { Calculator, FlaskConical } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { useLanguage } from '@/components/providers/LanguageProvider';
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 export default function SpecialitySelectionPage() {
+  const { t } = useLanguage();
   const specialities = [
     {
       name: 'Mathématiques et Informatique',
@@ -34,6 +38,10 @@ export default function SpecialitySelectionPage() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-background text-foreground p-4">
+      <div className="absolute top-4 right-4 flex items-center gap-2">
+        <LanguageSwitcher />
+        <ThemeToggle />
+      </div>
       <div className="text-center mb-10 sm:mb-12 flex flex-col items-center">
         {logoImage && (
             <Image
@@ -45,10 +53,13 @@ export default function SpecialitySelectionPage() {
             />
         )}
         <h1 className="text-4xl sm:text-5xl font-bold font-headline mb-3">
-          Welcome to ENSTA
+          {t.specialitySelection.title}
         </h1>
         <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-          Please select your specialization to enter the student portal.
+          {t.specialitySelection.subtitle}
+        </p>
+         <p className="mt-4 text-base text-muted-foreground max-w-2xl mx-auto">
+          {t.specialitySelection.selectPrompt}
         </p>
       </div>
 

@@ -7,6 +7,11 @@ export const translations = {
       about: "About Us",
       contact: "Contact",
     },
+    specialitySelection: {
+      title: "Welcome to ENSTA",
+      subtitle: "The National High School of Advanced Technologies (ENSTA) is a well-known Algerian school that trains future engineers in math and science and technology. It has two main branches, each with its own history and focus.",
+      selectPrompt: "Please select your specialization to enter the student portal."
+    },
     home: {
       heroTitle: "Welcome to ENSTA",
       heroSubtitle: "Excellence in education, diversity in culture. Join a community of learners and leaders.",
@@ -102,6 +107,11 @@ export const translations = {
       home: "Accueil",
       about: "À Propos",
       contact: "Contact",
+    },
+    specialitySelection: {
+      title: "Bienvenue à l'ENSTA",
+      subtitle: "L'École Nationale Supérieure de Technologies Avancées (ENSTA) est une école algérienne de renom qui forme les futurs ingénieurs en mathématiques et en sciences et technologies. Elle dispose de deux branches principales, chacune avec sa propre histoire et ses propres spécialités.",
+      selectPrompt: "Veuillez sélectionner votre spécialisation pour accéder au portail étudiant."
     },
     home: {
       heroTitle: "Bienvenue à ENSTA",
