@@ -122,39 +122,39 @@
     },
     {
       "id": "gallery-1",
-      "description": "Students collaborating in a modern classroom.",
-      "imageUrl": "https://images.unsplash.com/photo-1571260899052-7c737cb3e449?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzdHVkZW50cyUyMGNsYXNzcm9vbXxlbnwwfHx8fDE3NjI0MjA0ODR8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "students classroom"
+      "description": "Students celebrating.",
+      "imageUrl": "https://i.ibb.co/KSZMpgt/year-in-review.webp",
+      "imageHint": "students celebrating"
     },
     {
       "id": "gallery-2",
-      "description": "A well-lit, modern school library with many books.",
-      "imageUrl": "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxsaWJyYXJ5fGVufDB8fHx8MTc2MjQyMDUxOHww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "school library"
+      "description": "Students in a classroom.",
+      "imageUrl": "https://i.ibb.co/s9qfK91W/year-in-review-1.webp",
+      "imageHint": "students classroom"
     },
     {
       "id": "gallery-3",
-      "description": "Graduates in caps and gowns celebrating at their graduation ceremony.",
-      "imageUrl": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxncmFkdWF0aW9ufGVufDB8fHx8MTc2MjQyMDU1Nnww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "student graduation"
+      "description": "Students presentation.",
+      "imageUrl": "https://i.ibb.co/13RybHv/year-in-review-2.webp",
+      "imageHint": "student presentation"
     },
     {
       "id": "gallery-4",
-      "description": "A group of diverse students working together on a project.",
-      "imageUrl": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzdHVkZW50cyUyMGNvbGxhYm9yYXRpbmd8ZW58MHx8fHwxNzYyNDIwNTg0fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "students collaborating"
+      "description": "ENSTA sports team.",
+      "imageUrl": "https://i.ibb.co/MDY3bWzG/The-national-sport-of-ENSTA-is-Anonymous.jpg",
+      "imageHint": "sports team"
     },
     {
       "id": "gallery-5",
-      "description": "A wide shot of a modern and green school campus on a sunny day.",
-      "imageUrl": "https://images.unsplash.com/photo-1562774053-633a90623d40?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzY2hvb2wlMjBjYW1wdXN8ZW58MHx8fHwxNzYyNDIwNjExfDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "school campus"
+      "description": "Students posing for a photo.",
+      "imageUrl": "https://i.ibb.co/vn79HfQ/The-national-sport-of-ENSTA-is-Anonymous-1.jpg",
+      "imageHint": "students posing"
     },
     {
       "id": "gallery-6",
-      "description": "Students engaged in an art class, painting on canvases.",
-      "imageUrl": "https://images.unsplash.com/photo-1596495764348-db121a51a9a8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhcnQlMjBjbGFzc3xlbnwwfHx8fDE3NjI0MjA2NDN8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "art class"
+      "description": "A student receiving a certificate.",
+      "imageUrl": "https://i.ibb.co/dw4y4G04/get.jpg",
+      "imageHint": "student award"
     }
   ]
 }
