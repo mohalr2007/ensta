@@ -3,7 +3,6 @@
 
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { ArrowRight, Megaphone, Calendar as CalendarIcon, Lightbulb, Camera } from "lucide-react";
@@ -12,6 +11,7 @@ import { cn } from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useEffect, useState } from "react";
+import CircularGallery from "@/components/ui/CircularGallery";
 
 export default function Home() {
   const { t } = useLanguage();
@@ -35,7 +35,7 @@ export default function Home() {
     PlaceHolderImages.find(p => p.id === 'gallery-4'),
     PlaceHolderImages.find(p => p.id === 'gallery-5'),
     PlaceHolderImages.find(p => p.id === 'gallery-6'),
-  ].filter(Boolean) as any[];
+  ].filter(Boolean).map(img => ({ image: img.imageUrl, text: img.description })) as any[];
 
   const stGalleryImages = [
     PlaceHolderImages.find(p => p.id === 'st-gallery-1'),
@@ -45,8 +45,6 @@ export default function Home() {
     PlaceHolderImages.find(p => p.id === 'st-gallery-5'),
     PlaceHolderImages.find(p => p.id === 'st-gallery-6'),
   ].filter(Boolean) as any[];
-
-  const galleryImages = isSt ? stGalleryImages : miGalleryImages;
 
 
   const features = [
@@ -138,28 +136,32 @@ export default function Home() {
               {t.home.gallerySubtitle}
             </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4">
-              {galleryImages.map((image, index) => (
-                 <div key={image.id} className={cn(
-                    "group relative overflow-hidden rounded-xl shadow-lg",
-                    index === 0 || index === 5 ? "lg:col-span-2 lg:row-span-2" : ""
-                 )}>
-                   <Image
-                     src={image.imageUrl}
-                     alt={image.description}
-                     data-ai-hint={image.imageHint}
-                     width={600}
-                     height={600}
-                     className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
-                   />
-                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-300"></div>
-                 </div>
-              ))}
-          </div>
+          {isMi ? (
+            <div className="h-[60vh]">
+              <CircularGallery items={miGalleryImages} />
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4">
+                {stGalleryImages.map((image, index) => (
+                   <div key={image.id} className={cn(
+                      "group relative overflow-hidden rounded-xl shadow-lg",
+                      index === 0 || index === 5 ? "lg:col-span-2 lg:row-span-2" : ""
+                   )}>
+                     <Image
+                       src={image.imageUrl}
+                       alt={image.description}
+                       data-ai-hint={image.imageHint}
+                       width={600}
+                       height={600}
+                       className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
+                     />
+                     <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-300"></div>
+                   </div>
+                ))}
+            </div>
+          )}
         </div>
       </section>
     </div>
   );
 }
-
-    
