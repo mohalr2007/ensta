@@ -23,13 +23,6 @@ export default function MainContent({ children }: { children: React.ReactNode })
 
   const isLandingPage = pathname === '/';
 
-  useEffect(() => {
-    document.body.classList.toggle('is-landing', isLandingPage);
-    return () => {
-      document.body.classList.remove('is-landing');
-    }
-  }, [isLandingPage]);
-
   const logoImage = PlaceHolderImages.find(p => p.id === 'logo');
 
   const navItems = [
@@ -115,8 +108,12 @@ export default function MainContent({ children }: { children: React.ReactNode })
       <main className="flex-grow">
         {children}
       </main>
-      <Dock items={dockItems} />
-      <Footer />
+      {!isLandingPage && (
+        <>
+          <Dock items={dockItems} />
+          <Footer />
+        </>
+      )}
       <Chatbot isOpen={isChatOpen} onClose={() => setChatOpen(false)} />
     </div>
   );

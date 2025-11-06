@@ -66,8 +66,4 @@
   body {
     @apply bg-background text-foreground;
   }
-  body.is-landing .dock-outer,
-  body.is-landing .site-footer {
-    display: none;
-  }
 }
