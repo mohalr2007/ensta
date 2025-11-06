@@ -2,16 +2,25 @@
 "use client";
 
 import { useLanguage } from "@/components/providers/LanguageProvider";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, Send } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { useToast } from "@/hooks/use-toast";
 import { Skeleton } from "@/components/ui/skeleton";
+import { sendEmail } from "@/lib/actions/send-email";
 
 function ContactPageContent() {
   const { t } = useLanguage();
   const searchParams = useSearchParams();
+  const { toast } = useToast();
   const speciality = searchParams.get('speciality');
 
   const isSt = speciality === 'st';
@@ -22,6 +31,35 @@ function ContactPageContent() {
 
   const address = isSt ? t.contact.address_st : t.contact.address_mi;
   const addressUrl = isSt ? t.contact.addressUrl_st : t.contact.addressUrl_mi;
+
+  const formSchema = z.object({
+    name: z.string().min(2, { message: t.contact.form.validation.name }),
+    email: z.string().email({ message: t.contact.form.validation.email }),
+    subject: z.string().min(5, { message: t.contact.form.validation.subject }),
+    message: z.string().min(10, { message: t.contact.form.validation.message }),
+  });
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: { name: "", email: "", subject: "", message: "" },
+  });
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const result = await sendEmail({ ...values, speciality: speciality || "N/A" });
+    if (result.success) {
+      toast({
+        title: t.contact.form.successTitle,
+        description: t.contact.form.successDescription,
+      });
+      form.reset();
+    } else {
+      toast({
+        variant: "destructive",
+        title: t.contact.form.errorTitle,
+        description: result.error || t.contact.form.errorDescription,
+      });
+    }
+  }
 
   return (
     <>
@@ -38,16 +76,70 @@ function ContactPageContent() {
 
       <div className="container mx-auto py-12 md:py-20 px-4">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
-          <div className="lg:col-span-2 flex flex-col items-center justify-center text-center">
-             <h2 className="text-2xl md:text-3xl font-bold font-headline mb-6">{t.contact.form.title}</h2>
-             <p className="text-muted-foreground mb-8">
-                To ensure your message is delivered, please use our simplified contact form.
-             </p>
-             <Button asChild size="lg">
-                <Link href={`/contact/simple${speciality ? `?speciality=${speciality}`: ''}`}>
-                    Go to Contact Form
-                </Link>
-             </Button>
+          <div className="lg:col-span-2">
+            <h2 className="text-2xl md:text-3xl font-bold font-headline mb-6 text-center">{t.contact.form.title}</h2>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>{t.contact.form.name}</FormLabel>
+                        <FormControl>
+                          <Input placeholder={t.contact.form.namePlaceholder} {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>{t.contact.form.email}</FormLabel>
+                        <FormControl>
+                          <Input type="email" placeholder={t.contact.form.emailPlaceholder} {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <FormField
+                  control={form.control}
+                  name="subject"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t.contact.form.subject}</FormLabel>
+                      <FormControl>
+                        <Input placeholder={t.contact.form.subjectPlaceholder} {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t.contact.form.message}</FormLabel>
+                      <FormControl>
+                        <Textarea placeholder={t.contact.form.messagePlaceholder} className="min-h-[150px]" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button type="submit" size="lg" disabled={form.formState.isSubmitting}>
+                  <Send className="mr-2 h-4 w-4" />
+                  {form.formState.isSubmitting ? "Envoi en cours..." : t.contact.form.submit}
+                </Button>
+              </form>
+            </Form>
           </div>
 
           <div className="space-y-8">

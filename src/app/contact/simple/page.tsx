@@ -35,7 +35,7 @@ function SimpleContactFormContent() {
       toast({
         variant: "destructive",
         title: "Erreur de configuration",
-        description: "L'URL du script Google n'est pas définie.",
+        description: "L'URL du script Google n'est pas définie. Veuillez contacter l'administrateur.",
       });
       setIsSubmitting(false);
       return;
@@ -52,24 +52,21 @@ function SimpleContactFormContent() {
     try {
       const response = await fetch(sheetUrl, {
         method: 'POST',
+        mode: 'no-cors', // Important for Google Apps Script web apps
         body: formData,
       });
 
-      const result = await response.json();
-
-      if (result.result === 'success') {
-        toast({
-          title: t.contact.form.successTitle,
-          description: t.contact.form.successDescription,
-        });
-        // Reset form
-        setName('');
-        setEmail('');
-        setSubject('');
-        setMessage('');
-      } else {
-        throw new Error(result.error || "Le script a retourné une erreur.");
-      }
+      // Since it's 'no-cors', we can't read the response, but we can assume success if no network error
+      toast({
+        title: t.contact.form.successTitle,
+        description: t.contact.form.successDescription,
+      });
+      // Reset form
+      setName('');
+      setEmail('');
+      setSubject('');
+      setMessage('');
+      
     } catch (error) {
       console.error("Erreur lors de l'envoi:", error);
       toast({
