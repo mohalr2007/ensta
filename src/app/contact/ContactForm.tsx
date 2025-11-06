@@ -47,7 +47,7 @@ export function ContactForm({ speciality }: { speciality: string | null }) {
       email: "",
       subject: "",
       message: "",
-      speciality: speciality || "",
+      speciality: speciality || "N/A",
     },
   });
 
@@ -61,7 +61,7 @@ export function ContactForm({ speciality }: { speciality: string | null }) {
           description: t.contact.form.successDescription,
         });
         form.reset();
-        form.setValue('speciality', speciality || '');
+        form.setValue('speciality', speciality || 'N/A');
       } else {
         throw new Error(result.error || t.contact.form.errorDescription);
       }
