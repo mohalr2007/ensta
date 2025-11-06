@@ -16,6 +16,7 @@ import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Chatbot } from "@/components/chatbot/Chatbot";
+import { cn } from "@/lib/utils";
 
 
 const metadataConfig: Metadata = {
@@ -128,13 +129,11 @@ function MainContent({ children }: { children: React.ReactNode }) {
       <main className="flex-grow">
         {children}
       </main>
-      {showNav && (
-        <>
-          <Chatbot isOpen={isChatbotOpen} onClose={() => setChatbotOpen(false)} />
-          <Dock items={dockItems} />
-          <Footer />
-        </>
-      )}
+      <div className={cn(!showNav && "hidden")}>
+        <Chatbot isOpen={isChatbotOpen} onClose={() => setChatbotOpen(false)} />
+        <Dock items={dockItems} />
+        <Footer />
+      </div>
     </div>
   );
 }
