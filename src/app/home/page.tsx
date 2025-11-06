@@ -56,7 +56,7 @@ function HomePageContent() {
       icon: Code,
       title: t.home.feature2Title,
       description: t.home.feature2Desc,
-      href: "/dev-hub"
+      href: `/dev-hub${speciality ? `?speciality=${speciality}` : ''}`
     },
   ];
   
