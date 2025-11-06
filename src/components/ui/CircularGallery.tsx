@@ -1,7 +1,7 @@
 
 "use client";
 
-import { Camera, Mesh, Plane, Program, Renderer, Texture, Transform, Vec2 } from 'ogl';
+import { Camera, Mesh, Plane, Program, Renderer, Texture, Transform, Vec2, Raycast } from 'ogl';
 import { useEffect, useRef } from 'react';
 
 import './CircularGallery.css';
@@ -237,6 +237,7 @@ class App {
     this.onResize();
     this.createGeometry();
     this.createMedias(items, bend, textColor, borderRadius, font);
+    this.raycast = new Raycast(this.gl);
     this.update();
     this.addEventListeners();
   }
@@ -279,7 +280,7 @@ class App {
       { image: `https://picsum.photos/seed/21/800/600?grayscale`, text: 'Coastline' },
       { image: `https://picsum.photos/seed/12/800/600?grayscale`, text: 'Palm Trees' }
     ];
-    const galleryItems = items && items.length > items.length ? items : defaultItems;
+    const galleryItems = items && items.length > 0 ? items : defaultItems;
     this.mediasImages = galleryItems.concat(galleryItems);
     this.medias = this.mediasImages.map((data, index) => {
       return new Media({
@@ -338,18 +339,17 @@ class App {
     const x = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
     const y = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
     
-    const mouse = new Vec2(
+    this.mouse.set(
       (x / this.screen.width) * 2 - 1,
       -(y / this.screen.height) * 2 + 1
     );
 
-    this.camera.updateMatrixWorld();
-    const ray = this.camera.castRay(mouse);
-
-    for (const media of this.medias) {
-      if (media.plane.intersect(ray).hit) {
-        return media;
-      }
+    this.raycast.cast({ camera: this.camera, mouse: this.mouse });
+    const hits = this.raycast.intersectBounds(this.medias.map(m => m.plane));
+    
+    if (hits.length > 0) {
+      const hitMesh = hits[0];
+      return this.medias.find(media => media.plane === hitMesh);
     }
     return null;
   }
@@ -452,3 +452,5 @@ export default function CircularGallery({
   }, [items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase, onImageClick]);
   return <div className="circular-gallery" ref={containerRef} />;
 }
+
+    
