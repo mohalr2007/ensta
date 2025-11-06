@@ -15,7 +15,6 @@ import Image from "next/image";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { Chatbot } from "@/components/chatbot/Chatbot";
 import { cn } from "@/lib/utils";
 
 
@@ -30,7 +29,6 @@ function MainContent({ children }: { children: React.ReactNode }) {
   const speciality = searchParams.get('speciality');
   const router = useRouter();
   const { t } = useLanguage();
-  const [isChatbotOpen, setChatbotOpen] = useState(false);
 
   const logoImage = PlaceHolderImages.find(p => p.id === 'logo');
 
@@ -63,8 +61,9 @@ function MainContent({ children }: { children: React.ReactNode }) {
         {speciality}
       </div>
     ),
-    label: `Chat with ENSTA Assistant`,
-    onClick: () => setChatbotOpen(prev => !prev),
+    label: `Speciality: ${speciality.toUpperCase()}`,
+    isComponent: true,
+    onClick: () => {},
   } : null;
 
   const logoItem = {
@@ -116,7 +115,6 @@ function MainContent({ children }: { children: React.ReactNode }) {
       <main className="flex-grow">
         {children}
       </main>
-      <Chatbot isOpen={isChatbotOpen} onClose={() => setChatbotOpen(false)} />
       <Dock items={dockItems} />
       <Footer />
     </div>
