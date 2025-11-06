@@ -4,7 +4,7 @@
 import Image from "next/image";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Target, Eye, Landmark, BrainCircuit, ShieldCheck, Settings, BatteryCharging, Network, Factory, Wrench, Cpu, Bot, Component, Package, Train, Cog, Droplets, FlaskConical, TrainFront } from "lucide-react";
+import { Target, Landmark, BrainCircuit, ShieldCheck, Settings, BatteryCharging, Network, Factory, Wrench, Cpu, Bot, Component, Package, Train, Cog, Droplets, FlaskConical, TrainFront } from "lucide-react";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { useSearchParams } from "next/navigation";
 import LogoLoop from "@/components/ui/logo-loop";
@@ -136,8 +136,7 @@ function AboutPageContent() {
         </div>
       </div>
       <div className="container mx-auto py-12 md:py-20 px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-start">
-          <Card className="border-none shadow-none">
+        <Card className="border-none shadow-none mb-16 md:mb-24">
             <CardHeader className="p-0">
               <div className="flex items-center gap-4">
                 <div className="bg-primary text-primary-foreground p-3 rounded-lg">
@@ -150,20 +149,6 @@ function AboutPageContent() {
               <p className="text-base md:text-lg text-muted-foreground">{t.about.missionText}</p>
             </CardContent>
           </Card>
-          <Card className="border-none shadow-none">
-            <CardHeader className="p-0">
-              <div className="flex items-center gap-4">
-                <div className="bg-primary text-primary-foreground p-3 rounded-lg">
-                  <Eye className="w-6 h-6 md:w-8 md:h-8" />
-                </div>
-                <CardTitle className="text-2xl md:text-3xl font-headline">{t.about.visionTitle}</CardTitle>
-              </div>
-            </CardHeader>
-            <CardContent className="pt-4 pl-0 md:pt-6">
-              <p className="text-base md:text-lg text-muted-foreground">{t.about.visionText}</p>
-            </CardContent>
-          </Card>
-        </div>
 
         <div className="mt-16 md:mt-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12 items-center">
