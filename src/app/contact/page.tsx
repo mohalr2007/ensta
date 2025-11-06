@@ -74,7 +74,7 @@ function ContactPageContent() {
       <div className="container mx-auto py-12 md:py-20 px-4">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
           <div className="space-y-8">
-            {(isSt || noSpeciality) && (
+             {(isSt || noSpeciality) && (
               <div className="space-y-4">
                 <div className="rounded-lg overflow-hidden border">
                   <iframe 
@@ -87,12 +87,19 @@ function ContactPageContent() {
                     referrerPolicy="no-referrer-when-downgrade">
                   </iframe>
                 </div>
-                <div className="flex items-start gap-4">
-                  <MapPin className="h-5 w-5 mt-1 text-muted-foreground flex-shrink-0" />
-                  <Link href={t.contact.addressUrl_st} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:underline hover:text-primary">
-                    {t.contact.address_st}
-                  </Link>
-                </div>
+                 <Card>
+                    <CardHeader className="flex-row items-center gap-4">
+                        <div className="bg-primary/10 text-primary p-3 rounded-full">
+                            <MapPin className="h-6 w-6" />
+                        </div>
+                        <CardTitle className="text-xl font-headline">Campus ST (Bab El Oued)</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <Link href={t.contact.addressUrl_st} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:underline hover:text-primary">
+                        {t.contact.address_st}
+                      </Link>
+                    </CardContent>
+                </Card>
               </div>
             )}
 
@@ -109,15 +116,22 @@ function ContactPageContent() {
                     referrerPolicy="no-referrer-when-downgrade">
                   </iframe>
                 </div>
-                <div className="flex items-start gap-4">
-                  <MapPin className="h-5 w-5 mt-1 text-muted-foreground flex-shrink-0" />
-                  <Link href={t.contact.addressUrl_mi} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:underline hover:text-primary">
-                    {t.contact.address_mi}
-                  </Link>
-                </div>
+                 <Card>
+                    <CardHeader className="flex-row items-center gap-4">
+                        <div className="bg-primary/10 text-primary p-3 rounded-full">
+                            <MapPin className="h-6 w-6" />
+                        </div>
+                        <CardTitle className="text-xl font-headline">Campus MI (Dergana)</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <Link href={t.contact.addressUrl_mi} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:underline hover:text-primary">
+                        {t.contact.address_mi}
+                      </Link>
+                    </CardContent>
+                </Card>
               </div>
             )}
-
+            
             <Card>
               <CardHeader className="flex-row items-center gap-4">
                   <div className="bg-primary/10 text-primary p-3 rounded-full">
