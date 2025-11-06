@@ -59,14 +59,20 @@ export const translations = {
       ],
       stSpecializationsTitle: "ST Domain Specializations",
       stSpecializations: [
-        {
-          title: "Advanced Materials and Nanotechnology",
-          tag: "Established"
-        },
-        {
-          title: "Renewable Energy and Sustainable Systems",
-          tag: "Established"
-        }
+        { title: "Energy Mechanics", tag: "New 2025-2026" },
+        { title: "Renewable Energies and Energy Storage", tag: "New 2025-2026" },
+        { title: "Telecommunication Systems and Networks", tag: "" },
+        { title: "Automation and Industrial Computing", tag: "" },
+        { title: "Industrial Maintenance Engineering and Management", tag: "" },
+        { title: "Embedded Systems", tag: "" },
+        { title: "Mechatronics", tag: "" },
+        { title: "Industrial Engineering", tag: "" },
+        { title: "Supply Chain Engineering", tag: "" },
+        { title: "Transportation Engineering", tag: "" },
+        { title: "Mechanical Engineering", tag: "" },
+        { title: "Water Treatment", tag: "" },
+        { title: "Organic Processes", tag: "" },
+        { title: "Electric Traction", tag: "" },
       ]
     },
     contact: {
@@ -166,14 +172,20 @@ export const translations = {
       ],
       stSpecializationsTitle: "Spécialisations du Domaine ST",
       stSpecializations: [
-        {
-          title: "Matériaux Avancés et Nanotechnologie",
-          tag: "Établi"
-        },
-        {
-          title: "Énergies Renouvelables et Systèmes Durables",
-          tag: "Établi"
-        }
+        { title: "Mécanique Énergétique", tag: "Nouvelle 2025-2026" },
+        { title: "Énergies Renouvelables et Stockage d’Énergie", tag: "Nouvelle 2025-2026" },
+        { title: "Systèmes de Télécommunications et Réseaux", tag: "" },
+        { title: "Automatique et Informatique Industrielle", tag: "" },
+        { title: "Management et Ingénierie de la Maintenance Industrielle", tag: "" },
+        { title: "Systèmes Embarqués", tag: "" },
+        { title: "Mécatronique", tag: "" },
+        { title: "Génie Industriel", tag: "" },
+        { title: "Ingénierie de la Chaîne Logistique", tag: "" },
+        { title: "Ingénierie des Transports", tag: "" },
+        { title: "Ingénierie Mécanique", tag: "" },
+        { title: "Traitement des Eaux", tag: "" },
+        { title: "Procédés Organiques", tag: "" },
+        { title: "Traction Electrique", tag: "" },
       ]
     },
     contact: {

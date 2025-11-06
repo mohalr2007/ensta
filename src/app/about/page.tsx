@@ -4,10 +4,10 @@
 import Image from "next/image";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Target, Eye, Landmark, BrainCircuit, ShieldCheck, Atom, Wind } from "lucide-react";
+import { Target, Eye, Landmark, BrainCircuit, ShieldCheck, Atom, Wind, Settings, BatteryCharging, Network, Factory, Wrench, Cpu, Bot, Component, Package, Train, Cog, Droplets, FlaskConical, TrainFront } from "lucide-react";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { useSearchParams } from "next/navigation";
-import { LogoLoop } from "@/components/ui/logo-loop";
+import LogoLoop from "@/components/ui/logo-loop";
 
 export default function AboutPage() {
   const { t } = useLanguage();
@@ -28,18 +28,29 @@ export default function AboutPage() {
     }
   ];
   
-  const stSpecializations = [
-    {
-      ...t.about.stSpecializations[0],
-      icon: Atom,
-      image: PlaceHolderImages.find(p => p.id === 'st-materials'),
-    },
-    {
-      ...t.about.stSpecializations[1],
-      icon: Wind,
-      image: PlaceHolderImages.find(p => p.id === 'st-energy'),
-    }
+  const stSpecializationData = [
+    { icon: Settings, imageId: 'st-energy-mechanics' },
+    { icon: BatteryCharging, imageId: 'st-renewable-energy' },
+    { icon: Network, imageId: 'st-telecom' },
+    { icon: Factory, imageId: 'st-automation' },
+    { icon: Wrench, imageId: 'st-maintenance' },
+    { icon: Cpu, imageId: 'st-embedded' },
+    { icon: Bot, imageId: 'st-mechatronics' },
+    { icon: Component, imageId: 'st-industrial-eng' },
+    { icon: Package, imageId: 'st-supply-chain' },
+    { icon: Train, imageId: 'st-transport' },
+    { icon: Cog, imageId: 'st-mechanical-eng' },
+    { icon: Droplets, imageId: 'st-water' },
+    { icon: FlaskConical, imageId: 'st-organic' },
+    { icon: TrainFront, imageId: 'st-electric-traction' },
   ];
+
+  const stSpecializations = t.about.stSpecializations.map((spec, index) => ({
+    ...spec,
+    ...stSpecializationData[index],
+    image: PlaceHolderImages.find(p => p.id === stSpecializationData[index].imageId),
+  }));
+
 
   const miSpecializationLogos = miSpecializations.map((spec) => ({
     node: (
@@ -171,7 +182,7 @@ export default function AboutPage() {
           </div>
         </div>
         
-        {isMi && (
+        {(isMi || (!isMi && !isSt)) && (
           <div className="mt-16 md:mt-24">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold font-headline">{t.about.miSpecializationsTitle}</h2>
@@ -179,7 +190,7 @@ export default function AboutPage() {
              <LogoLoop logos={miSpecializationLogos} speed={50} fadeOut={true} />
           </div>
         )}
-        {isSt && (
+        {(isSt || (!isMi && !isSt)) && (
           <div className="mt-16 md:mt-24">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold font-headline">{t.about.stSpecializationsTitle}</h2>

@@ -55,16 +55,88 @@
       "imageHint": "system security"
     },
     {
-      "id": "st-materials",
-      "description": "A close-up view of graphene or another nanomaterial structure.",
-      "imageUrl": "https://images.unsplash.com/photo-1617892795383-727878804104?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxuYW5vdGVjaG5vbG9neXxlbnwwfHx8fDE3NjIyOTQ3MjF8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "nanotechnology material"
+      "id": "st-energy-mechanics",
+      "description": "Gears and mechanical parts related to energy.",
+      "imageUrl": "https://images.unsplash.com/photo-1718824331840-399943ff5c1e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxtZWNoYW5pY2FsJTIwZ2VhcnN8ZW58MHx8fHwxNzYyMzYyODAwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "mechanical gears"
     },
     {
-      "id": "st-energy",
-      "description": "A field of solar panels and wind turbines under a clear blue sky.",
-      "imageUrl": "https://images.unsplash.com/photo-1508514177221-188b1cf16e9c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxyZW5ld2FibGUlMjBlbmVyZ3l8ZW58MHx8fHwxNzYyMjk0NzUxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "id": "st-renewable-energy",
+      "description": "Wind turbines and solar panels.",
+      "imageUrl": "https://images.unsplash.com/photo-1452179535021-368bb0edc3a8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxyZW5ld2FibGUlMjBlbmVyZ3l8ZW58MHx8fHwxNzYyNDE0MTI0fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "renewable energy"
+    },
+    {
+      "id": "st-telecom",
+      "description": "Abstract network and communication lines.",
+      "imageUrl": "https://images.unsplash.com/photo-1762151654079-2c842b0dc1f9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHx0ZWxlY29tJTIwbmV0d29ya3xlbnwwfHx8fDE3NjI0MTQxMjR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "telecom network"
+    },
+    {
+      "id": "st-automation",
+      "description": "Robotic arm in an industrial setting.",
+      "imageUrl": "https://images.unsplash.com/photo-1509390288171-ce2088f7d08e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8aW5kdXN0cmlhbCUyMGF1dG9tYXRpb258ZW58MHx8fHwxNzYyNDE0MTI0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "industrial automation"
+    },
+    {
+      "id": "st-maintenance",
+      "description": "Engineer performing maintenance on machinery.",
+      "imageUrl": "https://images.unsplash.com/photo-1616512276680-6d2f34429103?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxpbmR1c3RyaWFsJTIwbWFpbnRlbmFuY2V8ZW58MHx8fHwxNzYyNDE0MTI0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "industrial maintenance"
+    },
+    {
+      "id": "st-embedded",
+      "description": "A close-up of a complex circuit board.",
+      "imageUrl": "https://images.unsplash.com/photo-1761496851678-6c0cc91b4482?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxlbWJlZGRlZCUyMHN5c3RlbXxlbnwwfHx8fDE3NjI0MTQxMjR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "embedded system"
+    },
+    {
+      "id": "st-mechatronics",
+      "description": "A fusion of mechanical and electronic components.",
+      "imageUrl": "https://images.unsplash.com/photo-1560724797-bf78e981d20d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxtZWNoYXRyb25pY3MlMjByb2JvdHxlbnwwfHx8fDE3NjI0MTQxMjR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "mechatronics robot"
+    },
+    {
+      "id": "st-industrial-eng",
+      "description": "A factory assembly line.",
+      "imageUrl": "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxpbmR1c3RyaWFsJTIwZW5naW5lZXJpbmd8ZW58MHx8fHwxNzYyMzQ5MjExfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "industrial engineering"
+    },
+    {
+      "id": "st-supply-chain",
+      "description": "A warehouse with boxes and logistics operations.",
+      "imageUrl": "https://images.unsplash.com/photo-1627309366653-2dedc084cdf1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzdXBwbHklMjBjaGFpbnxlbnwwfHx8fDE3NjI0MTQxMjR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "supply chain"
+    },
+    {
+      "id": "st-transport",
+      "description": "High-speed train and a modern bridge.",
+      "imageUrl": "https://images.unsplash.com/photo-1761550328565-acf20effb1c1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHx0cmFuc3BvcnRhdGlvbiUyMGVuZ2luZWVyaW5nfGVufDB8fHx8MTc2MjQxNDEyNHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "transportation engineering"
+    },
+    {
+      "id": "st-mechanical-eng",
+      "description": "A complex mechanical engine.",
+      "imageUrl": "https://images.unsplash.com/photo-1581093803931-46e730e7622e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxtZWNoYW5pY2FsJTIwZW5naW5lZXJpbmd8ZW58MHx8fHwxNzYyNDE0MTI1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "mechanical engineering"
+    },
+    {
+      "id": "st-water",
+      "description": "Water treatment facility.",
+      "imageUrl": "https://images.unsplash.com/photo-1636649389054-e5dcea139e64?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHx3YXRlciUyMHRyZWF0bWVudHxlbnwwfHx8fDE3NjI0MTQxMjR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "water treatment"
+    },
+    {
+      "id": "st-organic",
+      "description": "Chemical lab with organic compounds.",
+      "imageUrl": "https://images.unsplash.com/photo-1740490278517-21ec451914f6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8b3JnYW5pYyUyMGNoZW1pc3RyeXxlbnwwfHx8fDE3NjI0MTQxMjR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "organic chemistry"
+    },
+    {
+      "id": "st-electric-traction",
+      "description": "An electric train system.",
+      "imageUrl": "https://images.unsplash.com/photo-1631491471415-145cec7e5961?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxlbGVjdHJpYyUyMHRyYWlufGVufDB8fHx8MTc2MjQxNDEyNHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "electric train"
     }
   ]
 }
