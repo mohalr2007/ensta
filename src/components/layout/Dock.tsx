@@ -5,6 +5,7 @@ import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from
 import { Children, cloneElement, useEffect, useRef, useState, isValidElement } from 'react';
 import './Dock.css';
 import { cn } from '@/lib/utils';
+import { useWindowSize } from '@/hooks/use-window-size';
 
 function DockItem({ children, className = '', onClick, onLongPress, mouseX, spring, distance, magnification, baseItemSize }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -125,10 +126,12 @@ export function Dock({
   className = '',
 }) {
   const mouseX = useMotionValue(Infinity);
+  const { width } = useWindowSize();
+  const isMobile = width < 768;
 
-  const baseItemSize = 48; 
-  const magnification = 64; 
-  const distance = 120;
+  const baseItemSize = isMobile ? 40 : 48; 
+  const magnification = isMobile ? 52 : 64; 
+  const distance = isMobile ? 100 : 120;
   const spring = { stiffness: 500, damping: 30 };
 
   return (

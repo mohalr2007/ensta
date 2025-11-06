@@ -22,13 +22,13 @@
 .dock-panel {
   display: flex;
   align-items: flex-end;
-  gap: 0.5rem; /* Reduced gap */
-  border-radius: 1rem; /* Slightly smaller radius */
+  gap: 0.5rem; 
+  border-radius: 1rem; 
   background-color: hsl(var(--background) / 0.7);
   border: 1px solid hsl(var(--border));
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  padding: 0.4rem; /* Reduced padding */
+  padding: 0.4rem; 
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
   pointer-events: auto;
   transition: background-color 0.3s ease;
@@ -44,7 +44,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0.75rem; /* Consistent rounding */
+  border-radius: 0.75rem; 
   cursor: pointer;
   outline: none;
   color: hsl(var(--foreground));
@@ -66,7 +66,7 @@
 
 .dock-label {
   position: absolute;
-  top: -2.25rem; /* Positioned higher */
+  top: -2.25rem; 
   left: 50%;
   width: fit-content;
   white-space: pre;
@@ -83,14 +83,22 @@
 
 .dock-separator {
   width: 1px;
-  height: 24px; /* Adjust height */
+  height: 24px; 
   background-color: hsl(var(--border));
-  margin: 0 0.25rem; /* Add some space around it */
+  margin: 0 0.25rem; 
   align-self: center;
 }
 
 @media (max-width: 767px) {
   .dock-label {
     display: none;
+  }
+  .dock-panel {
+    padding: 0.3rem;
+    gap: 0.3rem;
+    border-radius: 0.75rem;
+  }
+  .dock-item {
+    border-radius: 0.6rem;
   }
 }
