@@ -18,6 +18,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { Badge } from "@/components/ui/badge";
+import { supabase } from "@/lib/supabaseClient";
 
 export function ContactForm({ speciality }: { speciality: string | null }) {
   const { toast } = useToast();
@@ -43,48 +44,32 @@ export function ContactForm({ speciality }: { speciality: string | null }) {
   });
 
   async function onSubmit(values: z.infer<typeof translatedFormSchema>) {
-    const scriptUrl = process.env.NEXT_PUBLIC_GOOGLE_SHEET_URL;
-    if (!scriptUrl) {
-      console.error("Google Sheet URL is not defined in environment variables.");
-      toast({
-        variant: "destructive",
-        title: t.contact.form.errorTitle,
-        description: "Server configuration error: Google Sheet URL is missing.",
-      });
-      return;
-    }
-
-    // Create a new FormData object to send the data like a simple HTML form
-    const formData = new FormData();
-    formData.append('timestamp', new Date().toISOString());
-    formData.append('name', values.name);
-    formData.append('email', values.email);
-    formData.append('subject', values.subject);
-    formData.append('message', values.message);
-    formData.append('speciality', values.speciality || 'N/A');
-
     try {
-      const response = await fetch(scriptUrl, {
-        method: 'POST',
-        body: formData,
-        // We remove 'no-cors' to be able to read the response from the script
-      });
+      const { error } = await supabase
+        .from('messages')
+        .insert([
+          { 
+            name: values.name,
+            email: values.email,
+            subject: values.subject,
+            message: values.message,
+            speciality: values.speciality || 'N/A'
+          }
+        ]);
 
-      const result = await response.json();
-
-      if (result.result === 'success') {
-        toast({
-          title: t.contact.form.successTitle,
-          description: t.contact.form.successDescription,
-        });
-        form.reset();
-        form.setValue('speciality', speciality || 'N/A');
-      } else {
-        throw new Error(result.error || 'The script reported an error.');
+      if (error) {
+        throw error;
       }
 
+      toast({
+        title: t.contact.form.successTitle,
+        description: t.contact.form.successDescription,
+      });
+      form.reset();
+      form.setValue('speciality', speciality || 'N/A');
+
     } catch (error) {
-      console.error("Error submitting form:", error);
+      console.error("Error submitting form to Supabase:", error);
       toast({
         variant: "destructive",
         title: t.contact.form.errorTitle,
