@@ -54,8 +54,7 @@ export default function MainContent({ children }: { children: React.ReactNode })
         {speciality}
       </div>
     ),
-    label: "Assistant",
-    isComponent: true,
+    label: t.nav.devHub,
     onClick: () => setChatOpen(true),
   } : null;
 
@@ -101,7 +100,7 @@ export default function MainContent({ children }: { children: React.ReactNode })
     logoItem,
     { isSeparator: true, id: 'sep2' },
     ...controlItems,
-  ];
+  ].filter(Boolean) as any[];
   
   return (
     <div className="flex flex-col min-h-screen">
