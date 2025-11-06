@@ -4,6 +4,7 @@
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Zap, Bot, Smartphone, FastForward, Target, Milestone } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export default function DevHubPage() {
   const { t } = useLanguage();
@@ -50,8 +51,14 @@ export default function DevHubPage() {
       </div>
       <div className="container mx-auto py-12 md:py-20 px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {devTips.map((tip) => (
-                <Card key={tip.title} className="text-center border-2 border-transparent hover:border-primary transition-all duration-300 hover:shadow-lg h-full">
+            {devTips.map((tip, index) => (
+                <Card 
+                  key={tip.title} 
+                  className={cn(
+                    "text-center border-2 border-transparent hover:border-primary transition-all duration-300 hover:shadow-lg h-full",
+                    devTips.length === 5 && index >= 3 && "lg:col-start-auto lg:mx-auto"
+                  )}
+                >
                     <CardHeader>
                         <div className="flex justify-center items-center mb-4">
                             <div className="bg-primary/10 text-primary p-4 rounded-full">
