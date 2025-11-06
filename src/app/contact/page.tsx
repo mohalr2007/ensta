@@ -86,7 +86,7 @@ function ContactPageContent() {
                    {(isSt || noSpeciality) && (
                       <div className="space-y-2">
                          <Link href={t.contact.addressUrl_st} target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-primary block">
-                           <span className="font-semibold text-foreground">ST:</span> {t.contact.address_st}
+                           {t.contact.address_st}
                          </Link>
                          <div className="rounded-lg overflow-hidden border">
                            <iframe 
@@ -104,7 +104,7 @@ function ContactPageContent() {
                    {(isMi || noSpeciality) && (
                       <div className="space-y-2 pt-4">
                         <Link href={t.contact.addressUrl_mi} target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-primary block">
-                           <span className="font-semibold text-foreground">MI:</span> {t.contact.address_mi}
+                           {t.contact.address_mi}
                         </Link>
                          <div className="rounded-lg overflow-hidden border">
                            <iframe 
