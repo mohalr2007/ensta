@@ -46,6 +46,7 @@ export default function Home() {
     PlaceHolderImages.find(p => p.id === 'st-gallery-6'),
     PlaceHolderImages.find(p => p.id === 'st-gallery-7'),
     PlaceHolderImages.find(p => p.id === 'st-gallery-8'),
+    PlaceHolderImages.find(p => p.id === 'st-gallery-9'),
   ].filter(Boolean) as any[];
 
 

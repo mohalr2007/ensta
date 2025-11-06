@@ -203,6 +203,12 @@
       "description": "A photo of the school or an event.",
       "imageUrl": "https://i.ibb.co/wNvPRhP1/5784977299248712918.jpg",
       "imageHint": "school event"
+    },
+    {
+      "id": "st-gallery-9",
+      "description": "A photo of the school or an event.",
+      "imageUrl": "https://i.ibb.co/PZKDxv2w/5784977299248712917.jpg",
+      "imageHint": "school event"
     }
   ]
 }
