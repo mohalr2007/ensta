@@ -3,31 +3,36 @@
 
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Code, LayoutTemplate, Palette, Rocket } from "lucide-react";
+import { Zap, Bot, Smartphone, FastForward, Target, Milestone } from "lucide-react";
 
 export default function DevHubPage() {
   const { t } = useLanguage();
 
   const devTips = [
     {
-      icon: LayoutTemplate,
-      title: "1. Plan Your Structure (HTML)",
-      description: "Start with a solid foundation. Use semantic HTML5 tags like <header>, <main>, <section>, and <footer> to organize your content logically. This is crucial for both SEO and accessibility."
+      icon: Target,
+      title: "1. Define Purpose First",
+      description: "Know why you're building the site before anything else."
     },
     {
-      icon: Palette,
-      title: "2. Style with Purpose (CSS)",
-      description: "Use CSS for all visual styling. Frameworks like Tailwind CSS are great for rapid development. Focus on creating a consistent theme with a clear color palette, spacing, and typography."
+      icon: Milestone,
+      title: "2. Keep It Simple",
+      description: "A clean layout and easy navigation make the best first impression."
     },
     {
-      icon: Code,
-      title: "3. Add Interactivity (JavaScript)",
-      description: "Bring your site to life with JavaScript. Handle user events, make API calls, and manipulate the DOM. Libraries like React (with Next.js) make building complex user interfaces much more manageable."
+      icon: Smartphone,
+      title: "3. Make It Mobile-Friendly",
+      description: "Most visitors will be on their phones, so design for mobile first."
     },
     {
-      icon: Rocket,
-      title: "4. Deploy and Share",
-      description: "Once you're ready, deploy your site to a platform like Firebase App Hosting or Vercel. This will make your project live on the internet for everyone to see. Don't forget to buy a domain name!"
+      icon: FastForward,
+      title: "4. Prioritize Speed and Clarity",
+      description: "Optimize images, limit heavy scripts, and use caching to ensure your site is fast."
+    },
+    {
+      icon: Bot,
+      title: "5. Leverage AI Tools",
+      description: "Use AI design assistants for layouts and to find solutions for bugs and problems you encounter."
     }
   ];
 
@@ -44,9 +49,9 @@ export default function DevHubPage() {
         </div>
       </div>
       <div className="container mx-auto py-12 md:py-20 px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {devTips.map((tip) => (
-                <Card key={tip.title} className="text-center border-2 border-transparent hover:border-primary transition-all duration-300 hover:shadow-lg">
+                <Card key={tip.title} className="text-center border-2 border-transparent hover:border-primary transition-all duration-300 hover:shadow-lg h-full">
                     <CardHeader>
                         <div className="flex justify-center items-center mb-4">
                             <div className="bg-primary/10 text-primary p-4 rounded-full">
