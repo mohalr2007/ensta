@@ -21,8 +21,6 @@ function AboutPageContent() {
     setIsClient(true);
   }, []);
   
-  const historyImage = PlaceHolderImages.find(p => p.id === 'about-history');
-
   const miSpecializations = [
     {
       ...t.about.miSpecializations[0],
@@ -151,7 +149,7 @@ function AboutPageContent() {
         </Card>
 
         <div className="mt-16 md:mt-24">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12 items-center">
+          <div className="grid grid-cols-1 gap-10 md:gap-12 items-center">
             <div>
               <div className="flex items-center gap-4 mb-4 md:mb-6">
                 <div className="bg-primary text-primary-foreground p-3 rounded-lg">
@@ -161,17 +159,6 @@ function AboutPageContent() {
               </div>
               <p className="text-base md:text-lg text-muted-foreground">{t.about.historyText}</p>
             </div>
-            {historyImage && (
-              <div className="w-full h-64 md:h-80 relative rounded-lg overflow-hidden shadow-xl">
-                 <Image
-                   src={historyImage.imageUrl}
-                   alt={historyImage.description}
-                   data-ai-hint={historyImage.imageHint}
-                   fill
-                   className="object-cover"
-                 />
-              </div>
-            )}
           </div>
         </div>
         
