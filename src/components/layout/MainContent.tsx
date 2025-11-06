@@ -112,9 +112,9 @@ export default function MainContent({ children }: { children: React.ReactNode })
       <main className="flex-grow">
         {children}
       </main>
-      {!isLandingPage && (
+      {isClient && !isLandingPage && (
         <>
-          {isClient && <Dock items={dockItems} />}
+          <Dock items={dockItems} />
           <Footer />
         </>
       )}
