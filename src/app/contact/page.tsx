@@ -76,14 +76,6 @@ function ContactPageContent() {
           <div className="space-y-8">
             {(isSt || noSpeciality) && (
               <div className="space-y-4">
-                <Card className="border-0 shadow-none -mb-4">
-                    <CardHeader className="flex-row items-center gap-4 px-0">
-                      <div className="bg-accent/10 text-accent p-3 rounded-full">
-                        <Building className="h-6 w-6" />
-                      </div>
-                      <CardTitle className="text-xl font-headline">Campus ST (Bab El Oued)</CardTitle>
-                    </CardHeader>
-                </Card>
                 <div className="rounded-lg overflow-hidden border">
                   <iframe 
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3195.247961551969!2d3.0613164000000004!3d36.78860480000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128fb301a7a8063d%3A0x4c8a4c0183459a2!2s%C3%89cole%20nationale%20Sup%C3%A9rieure%20de%20technologie%20avanc%C3%A9e!5e0!3m2!1sfr!2sdz!4v1762470127419!5m2!1sfr!2sdz" 
@@ -106,14 +98,6 @@ function ContactPageContent() {
 
             {(isMi || noSpeciality) && (
               <div className="space-y-4">
-                <Card className="border-0 shadow-none -mb-4">
-                  <CardHeader className="flex-row items-center gap-4 px-0">
-                    <div className="bg-primary/10 text-primary p-3 rounded-full">
-                      <Building className="h-6 w-6" />
-                    </div>
-                    <CardTitle className="text-xl font-headline">Campus MI (Dergana)</CardTitle>
-                  </CardHeader>
-                </Card>
                 <div className="rounded-lg overflow-hidden border">
                   <iframe 
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3195.7628594271096!2d3.2588635000000004!3d36.776256000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128e457e206a4adf%3A0x2dedffeaea98475f!2sNational%20Higher%20School%20of%20Advanced%20Technologies!5e0!3m2!1sfr!2sdz!4v1762470240518!5m2!1sfr!2sdz"
