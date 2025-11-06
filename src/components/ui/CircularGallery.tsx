@@ -344,7 +344,7 @@ class App {
       -(y / this.screen.height) * 2 + 1
     );
 
-    this.raycast.cast({ camera: this.camera, mouse: this.mouse });
+    this.raycast.cast(this.mouse, this.camera);
     const hits = this.raycast.intersectBounds(this.medias.map(m => m.plane));
     
     if (hits.length > 0) {
