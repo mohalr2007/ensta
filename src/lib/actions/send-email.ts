@@ -13,7 +13,7 @@ const sendEmailSchema = z.object({
 });
 
 export async function sendEmail(formData: FormData) {
-  const supabase = createSupabaseServerClient();
+  const supabase = await createSupabaseServerClient();
   const parsedData = sendEmailSchema.safeParse({
     name: formData.get('name'),
     email: formData.get('email'),
@@ -32,6 +32,7 @@ export async function sendEmail(formData: FormData) {
   const { error } = await supabase.from('contacts').insert([parsedData.data]);
 
   if (error) {
+    console.error('Supabase error:', error);
     return {
       success: false,
       message: error.message,
