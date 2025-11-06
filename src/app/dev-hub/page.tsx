@@ -5,6 +5,7 @@ import { useLanguage } from "@/components/providers/LanguageProvider";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Zap, Bot, Smartphone, FastForward, Target, Milestone, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 export default function DevHubPage() {
   const { t } = useLanguage();
@@ -41,6 +42,22 @@ export default function DevHubPage() {
       description: "Always test your site and get feedback from real users to find and fix issues."
     }
   ];
+  
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 }
+  };
+
 
   return (
     <>
@@ -55,26 +72,32 @@ export default function DevHubPage() {
         </div>
       </div>
       <div className="container mx-auto py-12 md:py-20 px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            variants={containerVariants}
+            initial="hidden"
+            animate="show"
+        >
             {devTips.map((tip, index) => (
-                <Card 
-                  key={tip.title} 
-                  className="text-center border-2 border-transparent hover:border-primary transition-all duration-300 hover:shadow-lg h-full"
-                >
-                    <CardHeader>
-                        <div className="flex justify-center items-center mb-4">
-                            <div className="bg-primary/10 text-primary p-4 rounded-full">
-                                <tip.icon className="h-8 w-8" />
+                <motion.div key={tip.title} variants={itemVariants}>
+                    <Card 
+                      className="text-center border-2 border-transparent hover:border-primary transition-all duration-300 hover:shadow-lg h-full"
+                    >
+                        <CardHeader>
+                            <div className="flex justify-center items-center mb-4">
+                                <div className="bg-primary/10 text-primary p-4 rounded-full">
+                                    <tip.icon className="h-8 w-8" />
+                                </div>
                             </div>
-                        </div>
-                        <CardTitle className="text-lg font-headline">{tip.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <p className="text-muted-foreground text-sm">{tip.description}</p>
-                    </CardContent>
-                </Card>
+                            <CardTitle className="text-lg font-headline">{tip.title}</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <p className="text-muted-foreground text-sm">{tip.description}</p>
+                        </CardContent>
+                    </Card>
+                </motion.div>
             ))}
-        </div>
+        </motion.div>
       </div>
     </>
   );

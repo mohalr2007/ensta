@@ -7,36 +7,9 @@ import './Dock.css';
 import { cn } from '@/lib/utils';
 import { useWindowSize } from '@/hooks/use-window-size';
 
-function DockItem({ children, className = '', onClick, onLongPress, mouseX, spring, distance, magnification, baseItemSize }) {
+function DockItem({ children, className = '', onClick, mouseX, spring, distance, magnification, baseItemSize }) {
   const ref = useRef<HTMLDivElement>(null);
   const isHovered = useMotionValue(0);
-  const pressTimeout = useRef<NodeJS.Timeout | null>(null);
-
-  const handlePressStart = (e: React.MouseEvent | React.TouchEvent) => {
-    // Prevent default context menu on long touch
-    if (e.type === 'touchstart') {
-      e.preventDefault();
-    }
-    pressTimeout.current = setTimeout(() => {
-      if (onLongPress) {
-        onLongPress();
-      }
-      pressTimeout.current = null; // Reset after firing
-    }, 1000); // 1 second for long press
-  };
-
-  const handlePressEnd = (e: React.MouseEvent | React.TouchEvent) => {
-    if (e.type === 'touchend') {
-        e.preventDefault();
-    }
-    if (pressTimeout.current) {
-      clearTimeout(pressTimeout.current);
-      pressTimeout.current = null;
-      if (onClick) {
-        onClick(); // It was a short click
-      }
-    }
-  };
 
   const mouseDistance = useTransform(mouseX, val => {
     if (val === Infinity) return Infinity;
@@ -61,10 +34,7 @@ function DockItem({ children, className = '', onClick, onLongPress, mouseX, spri
       onHoverEnd={() => isHovered.set(0)}
       onFocus={() => isHovered.set(1)}
       onBlur={() => isHovered.set(0)}
-      onMouseDown={handlePressStart}
-      onMouseUp={handlePressEnd}
-      onTouchStart={handlePressStart}
-      onTouchEnd={handlePressEnd}
+      onClick={onClick}
       className={cn("dock-item", className)}
       tabIndex={0}
       role="button"
@@ -120,7 +90,6 @@ type DockItemProps = {
   icon: React.ReactNode;
   label?: string;
   onClick?: () => void;
-  onLongPress?: () => void;
   className?: string;
   isSeparator?: boolean;
   isComponent?: boolean;
@@ -134,8 +103,8 @@ export function Dock({
   const { width } = useWindowSize();
   const isMobile = width < 768;
 
-  const baseItemSize = isMobile ? 44 : 48; 
-  const magnification = isMobile ? 56 : 64; 
+  const baseItemSize = isMobile ? 40 : 48; 
+  const magnification = isMobile ? 52 : 64; 
   const distance = isMobile ? 80 : 120;
   const spring = { stiffness: 500, damping: 30 };
 
@@ -165,7 +134,6 @@ export function Dock({
             <DockItem
               key={item.id}
               onClick={item.onClick}
-              onLongPress={item.onLongPress}
               className={item.className}
               mouseX={mouseX}
               spring={spring}
