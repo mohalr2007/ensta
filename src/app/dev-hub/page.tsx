@@ -56,7 +56,7 @@ export default function DevHubPage() {
                   key={tip.title} 
                   className={cn(
                     "text-center border-2 border-transparent hover:border-primary transition-all duration-300 hover:shadow-lg h-full",
-                    devTips.length === 5 && index >= 3 && "lg:col-start-auto lg:mx-auto"
+                    devTips.length === 5 && index === 3 && "lg:col-start-2",
                   )}
                 >
                     <CardHeader>
