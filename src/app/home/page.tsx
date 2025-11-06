@@ -12,12 +12,14 @@ import { useSearchParams } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useEffect, useState } from "react";
 import CircularGallery from "@/components/ui/CircularGallery";
+import { ImagePreviewDialog } from "@/components/ui/ImagePreviewDialog";
 
 export default function Home() {
   const { t } = useLanguage();
   const searchParams = useSearchParams();
   const speciality = searchParams.get('speciality');
   const [isClient, setIsClient] = useState(false);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   useEffect(() => {
     setIsClient(true);
@@ -67,6 +69,10 @@ export default function Home() {
       description: t.home.feature3Desc,
     },
   ];
+  
+  const handleImageClick = (imageUrl: string) => {
+    setPreviewImage(imageUrl);
+  };
 
   if (!isClient) {
     return (
@@ -140,12 +146,22 @@ export default function Home() {
             </p>
           </div>
             <div className="h-[60vh]">
-              <CircularGallery items={isSt ? stGalleryImages : miGalleryImages} />
+              <CircularGallery 
+                items={isSt ? stGalleryImages : miGalleryImages} 
+                onImageClick={handleImageClick}
+              />
             </div>
         </div>
       </section>
+      
+      <ImagePreviewDialog
+        imageUrl={previewImage}
+        onOpenChange={(isOpen) => {
+          if (!isOpen) {
+            setPreviewImage(null);
+          }
+        }}
+      />
     </div>
   );
 }
-
-    
