@@ -29,7 +29,7 @@ export async function sendEmail(formData: FormData) {
     };
   }
 
-  const { error } = await supabase.from('contacts').insert([parsedData.data]);
+  const { error } = await supabase.from('messages').insert([parsedData.data]);
 
   if (error) {
     console.error('Supabase error:', error);
