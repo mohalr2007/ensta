@@ -15,6 +15,17 @@ import { Chatbot } from "@/components/chatbot/Chatbot";
 
 export default function MainContent({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+
+  if (pathname === '/') {
+    return <>{children}</>;
+  }
+
+  return <SiteContent>{children}</SiteContent>;
+}
+
+
+function SiteContent({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
   const searchParams = useSearchParams();
   const speciality = searchParams.get('speciality');
   const router = useRouter();
@@ -25,9 +36,7 @@ export default function MainContent({ children }: { children: React.ReactNode })
   useEffect(() => {
     setIsClient(true);
   }, []);
-
-  const isLandingPage = pathname === '/';
-
+  
   const logoImage = PlaceHolderImages.find(p => p.id === 'logo');
 
   const navItems = [
@@ -112,13 +121,13 @@ export default function MainContent({ children }: { children: React.ReactNode })
       <main className="flex-grow">
         {children}
       </main>
-      {isClient && !isLandingPage && (
+      {isClient && (
         <>
           <Dock items={dockItems} />
           <Footer />
+          <Chatbot isOpen={isChatOpen} onClose={() => setChatOpen(false)} />
         </>
       )}
-      {isClient && <Chatbot isOpen={isChatOpen} onClose={() => setChatOpen(false)} />}
     </div>
   );
 }

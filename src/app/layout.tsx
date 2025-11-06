@@ -29,8 +29,8 @@ export default function RootLayout({
       <body className={cn("font-body antialiased", poppins.variable)}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <LanguageProvider>
-            <MainContent>{children}</MainContent>
-            <Toaster />
+              <MainContent>{children}</MainContent>
+              <Toaster />
           </LanguageProvider>
         </ThemeProvider>
       </body>
