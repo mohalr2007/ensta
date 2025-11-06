@@ -4,16 +4,24 @@
 import Image from "next/image";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Target, Eye, Landmark, BrainCircuit, ShieldCheck, Atom, Wind, Settings, BatteryCharging, Network, Factory, Wrench, Cpu, Bot, Component, Package, Train, Cog, Droplets, FlaskConical, TrainFront } from "lucide-react";
+import { Target, Eye, Landmark, BrainCircuit, ShieldCheck, Settings, BatteryCharging, Network, Factory, Wrench, Cpu, Bot, Component, Package, Train, Cog, Droplets, FlaskConical, TrainFront } from "lucide-react";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { useSearchParams } from "next/navigation";
 import LogoLoop from "@/components/ui/logo-loop";
+import { useEffect, useState } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function AboutPage() {
   const { t } = useLanguage();
-  const historyImage = PlaceHolderImages.find(p => p.id === 'about-history');
+  const [isClient, setIsClient] = useState(false);
   const searchParams = useSearchParams();
   const speciality = searchParams.get('speciality');
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+  
+  const historyImage = PlaceHolderImages.find(p => p.id === 'about-history');
 
   const miSpecializations = [
     {
@@ -182,7 +190,16 @@ export default function AboutPage() {
           </div>
         </div>
         
-        {(isMi || (!isMi && !isSt)) && (
+        {!isClient && (
+          <div className="mt-16 md:mt-24">
+            <div className="text-center mb-12">
+              <Skeleton className="h-10 w-72 mx-auto" />
+            </div>
+             <Skeleton className="h-96 w-full" />
+          </div>
+        )}
+
+        {isClient && (isMi || (!isMi && !isSt)) && (
           <div className="mt-16 md:mt-24">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold font-headline">{t.about.miSpecializationsTitle}</h2>
@@ -190,7 +207,8 @@ export default function AboutPage() {
              <LogoLoop logos={miSpecializationLogos} speed={50} fadeOut={true} />
           </div>
         )}
-        {(isSt || (!isMi && !isSt)) && (
+        
+        {isClient && (isSt || (!isMi && !isSt)) && (
           <div className="mt-16 md:mt-24">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold font-headline">{t.about.stSpecializationsTitle}</h2>
