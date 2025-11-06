@@ -12,6 +12,7 @@ import { useSearchParams } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useEffect, useState } from "react";
 import CircularGallery from "@/components/ui/CircularGallery";
+import { motion } from "framer-motion";
 
 export default function Home() {
   const { t } = useLanguage();
@@ -101,17 +102,33 @@ export default function Home() {
            />
         )}
         <div className="absolute inset-0 bg-gradient-to-r from-primary/40 via-secondary/40 to-accent/40 flex flex-col items-center justify-center text-center p-4">
-          <h1 className="text-4xl md:text-6xl font-headline font-bold drop-shadow-lg">
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-4xl md:text-6xl font-headline font-bold drop-shadow-lg"
+          >
             {t.home.heroTitle}
-          </h1>
-          <p className="mt-4 text-lg md:text-xl max-w-2xl drop-shadow-md">
+          </motion.h1>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mt-4 text-lg md:text-xl max-w-2xl drop-shadow-md"
+          >
             {heroSubtitle}
-          </p>
-          <Button asChild size="lg" className={cn("mt-8 text-white bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90")}>
-            <Link href={`/about${speciality ? `?speciality=${speciality}` : ''}`}>
-              {t.home.learnMore} <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
-          </Button>
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            <Button asChild size="lg" className={cn("mt-8 text-white bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90")}>
+              <Link href={`/about${speciality ? `?speciality=${speciality}` : ''}`}>
+                {t.home.learnMore} <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+          </motion.div>
         </div>
       </section>
 
@@ -155,3 +172,5 @@ export default function Home() {
     </div>
   );
 }
+
+    
