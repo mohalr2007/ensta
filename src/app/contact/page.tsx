@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Terminal } from "lucide-react";
 
 function ContactPageContent() {
   const { t } = useLanguage();
@@ -38,6 +40,16 @@ function ContactPageContent() {
       </div>
 
       <div className="container mx-auto py-12 md:py-20 px-4">
+        <Alert className="mb-8">
+            <Terminal className="h-4 w-4" />
+            <AlertTitle>Note pour le test</AlertTitle>
+            <AlertDescription>
+                Un nouveau formulaire de contact simplifié a été créé pour le débogage. Vous pouvez y accéder ici :{' '}
+                <Link href={`/contact/simple${speciality ? `?speciality=${speciality}` : ''}`} className="font-semibold underline">
+                    Formulaire de test
+                </Link>
+            </AlertDescription>
+        </Alert>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
           <div className="lg:col-span-2">
             <h2 className="text-2xl md:text-3xl font-bold font-headline mb-6">{t.contact.form.title}</h2>
