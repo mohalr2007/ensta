@@ -5,16 +5,16 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
-import { ArrowRight, Code } from "lucide-react";
+import { ArrowRight, Code, Camera } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import CircularGallery from "@/components/ui/CircularGallery";
 import { motion } from "framer-motion";
 
-function HomePageContent() {
+export default function Home() {
   const { t } = useLanguage();
   const searchParams = useSearchParams();
   const speciality = searchParams.get('speciality');
@@ -48,6 +48,9 @@ function HomePageContent() {
     PlaceHolderImages.find(p => p.id === 'st-gallery-7'),
     PlaceHolderImages.find(p => p.id === 'st-gallery-8'),
     PlaceHolderImages.find(p => p.id === 'st-gallery-9'),
+    PlaceHolderImages.find(p => p.id === 'st-gallery-10'),
+    PlaceHolderImages.find(p => p.id === 'st-gallery-11'),
+    PlaceHolderImages.find(p => p.id === 'st-gallery-12'),
   ].filter(Boolean).map(img => ({ image: img.imageUrl, text: img.description })) as any[];
 
 
@@ -142,7 +145,7 @@ function HomePageContent() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
            <div className="text-center mb-12 px-4">
             <div className="inline-flex items-center justify-center bg-primary/10 text-primary p-3 rounded-full mb-4">
-                <Code className="w-8 h-8"/>
+                <Camera className="w-8 h-8"/>
             </div>
             <h2 className="text-3xl md:text-4xl font-headline font-bold text-foreground">
               {t.home.galleryTitle}
@@ -160,14 +163,5 @@ function HomePageContent() {
       </section>
       
     </div>
-  );
-}
-
-
-export default function Home() {
-  return (
-    <Suspense fallback={<div className="w-full h-screen flex justify-center items-center"><Skeleton className="w-full h-full" /></div>}>
-      <HomePageContent />
-    </Suspense>
   );
 }

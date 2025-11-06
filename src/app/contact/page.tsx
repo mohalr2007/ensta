@@ -7,8 +7,10 @@ import { ContactForm } from "./ContactForm";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
-export default function ContactPage() {
+function ContactPageContent() {
   const { t } = useLanguage();
   const searchParams = useSearchParams();
   const speciality = searchParams.get('speciality');
@@ -91,4 +93,12 @@ export default function ContactPage() {
       </div>
     </>
   );
+}
+
+export default function ContactPage() {
+    return (
+        <Suspense fallback={<div className="w-full h-screen flex justify-center items-center"><Skeleton className="w-full h-full" /></div>}>
+            <ContactPageContent />
+        </Suspense>
+    );
 }

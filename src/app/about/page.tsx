@@ -8,10 +8,10 @@ import { Target, Eye, Landmark, BrainCircuit, ShieldCheck, Settings, BatteryChar
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { useSearchParams } from "next/navigation";
 import LogoLoop from "@/components/ui/logo-loop";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export default function AboutPage() {
+function AboutPageContent() {
   const { t } = useLanguage();
   const [isClient, setIsClient] = useState(false);
   const searchParams = useSearchParams();
@@ -219,4 +219,12 @@ export default function AboutPage() {
       </div>
     </>
   );
+}
+
+export default function AboutPage() {
+    return (
+        <Suspense fallback={<div className="w-full h-screen flex justify-center items-center"><Skeleton className="w-full h-full" /></div>}>
+            <AboutPageContent />
+        </Suspense>
+    );
 }
