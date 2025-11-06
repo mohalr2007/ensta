@@ -4,14 +4,14 @@
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { Footer } from "@/components/layout/Footer";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { Home, Info, Mail, GraduationCap } from "lucide-react";
+import { Home, Info, Mail, GraduationCap, Bot } from "lucide-react";
 import { Dock } from "@/components/layout/Dock";
 import Image from "next/image";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { cn } from "@/lib/utils";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Chatbot } from "@/components/chatbot/Chatbot";
 
 export default function MainContent({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -19,10 +19,10 @@ export default function MainContent({ children }: { children: React.ReactNode })
   const speciality = searchParams.get('speciality');
   const router = useRouter();
   const { t } = useLanguage();
+  const [isChatOpen, setChatOpen] = useState(false);
 
   const isLandingPage = pathname === '/';
 
-  // Apply a class to the body element for landing page-specific styles
   useEffect(() => {
     document.body.classList.toggle('is-landing', isLandingPage);
     return () => {
@@ -89,6 +89,12 @@ export default function MainContent({ children }: { children: React.ReactNode })
   const controlItems = [
     ...(specialityItem ? [specialityItem] : []),
     {
+      id: 'chatbot',
+      icon: <Bot className="w-5 h-5" />,
+      label: 'Assistant',
+      onClick: () => setChatOpen(true),
+    },
+    {
       id: 'lang-switcher',
       icon: <LanguageSwitcher />,
       label: 'Language',
@@ -117,6 +123,7 @@ export default function MainContent({ children }: { children: React.ReactNode })
       </main>
       <Dock items={dockItems} />
       <Footer />
+      <Chatbot isOpen={isChatOpen} onClose={() => setChatOpen(false)} />
     </div>
   );
 }
