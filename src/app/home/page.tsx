@@ -47,6 +47,9 @@ export default function Home() {
     PlaceHolderImages.find(p => p.id === 'st-gallery-7'),
     PlaceHolderImages.find(p => p.id === 'st-gallery-8'),
     PlaceHolderImages.find(p => p.id === 'st-gallery-9'),
+    PlaceHolderImages.find(p => p.id === 'st-gallery-10'),
+    PlaceHolderImages.find(p => p.id === 'st-gallery-11'),
+    PlaceHolderImages.find(p => p.id === 'st-gallery-12'),
   ].filter(Boolean).map(img => ({ image: img.imageUrl, text: img.description })) as any[];
 
 
@@ -68,6 +71,8 @@ export default function Home() {
     },
   ];
   
+  const heroSubtitle = isMi ? t.home.heroSubtitle_mi : t.home.heroSubtitle_st;
+
   if (!isClient) {
     return (
        <div className="flex flex-col items-center">
@@ -100,7 +105,7 @@ export default function Home() {
             {t.home.heroTitle}
           </h1>
           <p className="mt-4 text-lg md:text-xl max-w-2xl drop-shadow-md">
-            {t.home.heroSubtitle}
+            {heroSubtitle}
           </p>
           <Button asChild size="lg" className={cn("mt-8 text-white bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90")}>
             <Link href={`/about${speciality ? `?speciality=${speciality}` : ''}`}>
@@ -140,7 +145,7 @@ export default function Home() {
             </p>
           </div>
             <div className="h-[60vh]">
-              <CircularGallery 
+               <CircularGallery 
                 items={isSt ? stGalleryImages : miGalleryImages} 
               />
             </div>

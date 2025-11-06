@@ -14,7 +14,8 @@ export const translations = {
     },
     home: {
       heroTitle: "Welcome to ENSTA",
-      heroSubtitle: "Excellence in education, diversity in culture. Join a community of learners and leaders.",
+      heroSubtitle_mi: "MI (Mathematics and Informatics) school, is located in Dergana. It's known as the fourth officially recognized school in the country that focuses on computer science, offering strong programs in math, programming, and related fields.",
+      heroSubtitle_st: "ST (Science and Technology) school, located in Bab El Oued, is renowned for its advanced programs in various fields of engineering and technology, preparing the next generation of innovators.",
       learnMore: "Learn More",
       galleryTitle: "Our School in Pictures",
       gallerySubtitle: "A glimpse into the vibrant life at ENSTA.",
@@ -115,7 +116,8 @@ export const translations = {
     },
     home: {
       heroTitle: "Bienvenue à ENSTA",
-      heroSubtitle: "L'excellence dans l'éducation, la diversité dans la culture. Rejoignez une communauté d'apprenants et de leaders.",
+      heroSubtitle_mi: "L'école MI (Mathématiques et Informatique), est située à Dergana. C'est la quatrième école officiellement reconnue dans le pays qui se concentre sur l'informatique, offrant des programmes solides en mathématiques, en programmation et dans les domaines connexes.",
+      heroSubtitle_st: "L'école ST (Sciences et Technologies), située à Bab El Oued, est réputée pour ses programmes avancés dans divers domaines de l'ingénierie et de la technologie, préparant la prochaine génération d'innovateurs.",
       learnMore: "En Savoir Plus",
       galleryTitle: "Notre École en Images",
       gallerySubtitle: "Un aperçu de la vie dynamique à l'ENSTA.",
