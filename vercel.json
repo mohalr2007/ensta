@@ -1,0 +1,11 @@
+
+{
+  "functions": {
+    "app/api/genkit/**": {
+      "maxDuration": 300
+    }
+  },
+  "ignore": [
+    "apphosting.yaml"
+  ]
+}
