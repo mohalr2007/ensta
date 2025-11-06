@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
-import { ArrowRight, Megaphone, Calendar as CalendarIcon, Lightbulb, Camera } from "lucide-react";
+import { ArrowRight, Code, Camera } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
@@ -56,19 +56,9 @@ export default function Home() {
 
   const features = [
     {
-      icon: Megaphone,
-      title: t.home.feature1Title,
-      description: t.home.feature1Desc,
-    },
-    {
-      icon: CalendarIcon,
+      icon: Code,
       title: t.home.feature2Title,
       description: t.home.feature2Desc,
-    },
-    {
-      icon: Lightbulb,
-      title: t.home.feature3Title,
-      description: t.home.feature3Desc,
     },
   ];
   
@@ -134,7 +124,7 @@ export default function Home() {
 
       {/* Features Section */}
       <section className="w-full max-w-6xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+        <div className="grid grid-cols-1 gap-8 text-center">
           {features.map((feature, index) => (
             <div key={index} className="flex flex-col items-center">
               <div className="bg-gradient-to-br from-primary to-secondary text-primary-foreground rounded-full p-4 mb-4">
@@ -172,5 +162,3 @@ export default function Home() {
     </div>
   );
 }
-
-    
