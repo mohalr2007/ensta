@@ -15,7 +15,7 @@
     {
       "id": "hero-mi",
       "description": "Entrance of the National Higher School of Advanced Technologies",
-      "imageUrl": "https://i.ibb.co/ZpsKZXZc/487183919-1222830883087895-7293116505289254963-n.jpg",
+      "imageUrl": "https://i.ibb.co/ZpsKZXZ/487183919-1222830883087895-7293116505289254963-n.jpg",
       "imageHint": "school entrance"
     },
     {
@@ -44,9 +44,9 @@
     },
     {
       "id": "mi-ai",
-      "description": "A robot and human hand connecting, symbolizing artificial intelligence.",
-      "imageUrl": "https://images.unsplash.com/photo-1535223289827-42f1e9919769?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxhcnRpZmljaWFsJTIwaW50ZWxsaWdlbmNlfGVufDB8fHx8MTc2MjIyMTU5Nnww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "artificial intelligence"
+      "description": "An abstract visualization of a neural network or AI data streams.",
+      "imageUrl": "https://images.unsplash.com/photo-1683522649383-35a1a1555e60?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxuaXVyYWwlMjBuZXR3b3JrfGVufDB8fHx8MTc2MjQ5MjUzNnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "neural network"
     },
     {
       "id": "mi-security",
