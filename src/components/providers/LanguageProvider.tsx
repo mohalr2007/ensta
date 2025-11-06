@@ -1,3 +1,4 @@
+
 "use client";
 
 import { createContext, useContext, useState, useMemo, useEffect } from "react";
@@ -15,8 +16,10 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguageState] = useState<Language>('en');
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
     const storedLang = localStorage.getItem("polyglot-lang") as Language;
     if (storedLang && (storedLang === 'en' || storedLang === 'fr')) {
       setLanguageState(storedLang);
@@ -29,6 +32,17 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   };
 
   const t = useMemo(() => translations[language] || translations.en, [language]);
+  
+  // Prevent hydration mismatch by returning null or a loader until mounted on the client
+  if (!isMounted) {
+    // Returning children with default 'en' translation on server and initial client render
+    const serverT = translations.en;
+     return (
+        <LanguageContext.Provider value={{ language: 'en', setLanguage, t: serverT }}>
+            {children}
+        </LanguageContext.Provider>
+    );
+  }
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage, t }}>
