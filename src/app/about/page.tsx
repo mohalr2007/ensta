@@ -4,7 +4,7 @@
 import Image from "next/image";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Target, Landmark, BrainCircuit, ShieldCheck, Settings, BatteryCharging, Network, Factory, Wrench, Cpu, Bot, Component, Package, Train, Cog, Droplets, FlaskConical, TrainFront } from "lucide-react";
+import { GraduationCap, Landmark, BrainCircuit, ShieldCheck, Settings, BatteryCharging, Network, Factory, Wrench, Cpu, Bot, Component, Package, Train, Cog, Droplets, FlaskConical, TrainFront } from "lucide-react";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { useSearchParams } from "next/navigation";
 import LogoLoop from "@/components/ui/logo-loop";
@@ -138,7 +138,7 @@ function AboutPageContent() {
           <CardHeader className="p-0">
             <div className="flex flex-col items-center text-center gap-4">
               <div className="bg-primary text-primary-foreground p-3 rounded-lg">
-                <Target className="w-6 h-6 md:w-8 md:h-8" />
+                <GraduationCap className="w-6 h-6 md:w-8 md:h-8" />
               </div>
               <CardTitle className="text-2xl md:text-3xl font-headline">{t.about.missionTitle}</CardTitle>
             </div>
