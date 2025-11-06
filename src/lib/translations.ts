@@ -31,7 +31,7 @@ export const translations = {
       visionTitle: "Our Vision",
       visionText: "",
       historyTitle: "Our History",
-      historyText: "Founded in 2002, ENSTA has grown from a small community school into a celebrated center for academic excellence. For over two decades, we have been committed to providing a world-class education.",
+      historyText: "Founded in 2022, ENSTA has grown from a small community school into a celebrated center for academic excellence. Since our founding, we have been committed to providing a world-class education.",
       miSpecializationsTitle: "MI Domain Specializations",
       miSpecializations: [
         {
@@ -130,7 +130,7 @@ export const translations = {
       visionTitle: "Notre Vision",
       visionText: "",
       historyTitle: "Notre Histoire",
-      historyText: "Fondée en 2002, l'ENSTA est passée d'une petite école communautaire à un centre d'excellence académique réputé. Depuis plus de deux décennies, nous nous engageons à offrir une éducation de classe mondiale.",
+      historyText: "Fondée en 2022, l'ENSTA est passée d'une petite école communautaire à un centre d'excellence académique réputé. Depuis notre fondation, nous nous engageons à offrir une éducation de classe mondiale.",
       miSpecializationsTitle: "Spécialisations du Domaine MI",
       miSpecializations: [
         {
@@ -201,4 +201,6 @@ export const translations = {
   },
 };
     
+    
+
     
