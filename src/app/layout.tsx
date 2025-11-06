@@ -8,7 +8,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense } from "react";
 import { Home, Info, Mail, GraduationCap, Code } from "lucide-react";
 import { Dock } from "@/components/layout/Dock";
 import Image from "next/image";
@@ -16,11 +16,15 @@ import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { cn } from "@/lib/utils";
+import { Skeleton } from "@/components/ui/skeleton";
 
 
-const metadataConfig: Metadata = {
+export const metadata: Metadata = {
   title: "ENSTA",
   description: "A modern school hub with bilingual support.",
+  icons: {
+    icon: 'https://elearning.ensta.edu.dz/pluginfile.php/1/theme_academi/footerlogo/1715699273/ENSTA%20logo.png',
+  },
 };
 
 function MainContent({ children }: { children: React.ReactNode }) {
@@ -121,32 +125,49 @@ function MainContent({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+function RootLayoutContent({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isLandingPage = pathname === '/';
 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <title>{String(metadataConfig.title)}</title>
-        <meta name="description" content={String(metadataConfig.description)} />
-        <link rel="icon" href="https://elearning.ensta.edu.dz/pluginfile.php/1/theme_academi/footerlogo/1715699273/ENSTA%20logo.png" type="image/png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
       </head>
       <body className={cn("font-body antialiased", isLandingPage && "is-landing")}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          <LanguageProvider>
             <MainContent>{children}</MainContent>
             <Toaster />
-          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>
+  );
+}
+
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  
+  return (
+    <LanguageProvider>
+        <Suspense fallback={
+            <html lang="en" suppressHydrationWarning>
+                <body className="font-body antialiased">
+                    <div className="w-full h-screen flex justify-center items-center">
+                        <Skeleton className="w-full h-full" />
+                    </div>
+                </body>
+            </html>
+        }>
+            <RootLayoutContent>
+                {children}
+            </RootLayoutContent>
+        </Suspense>
+    </LanguageProvider>
   );
 }
