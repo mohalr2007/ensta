@@ -22,6 +22,7 @@ export const translations = {
       gallerySubtitle: "A glimpse into the vibrant life at ENSTA.",
       feature2Title: "Commitment to Development",
       feature2Desc: "We are dedicated to pushing the boundaries of technology and fostering innovation.",
+      exploreHere: "Click here to explore"
     },
     about: {
       title: "About ENSTA",
@@ -122,6 +123,7 @@ export const translations = {
       gallerySubtitle: "Un aperçu de la vie dynamique à l'ENSTA.",
       feature2Title: "Engagement pour le Développement",
       feature2Desc: "Nous nous consacrons à repousser les limites de la technologie et à encourager l'innovation.",
+      exploreHere: "Cliquez ici pour explorer"
     },
     about: {
       title: "À Propos de ENSTA",

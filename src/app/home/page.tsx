@@ -131,6 +131,10 @@ function HomePageContent() {
                 </div>
                 <h3 className="text-xl font-headline font-semibold text-foreground">{feature.title}</h3>
                 <p className="mt-2 text-muted-foreground">{feature.description}</p>
+                 <div className="mt-4 flex items-center text-primary font-semibold transition-transform duration-300 group-hover:translate-x-1">
+                  <span>{t.home.exploreHere}</span>
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </div>
               </div>
             </Link>
           ))}
