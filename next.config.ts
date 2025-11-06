@@ -40,6 +40,12 @@ const nextConfig: NextConfig = {
         hostname: 'elearning.ensta.edu.dz',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.cfecgc-adecco.com',
+        port: '',
+        pathname: '/**',
       }
     ],
   },

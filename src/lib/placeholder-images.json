@@ -44,9 +44,9 @@
     },
     {
       "id": "mi-ai",
-      "description": "An abstract visualization of a neural network or AI data streams.",
-      "imageUrl": "https://images.unsplash.com/photo-1683522649383-35a1a1555e60?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxuaXVyYWwlMjBuZXR3b3JrfGVufDB8fHx8MTc2MjQ5MjUzNnww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "neural network"
+      "description": "A robot and human hand connecting, symbolizing artificial intelligence.",
+      "imageUrl": "https://www.cfecgc-adecco.com/wp-content/uploads/2025/10/IA-2.jpg",
+      "imageHint": "artificial intelligence"
     },
     {
       "id": "mi-security",
