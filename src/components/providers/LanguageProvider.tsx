@@ -27,14 +27,15 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const setLanguage = (lang: Language) => {
-    if (isMounted) {
-      setLanguageState(lang);
-      localStorage.setItem("polyglot-lang", lang);
-    }
+    // We still update localStorage for persistence
+    localStorage.setItem("polyglot-lang", lang);
+    setLanguageState(lang);
   };
 
   const t = useMemo(() => translations[language] || translations.en, [language]);
   
+  // By returning null until the component has mounted, we ensure the server-rendered
+  // output and the initial client render are identical, preventing a hydration mismatch.
   if (!isMounted) {
     return null;
   }

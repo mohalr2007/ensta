@@ -40,7 +40,7 @@ function ContactPageContent() {
       <div className="container mx-auto py-12 md:py-20 px-4">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
           <div className="lg:col-span-2">
-            <h2 className="text-2xl md:text-3xl font-bold font-headline mb-6">{t.contact.form.submit}</h2>
+            <h2 className="text-2xl md:text-3xl font-bold font-headline mb-6">{t.contact.form.title}</h2>
             <ContactForm speciality={speciality} />
           </div>
 

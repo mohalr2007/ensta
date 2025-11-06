@@ -13,13 +13,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 function AboutPageContent() {
   const { t } = useLanguage();
-  const [isClient, setIsClient] = useState(false);
   const searchParams = useSearchParams();
   const speciality = searchParams.get('speciality');
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
   
   const miSpecializations = [
     {
@@ -123,12 +118,12 @@ function AboutPageContent() {
 
   return (
     <>
-      <div className="bg-secondary">
+      <div className="bg-secondary/10">
         <div className="container mx-auto text-center py-12 md:py-20 px-4">
-          <h1 className="text-3xl md:text-5xl font-bold font-headline text-secondary-foreground">
+          <h1 className="text-3xl md:text-5xl font-bold font-headline text-foreground">
             {t.about.title}
           </h1>
-          <p className="mt-4 text-base md:text-xl text-secondary-foreground/80 max-w-3xl mx-auto">
+          <p className="mt-4 text-base md:text-xl text-muted-foreground max-w-3xl mx-auto">
             {t.about.subtitle}
           </p>
         </div>
@@ -145,6 +140,7 @@ function AboutPageContent() {
           </CardHeader>
           <CardContent className="pt-4 md:pt-6">
             <p className="text-base md:text-lg text-muted-foreground">{t.about.missionText}</p>
+
           </CardContent>
         </Card>
 
@@ -158,16 +154,7 @@ function AboutPageContent() {
             <p className="text-base md:text-lg text-muted-foreground max-w-4xl mx-auto">{t.about.historyText}</p>
         </div>
         
-        {!isClient && (
-          <div className="mt-16 md:mt-24">
-            <div className="text-center mb-12">
-              <Skeleton className="h-10 w-72 mx-auto" />
-            </div>
-             <Skeleton className="h-96 w-full" />
-          </div>
-        )}
-
-        {isClient && (isMi || (!isMi && !isSt)) && (
+        {(isMi || (!isMi && !isSt)) && (
           <div className="mt-16 md:mt-24">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold font-headline">{t.about.miSpecializationsTitle}</h2>
@@ -176,7 +163,7 @@ function AboutPageContent() {
           </div>
         )}
         
-        {isClient && (isSt || (!isMi && !isSt)) && (
+        {(isSt || (!isMi && !isSt)) && (
           <div className="mt-16 md:mt-24">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold font-headline">{t.about.stSpecializationsTitle}</h2>

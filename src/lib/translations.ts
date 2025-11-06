@@ -74,6 +74,7 @@ export const translations = {
       emailTitle: "Email",
       email: "contact@ensta.edu.dz",
       form: {
+        title: "Send us a Message",
         name: "Your Name",
         namePlaceholder: "Enter your full name",
         email: "Your Email",
@@ -173,6 +174,7 @@ export const translations = {
       emailTitle: "Courriel",
       email: "contact@ensta.edu.dz",
       form: {
+        title: "Envoyez-nous un message",
         name: "Votre Nom",
         namePlaceholder: "Entrez votre nom complet",
         email: "Votre Courriel",
@@ -200,7 +202,3 @@ export const translations = {
     },
   },
 };
-    
-    
-
-    
