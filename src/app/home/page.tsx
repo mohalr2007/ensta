@@ -47,7 +47,7 @@ export default function Home() {
     PlaceHolderImages.find(p => p.id === 'st-gallery-7'),
     PlaceHolderImages.find(p => p.id === 'st-gallery-8'),
     PlaceHolderImages.find(p => p.id === 'st-gallery-9'),
-  ].filter(Boolean) as any[];
+  ].filter(Boolean).map(img => ({ image: img.imageUrl, text: img.description })) as any[];
 
 
   const features = [
@@ -139,30 +139,9 @@ export default function Home() {
               {t.home.gallerySubtitle}
             </p>
           </div>
-          {isMi ? (
             <div className="h-[60vh]">
-              <CircularGallery items={miGalleryImages} />
+              <CircularGallery items={isSt ? stGalleryImages : miGalleryImages} />
             </div>
-          ) : (
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4">
-                {stGalleryImages.map((image, index) => (
-                   <div key={image.id} className={cn(
-                      "group relative overflow-hidden rounded-xl shadow-lg",
-                      index === 0 || index === 5 ? "lg:col-span-2 lg:row-span-2" : ""
-                   )}>
-                     <Image
-                       src={image.imageUrl}
-                       alt={image.description}
-                       data-ai-hint={image.imageHint}
-                       width={600}
-                       height={600}
-                       className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
-                     />
-                     <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-300"></div>
-                   </div>
-                ))}
-            </div>
-          )}
         </div>
       </section>
     </div>
