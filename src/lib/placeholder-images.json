@@ -19,24 +19,6 @@
       "imageHint": "school entrance"
     },
     {
-      "id": "announcement1",
-      "description": "Students participating in a science fair.",
-      "imageUrl": "https://images.unsplash.com/photo-1554475901-4538ddfbccc2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzY2llbmNlJTIwZmFpcnxlbnwwfHx8fDE3NjE5NDc2NjV8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "science fair"
-    },
-    {
-      "id": "announcement2",
-      "description": "School sports team celebrating a victory.",
-      "imageUrl": "https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxzcG9ydHMlMjB0ZWFtfGVufDB8fHx8MTc2MTkxOTU0M3ww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "sports team"
-    },
-    {
-      "id": "announcement3",
-      "description": "Students performing in a school play.",
-      "imageUrl": "https://images.unsplash.com/photo-1619211142200-0d30ded30ca8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxzY2hvb2wlMjBwbGF5fGVufDB8fHx8MTc2MjAwNTQ4OXww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "school play"
-    },
-    {
       "id": "about-history",
       "description": "An old, historic picture of the school building.",
       "imageUrl": "https://images.unsplash.com/photo-1655911204432-04323935f032?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxoaXN0b3JpYyUyMGJ1aWxkaW5nfGVufDB8fHx8MTc2MTg5NzU3MHww&ixlib=rb-4.1.0&q=80&w=1080",
@@ -137,6 +119,42 @@
       "description": "An electric train system.",
       "imageUrl": "https://images.unsplash.com/photo-1631491471415-145cec7e5961?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxlbGVjdHJpYyUyMHRyYWlufGVufDB8fHx8MTc2MjQxNDEyNHww&ixlib.rb-4.1.0&q=80&w=1080",
       "imageHint": "electric train"
+    },
+    {
+      "id": "gallery-1",
+      "description": "Students collaborating in a modern classroom.",
+      "imageUrl": "https://images.unsplash.com/photo-1571260899052-7c737cb3e449?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzdHVkZW50cyUyMGNsYXNzcm9vbXxlbnwwfHx8fDE3NjI0MjA0ODR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "students classroom"
+    },
+    {
+      "id": "gallery-2",
+      "description": "A well-lit, modern school library with many books.",
+      "imageUrl": "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxsaWJyYXJ5fGVufDB8fHx8MTc2MjQyMDUxOHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "school library"
+    },
+    {
+      "id": "gallery-3",
+      "description": "Graduates in caps and gowns celebrating at their graduation ceremony.",
+      "imageUrl": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxncmFkdWF0aW9ufGVufDB8fHx8MTc2MjQyMDU1Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "student graduation"
+    },
+    {
+      "id": "gallery-4",
+      "description": "A group of diverse students working together on a project.",
+      "imageUrl": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzdHVkZW50cyUyMGNvbGxhYm9yYXRpbmd8ZW58MHx8fHwxNzYyNDIwNTg0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "students collaborating"
+    },
+    {
+      "id": "gallery-5",
+      "description": "A wide shot of a modern and green school campus on a sunny day.",
+      "imageUrl": "https://images.unsplash.com/photo-1562774053-633a90623d40?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzY2hvb2wlMjBjYW1wdXN8ZW58MHx8fHwxNzYyNDIwNjExfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "school campus"
+    },
+    {
+      "id": "gallery-6",
+      "description": "Students engaged in an art class, painting on canvases.",
+      "imageUrl": "https://images.unsplash.com/photo-1596495764348-db121a51a9a8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhcnQlMjBjbGFzc3xlbnwwfHx8fDE3NjI0MjA2NDN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "art class"
     }
   ]
 }
