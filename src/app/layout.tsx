@@ -30,12 +30,7 @@ function MainContent({ children }: { children: React.ReactNode }) {
   const speciality = searchParams.get('speciality');
   const router = useRouter();
   const { t } = useLanguage();
-  const [isClient, setIsClient] = useState(false);
   const [isChatbotOpen, setChatbotOpen] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
 
   const logoImage = PlaceHolderImages.find(p => p.id === 'logo');
 
@@ -122,18 +117,14 @@ function MainContent({ children }: { children: React.ReactNode }) {
     ...controlItems,
   ];
   
-  const showNav = isClient && pathname !== '/';
-
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-grow">
         {children}
       </main>
-      <div className={cn(!showNav && "hidden")}>
-        <Chatbot isOpen={isChatbotOpen} onClose={() => setChatbotOpen(false)} />
-        <Dock items={dockItems} />
-        <Footer />
-      </div>
+      <Chatbot isOpen={isChatbotOpen} onClose={() => setChatbotOpen(false)} />
+      <Dock items={dockItems} />
+      <Footer />
     </div>
   );
 }
@@ -143,6 +134,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = usePathname();
+  const isLandingPage = pathname === '/';
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -153,7 +147,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
       </head>
-      <body className="font-body antialiased">
+      <body className={cn("font-body antialiased", isLandingPage && "is-landing")}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <LanguageProvider>
             <MainContent>{children}</MainContent>
