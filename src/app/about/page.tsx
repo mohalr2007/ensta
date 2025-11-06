@@ -148,18 +148,14 @@ function AboutPageContent() {
           </CardContent>
         </Card>
 
-        <div className="mt-16 md:mt-24">
-          <div className="grid grid-cols-1 gap-10 md:gap-12 items-center">
-            <div>
-              <div className="flex items-center gap-4 mb-4 md:mb-6">
+        <div className="mt-16 md:mt-24 text-center">
+            <div className="flex flex-col items-center gap-4 mb-4 md:mb-6">
                 <div className="bg-primary text-primary-foreground p-3 rounded-lg">
                   <Landmark className="w-6 h-6 md:w-8 md:h-8" />
                 </div>
                 <h2 className="text-2xl md:text-3xl font-headline font-bold">{t.about.historyTitle}</h2>
-              </div>
-              <p className="text-base md:text-lg text-muted-foreground">{t.about.historyText}</p>
             </div>
-          </div>
+            <p className="text-base md:text-lg text-muted-foreground max-w-4xl mx-auto">{t.about.historyText}</p>
         </div>
         
         {!isClient && (
