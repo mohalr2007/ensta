@@ -1,7 +1,7 @@
 
 "use client";
 
-import React, a { useState, FormEvent, Suspense, useTransition } from 'react';
+import React, { useState, FormEvent, Suspense, useTransition } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -214,3 +214,5 @@ export default function ContactPage() {
         </Suspense>
     );
 }
+
+    
