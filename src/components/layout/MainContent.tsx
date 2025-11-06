@@ -3,7 +3,7 @@
 
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { Footer } from "@/components/layout/Footer";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { Home, Info, Mail, GraduationCap } from "lucide-react";
 import { Dock } from "@/components/layout/Dock";
 import Image from "next/image";
