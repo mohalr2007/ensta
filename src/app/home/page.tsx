@@ -44,6 +44,8 @@ export default function Home() {
     PlaceHolderImages.find(p => p.id === 'st-gallery-4'),
     PlaceHolderImages.find(p => p.id === 'st-gallery-5'),
     PlaceHolderImages.find(p => p.id === 'st-gallery-6'),
+    PlaceHolderImages.find(p => p.id === 'st-gallery-7'),
+    PlaceHolderImages.find(p => p.id === 'st-gallery-8'),
   ].filter(Boolean) as any[];
 
 
@@ -165,3 +167,5 @@ export default function Home() {
     </div>
   );
 }
+
+    
