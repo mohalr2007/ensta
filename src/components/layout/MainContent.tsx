@@ -4,7 +4,7 @@
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { Footer } from "@/components/layout/Footer";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { Home, Info, Mail, GraduationCap, Bot } from "lucide-react";
+import { Home, Info, Mail, GraduationCap } from "lucide-react";
 import { Dock } from "@/components/layout/Dock";
 import Image from "next/image";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
@@ -61,9 +61,9 @@ export default function MainContent({ children }: { children: React.ReactNode })
         {speciality}
       </div>
     ),
-    label: `Speciality: ${speciality.toUpperCase()}`,
+    label: "Assistant",
     isComponent: true,
-    onClick: () => {},
+    onClick: () => setChatOpen(true),
   } : null;
 
   const logoItem = {
@@ -88,12 +88,6 @@ export default function MainContent({ children }: { children: React.ReactNode })
   
   const controlItems = [
     ...(specialityItem ? [specialityItem] : []),
-    {
-      id: 'chatbot',
-      icon: <Bot className="w-5 h-5" />,
-      label: 'Assistant',
-      onClick: () => setChatOpen(true),
-    },
     {
       id: 'lang-switcher',
       icon: <LanguageSwitcher />,
