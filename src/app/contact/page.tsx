@@ -1,195 +1,130 @@
 
 "use client";
 
-import { useLanguage } from "@/components/providers/LanguageProvider";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import { Suspense } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import React, { useState, FormEvent, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { useToast } from "@/hooks/use-toast";
-import { Skeleton } from "@/components/ui/skeleton";
-import { sendEmail } from "@/lib/actions/send-email";
+import { Label } from "@/components/ui/label";
+import { useLanguage } from '@/components/providers/LanguageProvider';
+import { Badge } from '@/components/ui/badge';
+import { useToast } from '@/hooks/use-toast';
+import { Skeleton } from '@/components/ui/skeleton';
 
 function ContactPageContent() {
   const { t } = useLanguage();
   const searchParams = useSearchParams();
-  const { toast } = useToast();
   const speciality = searchParams.get('speciality');
+  const { toast } = useToast();
 
-  const isSt = speciality === 'st';
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [subject, setSubject] = useState('');
+  const [message, setMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  const sheetUrl = process.env.NEXT_PUBLIC_GOOGLE_SHEET_URL;
 
-  const mapUrl = isSt
-    ? "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3195.2479627091916!2d3.0587414756553097!3d36.78860477225033!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128fb301a7a8063d%3A0x4c8a4c0183459a2!2s%C3%89cole%20nationale%20Sup%C3%A9rieure%20de%20technologie%20avanc%C3%A9e!5e0!3m2!1sfr!2sdz!4v1762110639738!5m2!1sfr!2sdz"
-    : "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3195.7628605838518!2d3.256288575654727!3d36.77625597225385!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128e457e206a4adf%3A0x2dedffeaea98475f!2sNational%20Higher%20School%20of%20Advanced%20Technologies!5e0!3m2!1sfr!2sdz!4v1762009406950!5m2!1sfr!2sdz";
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setIsSubmitting(true);
 
-  const address = isSt ? t.contact.address_st : t.contact.address_mi;
-  const addressUrl = isSt ? t.contact.addressUrl_st : t.contact.addressUrl_mi;
+    if (!sheetUrl) {
+      console.error("Google Sheet URL is not defined.");
+      toast({
+        variant: "destructive",
+        title: "Erreur de configuration",
+        description: "L'URL du script Google n'est pas définie. Veuillez contacter l'administrateur.",
+      });
+      setIsSubmitting(false);
+      return;
+    }
 
-  const formSchema = z.object({
-    name: z.string().min(2, { message: t.contact.form.validation.name }),
-    email: z.string().email({ message: t.contact.form.validation.email }),
-    subject: z.string().min(5, { message: t.contact.form.validation.subject }),
-    message: z.string().min(10, { message: t.contact.form.validation.message }),
-  });
+    const formData = new FormData();
+    formData.append('timestamp', new Date().toISOString());
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('subject', subject);
+    formData.append('message', message);
+    formData.append('speciality', speciality || 'N/A');
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: { name: "", email: "", subject: "", message: "" },
-  });
+    try {
+      const response = await fetch(sheetUrl, {
+        method: 'POST',
+        mode: 'no-cors', // Important for Google Apps Script web apps
+        body: formData,
+      });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    const result = await sendEmail({ ...values, speciality: speciality || "N/A" });
-    if (result.success) {
+      // Since it's 'no-cors', we can't read the response, but we can assume success if no network error
       toast({
         title: t.contact.form.successTitle,
         description: t.contact.form.successDescription,
       });
-      form.reset();
-    } else {
+      // Reset form
+      setName('');
+      setEmail('');
+      setSubject('');
+      setMessage('');
+      
+    } catch (error) {
+      console.error("Erreur lors de l'envoi:", error);
       toast({
         variant: "destructive",
         title: t.contact.form.errorTitle,
-        description: result.error || t.contact.form.errorDescription,
+        description: (error as Error).message || t.contact.form.errorDescription,
       });
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
   return (
-    <>
+     <>
       <div className="bg-secondary/10">
         <div className="container mx-auto text-center py-12 md:py-20 px-4">
           <h1 className="text-3xl md:text-5xl font-bold font-headline text-foreground">
             {t.contact.title}
           </h1>
           <p className="mt-4 text-base md:text-xl text-muted-foreground max-w-3xl mx-auto">
-            {t.contact.subtitle}
+             {t.contact.subtitle}
           </p>
         </div>
       </div>
-
       <div className="container mx-auto py-12 md:py-20 px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
-          <div className="lg:col-span-2">
-            <h2 className="text-2xl md:text-3xl font-bold font-headline mb-6 text-center">{t.contact.form.title}</h2>
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <div className="max-w-2xl mx-auto">
+            <form onSubmit={handleSubmit} className="space-y-6">
+                {speciality && (
+                  <div className="flex items-center gap-2">
+                    <Label>{t.contact.form.specialization}</Label>
+                    <Badge variant="secondary" className="uppercase text-base">{speciality}</Badge>
+                  </div>
+                )}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>{t.contact.form.name}</FormLabel>
-                        <FormControl>
-                          <Input placeholder={t.contact.form.namePlaceholder} {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>{t.contact.form.email}</FormLabel>
-                        <FormControl>
-                          <Input type="email" placeholder={t.contact.form.emailPlaceholder} {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                    <div>
+                        <Label htmlFor="name">{t.contact.form.name}</Label>
+                        <Input id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder={t.contact.form.namePlaceholder} required />
+                    </div>
+                    <div>
+                        <Label htmlFor="email">{t.contact.form.email}</Label>
+                        <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder={t.contact.form.emailPlaceholder} required />
+                    </div>
                 </div>
-                <FormField
-                  control={form.control}
-                  name="subject"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>{t.contact.form.subject}</FormLabel>
-                      <FormControl>
-                        <Input placeholder={t.contact.form.subjectPlaceholder} {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="message"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>{t.contact.form.message}</FormLabel>
-                      <FormControl>
-                        <Textarea placeholder={t.contact.form.messagePlaceholder} className="min-h-[150px]" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <Button type="submit" size="lg" disabled={form.formState.isSubmitting}>
-                  <Send className="mr-2 h-4 w-4" />
-                  {form.formState.isSubmitting ? "Envoi en cours..." : t.contact.form.submit}
+                 <div>
+                    <Label htmlFor="subject">{t.contact.form.subject}</Label>
+                    <Input id="subject" value={subject} onChange={(e) => setSubject(e.target.value)} placeholder={t.contact.form.subjectPlaceholder} required />
+                </div>
+                <div>
+                    <Label htmlFor="message">{t.contact.form.message}</Label>
+                    <Textarea id="message" value={message} onChange={(e) => setMessage(e.target.value)} placeholder={t.contact.form.messagePlaceholder} required className="min-h-[150px]" />
+                </div>
+                <Button type="submit" size="lg" disabled={isSubmitting}>
+                  {isSubmitting ? "Envoi en cours..." : t.contact.form.submit}
                 </Button>
-              </form>
-            </Form>
-          </div>
-
-          <div className="space-y-8">
-            <div className="rounded-lg overflow-hidden shadow-lg h-64 md:h-72">
-              <iframe
-                src={mapUrl}
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen={true}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              ></iframe>
-            </div>
-
-            <div className="flex items-start gap-4">
-               <Link href={addressUrl} target="_blank" rel="noopener noreferrer" className="mt-1 flex-shrink-0 bg-primary text-primary-foreground p-3 rounded-full hover:bg-primary/90 transition-colors">
-                  <MapPin className="w-5 h-5 md:w-6 md:h-6" />
-               </Link>
-              <div>
-                <h3 className="font-semibold text-lg">{t.contact.addressTitle}</h3>
-                <Link href={addressUrl} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors text-sm md:text-base">
-                  {address}
-                </Link>
-              </div>
-            </div>
-            <div className="flex items-start gap-4">
-               <a href={`tel:${t.contact.phones[0]}`} className="mt-1 flex-shrink-0 bg-primary text-primary-foreground p-3 rounded-full hover:bg-primary/90 transition-colors">
-                  <Phone className="w-5 h-5 md:w-6 md:h-6" />
-                </a>
-              <div>
-                <h3 className="font-semibold text-lg">{t.contact.phoneTitle}</h3>
-                {t.contact.phones.map((phone, index) => (
-                  <a key={index} href={`tel:${phone}`} className="block text-muted-foreground hover:text-primary transition-colors text-sm md:text-base">{phone}</a>
-                ))}
-              </div>
-            </div>
-            <div className="flex items-start gap-4">
-              <a href={`mailto:${t.contact.email}`} className="mt-1 flex-shrink-0 bg-primary text-primary-foreground p-3 rounded-full hover:bg-primary/90 transition-colors">
-                  <Mail className="w-5 h-5 md:w-6 md:h-6" />
-              </a>
-              <div>
-                <h3 className="font-semibold text-lg">{t.contact.emailTitle}</h3>
-                <a href={`mailto:${t.contact.email}`} className="text-muted-foreground hover:text-primary transition-colors text-sm md:text-base">{t.contact.email}</a>
-              </div>
-            </div>
-          </div>
+            </form>
         </div>
       </div>
-    </>
+     </>
   );
 }
 
