@@ -162,7 +162,7 @@ export function Dock({
               baseItemSize={baseItemSize}
             >
               <DockIcon>{item.icon}</DockIcon>
-              {!item.isComponent && <DockLabel isHovered={useMotionValue(0)}>{item.label}</DockLabel>}
+              {!item.isComponent && item.label && <DockLabel>{item.label}</DockLabel>}
             </DockItem>
           );
         })}
