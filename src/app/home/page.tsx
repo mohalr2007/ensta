@@ -59,6 +59,7 @@ export default function Home() {
       icon: Code,
       title: t.home.feature2Title,
       description: t.home.feature2Desc,
+      href: "/dev-hub"
     },
   ];
   
@@ -126,13 +127,15 @@ export default function Home() {
       <section className="w-full max-w-6xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 text-center">
           {features.map((feature, index) => (
-            <div key={index} className="flex flex-col items-center">
-              <div className="bg-gradient-to-br from-primary to-secondary text-primary-foreground rounded-full p-4 mb-4">
-                 <feature.icon className="h-8 w-8" />
+            <Link key={index} href={feature.href} className="group block">
+              <div className="flex flex-col items-center p-6 rounded-lg transition-all duration-300 group-hover:bg-accent/10 group-hover:shadow-lg">
+                <div className="bg-gradient-to-br from-primary to-secondary text-primary-foreground rounded-full p-4 mb-4 transition-transform duration-300 group-hover:scale-110">
+                   <feature.icon className="h-8 w-8" />
+                </div>
+                <h3 className="text-xl font-headline font-semibold text-foreground">{feature.title}</h3>
+                <p className="mt-2 text-muted-foreground">{feature.description}</p>
               </div>
-              <h3 className="text-xl font-headline font-semibold text-foreground">{feature.title}</h3>
-              <p className="mt-2 text-muted-foreground">{feature.description}</p>
-            </div>
+            </Link>
           ))}
         </div>
       </section>

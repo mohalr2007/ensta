@@ -5,6 +5,7 @@ export const translations = {
     nav: {
       home: "Home",
       about: "About Us",
+      devHub: "Developer Hub",
       contact: "Contact",
     },
     specialitySelection: {
@@ -103,6 +104,7 @@ export const translations = {
     nav: {
       home: "Accueil",
       about: "À Propos",
+      devHub: "Hub Développeur",
       contact: "Contact",
     },
     specialitySelection: {

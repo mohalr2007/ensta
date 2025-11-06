@@ -9,7 +9,7 @@ import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Home, Info, Mail, GraduationCap } from "lucide-react";
+import { Home, Info, Mail, GraduationCap, Code } from "lucide-react";
 import { Dock } from "@/components/layout/Dock";
 import Image from "next/image";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
@@ -50,6 +50,12 @@ function MainContent({ children }: { children: React.ReactNode }) {
       icon: <Info className="w-5 h-5" />,
       label: t.nav.about,
       onClick: () => router.push(`/about${speciality ? `?speciality=${speciality}` : ''}`),
+    },
+    {
+      id: 'dev-hub',
+      icon: <Code className="w-5 h-5" />,
+      label: t.nav.devHub,
+      onClick: () => router.push('/dev-hub'),
     },
     {
       id: 'contact',
