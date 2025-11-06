@@ -1,7 +1,7 @@
 
 "use client";
 
-import { Camera, Mesh, Plane, Program, Renderer, Texture, Transform, Vec2, Raycast } from 'ogl';
+import { Camera, Mesh, Plane, Program, Renderer, Texture, Transform, Vec2 } from 'ogl';
 import { useEffect, useRef } from 'react';
 
 import './CircularGallery.css';
@@ -42,8 +42,7 @@ class Media {
     bend,
     textColor,
     borderRadius = 0,
-    font,
-    onClick,
+    font
   }) {
     this.extra = 0;
     this.geometry = geometry;
@@ -60,7 +59,6 @@ class Media {
     this.textColor = textColor;
     this.borderRadius = borderRadius;
     this.font = font;
-    this.onClick = onClick;
     this.createShader();
     this.createMesh();
     // this.createTitle();
@@ -219,7 +217,6 @@ class App {
       font = 'bold 30px Figtree',
       scrollSpeed = 2,
       scrollEase = 0.05,
-      onImageClick,
     } = {}
   ) {
     if (!container) return;
@@ -229,15 +226,12 @@ class App {
     this.scrollSpeed = scrollSpeed;
     this.scroll = { ease: scrollEase, current: 0, target: 0, last: 0 };
     this.onCheckDebounce = debounce(this.onCheck, 200);
-    this.onImageClick = onImageClick;
-    this.mouse = new Vec2();
     this.createRenderer();
     this.createCamera();
     this.createScene();
     this.onResize();
     this.createGeometry();
     this.createMedias(items, bend, textColor, borderRadius, font);
-    this.raycast = new Raycast();
     this.update();
     this.addEventListeners();
   }
@@ -298,17 +292,13 @@ class App {
         textColor,
         borderRadius,
         font,
-        onClick: () => this.onImageClick(data.image),
       });
     });
   }
   onTouchDown(e) {
     this.isDown = true;
     this.scroll.position = this.scroll.current;
-    const x = e.touches ? e.touches[0].clientX : e.clientX;
-    const y = e.touches ? e.touches[0].clientY : e.clientY;
-    this.start = x;
-    this.mouse.set(x, y);
+    this.start = e.touches ? e.touches[0].clientX : e.clientX;
   }
   onTouchMove(e) {
     if (!this.isDown) return;
@@ -319,38 +309,7 @@ class App {
   onTouchUp(e) {
     if (!this.isDown) return;
     this.isDown = false;
-    
-    const x = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
-    const y = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
-    const distance = Math.hypot(x - this.mouse.x, y - this.mouse.y);
-
-    if (distance < 10) { // Click threshold
-      const clickedMedia = this.getMediaFromMouse(e);
-      if (clickedMedia && clickedMedia.onClick) {
-        clickedMedia.onClick();
-      }
-    } else {
-      this.onCheck();
-    }
-  }
-  
-  getMediaFromMouse(e) {
-    const x = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
-    const y = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
-    
-    const mouse = new Vec2(
-      (x / this.screen.width) * 2 - 1,
-      -(y / this.screen.height) * 2 + 1
-    );
-
-    this.raycast.cast(mouse, this.camera);
-    const hits = this.raycast.intersectBounds(this.medias.map(m => m.plane));
-    
-    if (hits.length > 0) {
-      const hitMesh = hits[0];
-      return this.medias.find(media => media.plane === hitMesh);
-    }
-    return null;
+    this.onCheck();
   }
 
   onWheel(e) {
@@ -435,21 +394,18 @@ export default function CircularGallery({
   font = 'bold 30px Figtree',
   scrollSpeed = 2,
   scrollEase = 0.05,
-  onImageClick
 }) {
   const containerRef = useRef(null);
   useEffect(() => {
     let app;
     if (containerRef.current) {
-        app = new App(containerRef.current, { items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase, onImageClick });
+        app = new App(containerRef.current, { items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase });
     }
     return () => {
       if (app) {
         app.destroy();
       }
     };
-  }, [items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase, onImageClick]);
+  }, [items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase]);
   return <div className="circular-gallery" ref={containerRef} />;
 }
-
-    
