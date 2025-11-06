@@ -51,9 +51,9 @@ export function ContactForm({ speciality }: { speciality: string | null }) {
   });
 
   async function onSubmit(values: z.infer<typeof translatedFormSchema>) {
-    const scriptURL = process.env.NEXT_PUBLIC_GOOGLE_SHEET_URL;
-    if (!scriptURL) {
-      console.error("Google Sheet URL is not defined.");
+    const sheetdbURL = process.env.NEXT_PUBLIC_GOOGLE_SHEET_URL;
+    if (!sheetdbURL) {
+      console.error("SheetDB URL is not defined in environment variables.");
       toast({
         variant: "destructive",
         title: t.contact.form.errorTitle,
@@ -62,18 +62,32 @@ export function ContactForm({ speciality }: { speciality: string | null }) {
       return;
     }
 
-    const body = new URLSearchParams();
-    body.append('name', values.name);
-    body.append('email', values.email);
-    body.append('subject', values.subject);
-    body.append('message', values.message);
-    body.append('speciality', values.speciality || 'N/A');
-
     try {
-      await fetch(scriptURL, {
+      const response = await fetch(sheetdbURL, {
         method: 'POST',
-        body: body,
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          data: {
+            // A 'timestamp' column will be auto-created by SheetDB if it exists in your sheet
+            timestamp: new Date().toISOString(),
+            name: values.name,
+            email: values.email,
+            subject: values.subject,
+            message: values.message,
+            speciality: values.speciality || 'N/A'
+          }
+        })
       });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to submit form to SheetDB.');
+      }
+
+      await response.json();
 
       toast({
         title: t.contact.form.successTitle,
@@ -83,7 +97,7 @@ export function ContactForm({ speciality }: { speciality: string | null }) {
       form.setValue('speciality', speciality || '');
 
     } catch (error) {
-      console.error("Error submitting form:", error);
+      console.error("Error submitting form to SheetDB:", error);
       toast({
         variant: "destructive",
         title: t.contact.form.errorTitle,
