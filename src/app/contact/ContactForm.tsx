@@ -18,6 +18,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { Badge } from "@/components/ui/badge";
+import { sendContactForm } from "@/app/actions/sendContactForm";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -51,39 +52,10 @@ export function ContactForm({ speciality }: { speciality: string | null }) {
   });
 
   async function onSubmit(values: z.infer<typeof translatedFormSchema>) {
-    const sheetdbURL = process.env.NEXT_PUBLIC_GOOGLE_SHEET_URL;
-
-    if (!sheetdbURL) {
-      console.error("Google Sheet URL is not defined in environment variables.");
-      toast({
-        variant: "destructive",
-        title: t.contact.form.errorTitle,
-        description: "The form endpoint is not configured correctly.",
-      });
-      return;
-    }
-
     try {
-      const formData = new URLSearchParams();
-      formData.append('timestamp', new Date().toISOString());
-      formData.append('name', values.name);
-      formData.append('email', values.email);
-      formData.append('subject', values.subject);
-      formData.append('message', values.message);
-      formData.append('speciality', values.speciality || 'N/A');
+      const result = await sendContactForm(values);
 
-      const response = await fetch(sheetdbURL, {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const result = await response.json();
-
-      if (result.result === 'success') {
+      if (result.success) {
         toast({
           title: t.contact.form.successTitle,
           description: t.contact.form.successDescription,
@@ -91,7 +63,7 @@ export function ContactForm({ speciality }: { speciality: string | null }) {
         form.reset();
         form.setValue('speciality', speciality || 'N/A');
       } else {
-        throw new Error(result.error || 'Failed to submit form.');
+        throw new Error(result.error || 'An unknown error occurred.');
       }
     } catch (error) {
       console.error("Error submitting form:", error);
