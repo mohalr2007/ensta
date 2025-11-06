@@ -48,12 +48,6 @@ function MainContent({ children }: { children: React.ReactNode }) {
       onClick: () => router.push(`/about${speciality ? `?speciality=${speciality}` : ''}`),
     },
     {
-      id: 'dev-hub',
-      icon: <Code className="w-5 h-5" />,
-      label: t.nav.devHub,
-      onClick: () => router.push('/dev-hub'),
-    },
-    {
       id: 'contact',
       icon: <Mail className="w-5 h-5" />,
       label: t.nav.contact,
