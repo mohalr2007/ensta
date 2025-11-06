@@ -11,6 +11,7 @@ import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { cn } from "@/lib/utils";
+import { useEffect } from "react";
 
 export default function MainContent({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -20,6 +21,14 @@ export default function MainContent({ children }: { children: React.ReactNode })
   const { t } = useLanguage();
 
   const isLandingPage = pathname === '/';
+
+  // Apply a class to the body element for landing page-specific styles
+  useEffect(() => {
+    document.body.classList.toggle('is-landing', isLandingPage);
+    return () => {
+      document.body.classList.remove('is-landing');
+    }
+  }, [isLandingPage]);
 
   const logoImage = PlaceHolderImages.find(p => p.id === 'logo');
 
@@ -100,10 +109,6 @@ export default function MainContent({ children }: { children: React.ReactNode })
     { isSeparator: true, id: 'sep2' },
     ...controlItems,
   ];
-  
-  if (typeof window !== 'undefined') {
-    document.body.classList.toggle('is-landing', isLandingPage);
-  }
   
   return (
     <div className="flex flex-col min-h-screen">
