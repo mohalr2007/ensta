@@ -3,7 +3,6 @@
 
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { Mail, Phone, MapPin } from "lucide-react";
-import { ContactForm } from "./ContactForm";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useSearchParams } from "next/navigation";
@@ -39,9 +38,16 @@ function ContactPageContent() {
 
       <div className="container mx-auto py-12 md:py-20 px-4">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
-          <div className="lg:col-span-2">
-            <h2 className="text-2xl md:text-3xl font-bold font-headline mb-6">{t.contact.form.title}</h2>
-            <ContactForm speciality={speciality} />
+          <div className="lg:col-span-2 flex flex-col items-center justify-center text-center">
+             <h2 className="text-2xl md:text-3xl font-bold font-headline mb-6">{t.contact.form.title}</h2>
+             <p className="text-muted-foreground mb-8">
+                To ensure your message is delivered, please use our simplified contact form.
+             </p>
+             <Button asChild size="lg">
+                <Link href={`/contact/simple${speciality ? `?speciality=${speciality}`: ''}`}>
+                    Go to Contact Form
+                </Link>
+             </Button>
           </div>
 
           <div className="space-y-8">
