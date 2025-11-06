@@ -237,7 +237,7 @@ class App {
     this.onResize();
     this.createGeometry();
     this.createMedias(items, bend, textColor, borderRadius, font);
-    this.raycast = new Raycast(this.gl);
+    this.raycast = new Raycast();
     this.update();
     this.addEventListeners();
   }
@@ -305,11 +305,10 @@ class App {
   onTouchDown(e) {
     this.isDown = true;
     this.scroll.position = this.scroll.current;
-    this.start = e.touches ? e.touches[0].clientX : e.clientX;
-    this.mouse.set(
-      e.touches ? e.touches[0].clientX : e.clientX,
-      e.touches ? e.touches[0].clientY : e.clientY,
-    );
+    const x = e.touches ? e.touches[0].clientX : e.clientX;
+    const y = e.touches ? e.touches[0].clientY : e.clientY;
+    this.start = x;
+    this.mouse.set(x, y);
   }
   onTouchMove(e) {
     if (!this.isDown) return;
@@ -339,12 +338,12 @@ class App {
     const x = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
     const y = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
     
-    this.mouse.set(
+    const mouse = new Vec2(
       (x / this.screen.width) * 2 - 1,
       -(y / this.screen.height) * 2 + 1
     );
 
-    this.raycast.cast(this.mouse, this.camera);
+    this.raycast.cast(mouse, this.camera);
     const hits = this.raycast.intersectBounds(this.medias.map(m => m.plane));
     
     if (hits.length > 0) {
