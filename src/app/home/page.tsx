@@ -24,9 +24,11 @@ export default function Home() {
   }, []);
 
   const isMi = speciality === 'mi';
-  const heroImage = PlaceHolderImages.find(p => p.id === (isMi ? 'hero-mi' : 'hero-st'));
+  const isSt = speciality === 'st';
+
+  const heroImage = PlaceHolderImages.find(p => p.id === (isSt ? 'hero-st' : 'hero-mi'));
   
-  const galleryImages = [
+  const miGalleryImages = [
     PlaceHolderImages.find(p => p.id === 'gallery-1'),
     PlaceHolderImages.find(p => p.id === 'gallery-2'),
     PlaceHolderImages.find(p => p.id === 'gallery-3'),
@@ -34,6 +36,17 @@ export default function Home() {
     PlaceHolderImages.find(p => p.id === 'gallery-5'),
     PlaceHolderImages.find(p => p.id === 'gallery-6'),
   ].filter(Boolean) as any[];
+
+  const stGalleryImages = [
+    PlaceHolderImages.find(p => p.id === 'st-gallery-1'),
+    PlaceHolderImages.find(p => p.id === 'st-gallery-2'),
+    PlaceHolderImages.find(p => p.id === 'st-gallery-3'),
+    PlaceHolderImages.find(p => p.id === 'st-gallery-4'),
+    PlaceHolderImages.find(p => p.id === 'st-gallery-5'),
+    PlaceHolderImages.find(p => p.id === 'st-gallery-6'),
+  ].filter(Boolean) as any[];
+
+  const galleryImages = isSt ? stGalleryImages : miGalleryImages;
 
 
   const features = [

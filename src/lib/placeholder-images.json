@@ -155,6 +155,42 @@
       "description": "A student receiving a certificate.",
       "imageUrl": "https://i.ibb.co/dw4y4G04/get.jpg",
       "imageHint": "student award"
+    },
+    {
+      "id": "st-gallery-1",
+      "description": "Scientist in a modern lab.",
+      "imageUrl": "https://images.unsplash.com/photo-1574852859542-1b41217a7195?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxzY2llbmNlJTIwbGFifGVufDB8fHx8MTc2MjQzOTU4Mnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "science lab"
+    },
+    {
+      "id": "st-gallery-2",
+      "description": "Advanced robotics arm in a factory.",
+      "imageUrl": "https://images.unsplash.com/photo-1567704272534-45bce155110d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxyb2JvdGljcyUyMGFybXxlbnwwfHx8fDE3NjI0Mzk1ODJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "robotics arm"
+    },
+    {
+      "id": "st-gallery-3",
+      "description": "Close-up of a circuit board.",
+      "imageUrl": "https://images.unsplash.com/photo-1593344484962-796b55d956a8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxjaXJjdWl0JTIwYm9hcmR8ZW58MHx8fHwxNzYyNDM5NTgyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "circuit board"
+    },
+    {
+      "id": "st-gallery-4",
+      "description": "Engineers collaborating on a project.",
+      "imageUrl": "https://images.unsplash.com/photo-1549605656-15ad5e2433e9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxlbmdpbmVlcnN8ZW58MHx8fHwxNzYyNDM5NTgyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "engineers collaborating"
+    },
+    {
+      "id": "st-gallery-5",
+      "description": "Wind turbines at sunset.",
+      "imageUrl": "https://images.unsplash.com/photo-1544243499-639a0a404a37?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHx3aW5kJTIwdHVyYmluZXN8ZW58MHx8fHwxNzYyNDM5NTgyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "wind turbines"
+    },
+    {
+      "id": "st-gallery-6",
+      "description": "Student working on an electronics project.",
+      "imageUrl": "https://images.unsplash.com/photo-1620712943543-959695283929?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxlbGVjdHJvbmljcyUyMHByb2plY3R8ZW58MHx8fHwxNzYyNDM5NTgyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "electronics project"
     }
   ]
 }
