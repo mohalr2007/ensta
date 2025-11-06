@@ -19,29 +19,24 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
     const storedLang = localStorage.getItem("polyglot-lang") as Language;
     if (storedLang && (storedLang === 'en' || storedLang === 'fr')) {
       setLanguageState(storedLang);
     }
+    setIsMounted(true);
   }, []);
 
   const setLanguage = (lang: Language) => {
-    setLanguageState(lang);
-    localStorage.setItem("polyglot-lang", lang);
+    if (isMounted) {
+      setLanguageState(lang);
+      localStorage.setItem("polyglot-lang", lang);
+    }
   };
 
   const t = useMemo(() => translations[language] || translations.en, [language]);
   
-  // Prevent hydration mismatch by returning null or a loader until mounted on the client
   if (!isMounted) {
-    // Returning children with default 'en' translation on server and initial client render
-    const serverT = translations.en;
-     return (
-        <LanguageContext.Provider value={{ language: 'en', setLanguage, t: serverT }}>
-            {children}
-        </LanguageContext.Provider>
-    );
+    return null;
   }
 
   return (
