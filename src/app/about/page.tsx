@@ -136,19 +136,19 @@ function AboutPageContent() {
         </div>
       </div>
       <div className="container mx-auto py-12 md:py-20 px-4">
-        <Card className="border-none shadow-none mb-16 md:mb-24">
-            <CardHeader className="p-0">
-              <div className="flex items-center gap-4">
-                <div className="bg-primary text-primary-foreground p-3 rounded-lg">
-                  <Target className="w-6 h-6 md:w-8 md:h-8" />
-                </div>
-                <CardTitle className="text-2xl md:text-3xl font-headline">{t.about.missionTitle}</CardTitle>
+        <Card className="border-none shadow-none mb-16 md:mb-24 text-center">
+          <CardHeader className="p-0">
+            <div className="flex flex-col items-center text-center gap-4">
+              <div className="bg-primary text-primary-foreground p-3 rounded-lg">
+                <Target className="w-6 h-6 md:w-8 md:h-8" />
               </div>
-            </CardHeader>
-            <CardContent className="pt-4 pl-0 md:pt-6">
-              <p className="text-base md:text-lg text-muted-foreground">{t.about.missionText}</p>
-            </CardContent>
-          </Card>
+              <CardTitle className="text-2xl md:text-3xl font-headline">{t.about.missionTitle}</CardTitle>
+            </div>
+          </CardHeader>
+          <CardContent className="pt-4 md:pt-6">
+            <p className="text-base md:text-lg text-muted-foreground">{t.about.missionText}</p>
+          </CardContent>
+        </Card>
 
         <div className="mt-16 md:mt-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12 items-center">
