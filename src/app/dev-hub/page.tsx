@@ -3,7 +3,7 @@
 
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Zap, Bot, Smartphone, FastForward, Target, Milestone } from "lucide-react";
+import { Zap, Bot, Smartphone, FastForward, Target, Milestone, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function DevHubPage() {
@@ -34,6 +34,11 @@ export default function DevHubPage() {
       icon: Bot,
       title: "5. Leverage AI Tools",
       description: "Use AI design assistants for layouts and to find solutions for bugs and problems you encounter."
+    },
+    {
+      icon: Users,
+      title: "6. Test and Get Feedback",
+      description: "Always test your site and get feedback from real users to find and fix issues."
     }
   ];
 
@@ -54,10 +59,7 @@ export default function DevHubPage() {
             {devTips.map((tip, index) => (
                 <Card 
                   key={tip.title} 
-                  className={cn(
-                    "text-center border-2 border-transparent hover:border-primary transition-all duration-300 hover:shadow-lg h-full",
-                    devTips.length === 5 && index === 3 && "lg:col-start-2",
-                  )}
+                  className="text-center border-2 border-transparent hover:border-primary transition-all duration-300 hover:shadow-lg h-full"
                 >
                     <CardHeader>
                         <div className="flex justify-center items-center mb-4">
