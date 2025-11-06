@@ -5,9 +5,7 @@ import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { LanguageProvider } from "@/components/providers/LanguageProvider";
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
-import { Suspense } from "react";
 import { cn } from "@/lib/utils";
-import { Skeleton } from "@/components/ui/skeleton";
 import MainContent from "@/components/layout/MainContent";
 
 const poppins = Poppins({
@@ -31,13 +29,7 @@ export default function RootLayout({
       <body className={cn("font-body antialiased", poppins.variable)}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <LanguageProvider>
-            <Suspense fallback={
-              <div className="w-full h-screen flex justify-center items-center">
-                  <Skeleton className="w-full h-full" />
-              </div>
-            }>
-              <MainContent>{children}</MainContent>
-            </Suspense>
+            <MainContent>{children}</MainContent>
             <Toaster />
           </LanguageProvider>
         </ThemeProvider>
