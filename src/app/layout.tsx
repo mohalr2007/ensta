@@ -17,9 +17,6 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "ENSTA",
   description: "A modern school hub with bilingual support.",
-  icons: {
-    icon: '/favicon.ico',
-  }
 };
 
 export default function RootLayout({
@@ -29,7 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head />
+      <head>
+        <link rel="icon" href="https://elearning.ensta.edu.dz/pluginfile.php/1/theme_academi/footerlogo/1715699273/ENSTA%20logo.png" type="image/png" />
+      </head>
       <body className={cn("font-body antialiased", inter.variable)}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <LanguageProvider>
