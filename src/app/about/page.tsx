@@ -8,7 +8,7 @@ import { GraduationCap, Landmark, BrainCircuit, ShieldCheck, Settings, BatteryCh
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { useSearchParams } from "next/navigation";
 import LogoLoop from "@/components/ui/logo-loop";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 
 function AboutPageContent() {

@@ -3,39 +3,23 @@
 
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { Footer } from "@/components/layout/Footer";
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { Home, Info, Mail, GraduationCap } from "lucide-react";
 import { Dock } from "@/components/layout/Dock";
 import Image from "next/image";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { Chatbot } from "@/components/chatbot/Chatbot";
+import { Skeleton } from "../ui/skeleton";
 
-export default function MainContent({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-
-  if (pathname === '/') {
-    return <>{children}</>;
-  }
-
-  return <SiteContent>{children}</SiteContent>;
-}
-
-
-function SiteContent({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const speciality = searchParams.get('speciality');
+function DockAndFooter() {
   const router = useRouter();
   const { t } = useLanguage();
+  const searchParams = useSearchParams();
+  const speciality = searchParams.get('speciality');
   const [isChatOpen, setChatOpen] = useState(false);
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
   
   const logoImage = PlaceHolderImages.find(p => p.id === 'logo');
 
@@ -117,16 +101,37 @@ function SiteContent({ children }: { children: React.ReactNode }) {
   ].filter(Boolean) as any[];
   
   return (
+    <>
+      <Dock items={dockItems} />
+      <Footer />
+      <Chatbot isOpen={isChatOpen} onClose={() => setChatOpen(false)} />
+    </>
+  );
+}
+
+export default function MainContent({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const isLandingPage = pathname === '/';
+
+  if (isLandingPage) {
+    return <>{children}</>;
+  }
+  
+  return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-grow">
         {children}
       </main>
       {isClient && (
-        <>
-          <Dock items={dockItems} />
-          <Footer />
-          <Chatbot isOpen={isChatOpen} onClose={() => setChatOpen(false)} />
-        </>
+        <Suspense fallback={<div style={{ height: '80px' }}><Skeleton className="w-full h-full" /></div>}>
+          <DockAndFooter />
+        </Suspense>
       )}
     </div>
   );
