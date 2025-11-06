@@ -1,3 +1,4 @@
+
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,9 +18,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { Badge } from "@/components/ui/badge";
-import { sendContactForm } from "@/app/actions/sendContactForm";
 
-// This schema must match the one in the server action
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   email: z.string().email({ message: "Please enter a valid email address." }),
@@ -32,7 +31,6 @@ export function ContactForm({ speciality }: { speciality: string | null }) {
   const { toast } = useToast();
   const { t } = useLanguage();
 
-  // Use the new translated validation messages
   const translatedFormSchema = z.object({
     name: z.string().min(2, { message: t.contact.form.validation.name }),
     email: z.string().email({ message: t.contact.form.validation.email }),
@@ -53,21 +51,44 @@ export function ContactForm({ speciality }: { speciality: string | null }) {
   });
 
   async function onSubmit(values: z.infer<typeof translatedFormSchema>) {
-    // Call the server action
-    const result = await sendContactForm(values);
+    const scriptURL = process.env.NEXT_PUBLIC_GOOGLE_SHEET_URL;
+    if (!scriptURL) {
+      console.error("Google Sheet URL is not defined.");
+      toast({
+        variant: "destructive",
+        title: t.contact.form.errorTitle,
+        description: "The form endpoint is not configured correctly.",
+      });
+      return;
+    }
 
-    if (result.success) {
+    const body = new FormData();
+    body.append('name', values.name);
+    body.append('email', values.email);
+    body.append('subject', values.subject);
+    body.append('message', values.message);
+    body.append('speciality', values.speciality || 'N/A');
+
+    try {
+      const response = await fetch(scriptURL, {
+        method: 'POST',
+        body,
+        mode: 'no-cors', // Important for cross-origin requests to Google Scripts
+      });
+
       toast({
         title: t.contact.form.successTitle,
         description: t.contact.form.successDescription,
       });
       form.reset();
       form.setValue('speciality', speciality || '');
-    } else {
+
+    } catch (error) {
+      console.error("Error submitting form:", error);
       toast({
         variant: "destructive",
         title: t.contact.form.errorTitle,
-        description: result.message || t.contact.form.errorDescription,
+        description: (error as Error).message || t.contact.form.errorDescription,
       });
     }
   }
