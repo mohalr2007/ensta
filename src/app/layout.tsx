@@ -18,14 +18,7 @@ export const metadata: Metadata = {
   title: "ENSTA",
   description: "A modern school hub with bilingual support.",
   icons: {
-    icon: [
-      { url: '/favicon.ico', sizes: 'any', type: 'image/x-icon' },
-      { url: 'https://elearning.ensta.edu.dz/pluginfile.php/1/theme_academi/footerlogo/1715699273/ENSTA%20logo.png', type: 'image/png' },
-    ],
-    shortcut: ['https://elearning.ensta.edu.dz/pluginfile.php/1/theme_academi/footerlogo/1715699273/ENSTA%20logo.png'],
-    apple: [
-      { url: 'https://elearning.ensta.edu.dz/pluginfile.php/1/theme_academi/footerlogo/1715699273/ENSTA%20logo.png' },
-    ],
+    icon: '/favicon.ico',
   }
 };
 
@@ -36,9 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="icon" href="https://elearning.ensta.edu.dz/pluginfile.php/1/theme_academi/footerlogo/1715699273/ENSTA%20logo.png" sizes="any" />
-      </head>
+      <head />
       <body className={cn("font-body antialiased", inter.variable)}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <LanguageProvider>
