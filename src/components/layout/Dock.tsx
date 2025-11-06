@@ -132,7 +132,7 @@ export function Dock({
   const baseItemSize = isMobile ? 40 : 48; 
   const magnification = isMobile ? 52 : 64; 
   const distance = isMobile ? 100 : 120;
-  const spring = { stiffness: 500, damping: 30 };
+  const spring = isMobile ? { stiffness: 400, damping: 25 } : { stiffness: 500, damping: 30 };
 
   return (
     <div className="dock-outer">
@@ -140,7 +140,7 @@ export function Dock({
         onMouseMove={({ clientX }) => mouseX.set(clientX)}
         onMouseLeave={() => mouseX.set(Infinity)}
         onTouchStart={e => mouseX.set(e.touches[0].clientX)}
-        onTouchMove={e => mouseX.set(e.touches[0].clientX)}
+        onTouchMove={e => mouseax.set(e.touches[0].clientX)}
         onTouchEnd={() => mouseX.set(Infinity)}
         onTouchCancel={() => mouseX.set(Infinity)}
         className={cn("dock-panel", className)}
@@ -173,3 +173,5 @@ export function Dock({
     </div>
   );
 }
+
+    

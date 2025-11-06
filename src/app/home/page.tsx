@@ -13,12 +13,17 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Suspense, useEffect, useState } from "react";
 import CircularGallery from "@/components/ui/CircularGallery";
 import { motion } from "framer-motion";
+import { useWindowSize } from "@/hooks/use-window-size";
+import { Card, CardContent } from "@/components/ui/card";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 
 function HomePageContent() {
   const { t } = useLanguage();
   const searchParams = useSearchParams();
   const speciality = searchParams.get('speciality');
   const [isClient, setIsClient] = useState(false);
+  const { width } = useWindowSize();
+  const isMobile = width < 768;
 
   useEffect(() => {
     setIsClient(true);
@@ -74,6 +79,8 @@ function HomePageContent() {
        </div>
     )
   }
+  
+  const galleryItems = isSt ? stGalleryImages : miGalleryImages;
 
   return (
     <div className="flex flex-col items-center">
@@ -155,11 +162,38 @@ function HomePageContent() {
               {t.home.gallerySubtitle}
             </p>
           </div>
-            <div className="h-[60vh]">
-               <CircularGallery 
-                items={isSt ? stGalleryImages : miGalleryImages} 
-              />
-            </div>
+            {isMobile ? (
+              <Carousel
+                opts={{
+                  align: "start",
+                  loop: true,
+                }}
+                className="w-full"
+              >
+                <CarouselContent>
+                  {galleryItems.map((item, index) => (
+                    <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                      <div className="p-1">
+                        <Card>
+                          <CardContent className="flex aspect-video items-center justify-center p-0 relative rounded-lg overflow-hidden">
+                             <Image
+                                src={item.image}
+                                alt={item.text}
+                                fill
+                                className="object-cover"
+                              />
+                          </CardContent>
+                        </Card>
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+              </Carousel>
+            ) : (
+               <div className="h-[60vh]">
+                 <CircularGallery items={galleryItems} />
+              </div>
+            )}
         </div>
       </section>
       
@@ -175,3 +209,5 @@ export default function Home() {
     </Suspense>
   );
 }
+
+    
