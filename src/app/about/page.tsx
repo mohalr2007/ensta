@@ -4,7 +4,7 @@
 import Image from "next/image";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Target, Eye, Landmark, BrainCircuit, ShieldCheck } from "lucide-react";
+import { Target, Eye, Landmark, BrainCircuit, ShieldCheck, Atom, Wind } from "lucide-react";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { useSearchParams } from "next/navigation";
 import { LogoLoop } from "@/components/ui/logo-loop";
@@ -27,8 +27,21 @@ export default function AboutPage() {
       image: PlaceHolderImages.find(p => p.id === 'mi-security'),
     }
   ];
+  
+  const stSpecializations = [
+    {
+      ...t.about.stSpecializations[0],
+      icon: Atom,
+      image: PlaceHolderImages.find(p => p.id === 'st-materials'),
+    },
+    {
+      ...t.about.stSpecializations[1],
+      icon: Wind,
+      image: PlaceHolderImages.find(p => p.id === 'st-energy'),
+    }
+  ];
 
-  const specializationLogos = miSpecializations.map((spec, index) => ({
+  const miSpecializationLogos = miSpecializations.map((spec) => ({
     node: (
       <div className="w-[350px] md:w-[400px]">
         <Card key={spec.title} className="group overflow-hidden text-center transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border-2 border-transparent hover:border-primary h-full">
@@ -58,7 +71,38 @@ export default function AboutPage() {
     ),
   }));
 
+  const stSpecializationLogos = stSpecializations.map((spec) => ({
+    node: (
+      <div className="w-[350px] md:w-[400px]">
+        <Card key={spec.title} className="group overflow-hidden text-center transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border-2 border-transparent hover:border-accent h-full">
+          {spec.image && (
+            <div className="relative h-56 w-full">
+              <Image
+                src={spec.image.imageUrl}
+                alt={spec.image.description}
+                data-ai-hint={spec.image.imageHint}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+          )}
+          <CardContent className="p-6">
+            <div className="flex justify-center items-center mb-4">
+              <div className="bg-accent/10 text-accent p-3 rounded-full">
+                <spec.icon className="h-8 w-8" />
+              </div>
+            </div>
+            <p className="text-sm font-semibold text-accent">Domaine ST</p>
+            <h3 className="text-xl font-bold font-headline mt-2">{spec.title}</h3>
+            <p className="mt-2 text-destructive font-semibold">{spec.tag}</p>
+          </CardContent>
+        </Card>
+      </div>
+    ),
+  }));
+
   const isMi = speciality === 'mi';
+  const isSt = speciality === 'st';
 
   return (
     <>
@@ -132,7 +176,15 @@ export default function AboutPage() {
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold font-headline">{t.about.miSpecializationsTitle}</h2>
             </div>
-             <LogoLoop logos={specializationLogos} speed={50} fadeOut={true} />
+             <LogoLoop logos={miSpecializationLogos} speed={50} fadeOut={true} />
+          </div>
+        )}
+        {isSt && (
+          <div className="mt-16 md:mt-24">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold font-headline">{t.about.stSpecializationsTitle}</h2>
+            </div>
+             <LogoLoop logos={stSpecializationLogos} speed={50} fadeOut={true} />
           </div>
         )}
       </div>

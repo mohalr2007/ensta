@@ -53,6 +53,18 @@
       "description": "A person holding a digital lock icon, symbolizing cybersecurity.",
       "imageUrl": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjeWJlcnNlY3VyaXR5fGVufDB8fHx8MTc2MjIyMTY0Nnww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "system security"
+    },
+    {
+      "id": "st-materials",
+      "description": "A close-up view of graphene or another nanomaterial structure.",
+      "imageUrl": "https://images.unsplash.com/photo-1617892795383-727878804104?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxuYW5vdGVjaG5vbG9neXxlbnwwfHx8fDE3NjIyOTQ3MjF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "nanotechnology material"
+    },
+    {
+      "id": "st-energy",
+      "description": "A field of solar panels and wind turbines under a clear blue sky.",
+      "imageUrl": "https://images.unsplash.com/photo-1508514177221-188b1cf16e9c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxyZW5ld2FibGUlMjBlbmVyZ3l8ZW58MHx8fHwxNzYyMjk0NzUxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "renewable energy"
     }
   ]
 }

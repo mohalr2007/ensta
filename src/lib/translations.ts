@@ -56,6 +56,17 @@ export const translations = {
           title: "Systems Security",
           tag: "New 2025-2026"
         }
+      ],
+      stSpecializationsTitle: "ST Domain Specializations",
+      stSpecializations: [
+        {
+          title: "Advanced Materials and Nanotechnology",
+          tag: "Established"
+        },
+        {
+          title: "Renewable Energy and Sustainable Systems",
+          tag: "Established"
+        }
       ]
     },
     contact: {
@@ -151,6 +162,17 @@ export const translations = {
         {
           title: "Sécurité des Systèmes",
           tag: "Nouvelle 2025-2026"
+        }
+      ],
+      stSpecializationsTitle: "Spécialisations du Domaine ST",
+      stSpecializations: [
+        {
+          title: "Matériaux Avancés et Nanotechnologie",
+          tag: "Établi"
+        },
+        {
+          title: "Énergies Renouvelables et Systèmes Durables",
+          tag: "Établi"
         }
       ]
     },
