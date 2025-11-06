@@ -62,7 +62,7 @@ export function ContactForm({ speciality }: { speciality: string | null }) {
       return;
     }
 
-    const body = new FormData();
+    const body = new URLSearchParams();
     body.append('name', values.name);
     body.append('email', values.email);
     body.append('subject', values.subject);
@@ -70,10 +70,9 @@ export function ContactForm({ speciality }: { speciality: string | null }) {
     body.append('speciality', values.speciality || 'N/A');
 
     try {
-      const response = await fetch(scriptURL, {
+      await fetch(scriptURL, {
         method: 'POST',
-        body,
-        mode: 'no-cors', // Important for cross-origin requests to Google Scripts
+        body: body,
       });
 
       toast({
