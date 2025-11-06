@@ -20,6 +20,11 @@ export default function MainContent({ children }: { children: React.ReactNode })
   const router = useRouter();
   const { t } = useLanguage();
   const [isChatOpen, setChatOpen] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const isLandingPage = pathname === '/';
 
@@ -54,7 +59,7 @@ export default function MainContent({ children }: { children: React.ReactNode })
         {speciality}
       </div>
     ),
-    label: t.nav.devHub,
+    label: "Open AI Assistant",
     onClick: () => setChatOpen(true),
   } : null;
 
@@ -109,11 +114,11 @@ export default function MainContent({ children }: { children: React.ReactNode })
       </main>
       {!isLandingPage && (
         <>
-          <Dock items={dockItems} />
+          {isClient && <Dock items={dockItems} />}
           <Footer />
         </>
       )}
-      <Chatbot isOpen={isChatOpen} onClose={() => setChatOpen(false)} />
+      {isClient && <Chatbot isOpen={isChatOpen} onClose={() => setChatOpen(false)} />}
     </div>
   );
 }
