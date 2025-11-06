@@ -88,7 +88,7 @@ export default function SpecialitySelectionPage() {
       </div>
 
       <div className="mt-12 sm:mt-16 text-center text-muted-foreground">
-        <p>&copy; 2024 ENSTA. All rights reserved.</p>
+        <p>&copy; 2025 ENSTA. All rights reserved.</p>
       </div>
     </div>
   );
