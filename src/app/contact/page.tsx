@@ -1,7 +1,7 @@
 
 "use client";
 
-import React, { useState, FormEvent, Suspense, useTransition } from 'react';
+import React, a { useState, FormEvent, Suspense, useTransition } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -75,22 +75,14 @@ function ContactPageContent() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
           <div className="space-y-8">
             {(isSt || noSpeciality) && (
-              <div className="space-y-8">
-                <Card>
-                    <CardHeader className="flex-row items-center gap-4">
+              <div className="space-y-4">
+                <Card className="border-0 shadow-none -mb-4">
+                    <CardHeader className="flex-row items-center gap-4 px-0">
                       <div className="bg-accent/10 text-accent p-3 rounded-full">
                         <Building className="h-6 w-6" />
                       </div>
                       <CardTitle className="text-xl font-headline">Campus ST (Bab El Oued)</CardTitle>
                     </CardHeader>
-                    <CardContent>
-                      <div className="flex items-start gap-4">
-                        <MapPin className="h-5 w-5 mt-1 text-muted-foreground" />
-                        <Link href={t.contact.addressUrl_st} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:underline hover:text-primary">
-                          {t.contact.address_st}
-                        </Link>
-                      </div>
-                    </CardContent>
                 </Card>
                 <div className="rounded-lg overflow-hidden border">
                   <iframe 
@@ -103,26 +95,24 @@ function ContactPageContent() {
                     referrerPolicy="no-referrer-when-downgrade">
                   </iframe>
                 </div>
+                <div className="flex items-start gap-4">
+                  <MapPin className="h-5 w-5 mt-1 text-muted-foreground flex-shrink-0" />
+                  <Link href={t.contact.addressUrl_st} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:underline hover:text-primary">
+                    {t.contact.address_st}
+                  </Link>
+                </div>
               </div>
             )}
 
             {(isMi || noSpeciality) && (
-              <div className="space-y-8">
-                <Card>
-                  <CardHeader className="flex-row items-center gap-4">
+              <div className="space-y-4">
+                <Card className="border-0 shadow-none -mb-4">
+                  <CardHeader className="flex-row items-center gap-4 px-0">
                     <div className="bg-primary/10 text-primary p-3 rounded-full">
                       <Building className="h-6 w-6" />
                     </div>
                     <CardTitle className="text-xl font-headline">Campus MI (Dergana)</CardTitle>
                   </CardHeader>
-                  <CardContent>
-                    <div className="flex items-start gap-4">
-                      <MapPin className="h-5 w-5 mt-1 text-muted-foreground" />
-                      <Link href={t.contact.addressUrl_mi} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:underline hover:text-primary">
-                        {t.contact.address_mi}
-                      </Link>
-                    </div>
-                  </CardContent>
                 </Card>
                 <div className="rounded-lg overflow-hidden border">
                   <iframe 
@@ -134,6 +124,12 @@ function ContactPageContent() {
                     loading="lazy" 
                     referrerPolicy="no-referrer-when-downgrade">
                   </iframe>
+                </div>
+                <div className="flex items-start gap-4">
+                  <MapPin className="h-5 w-5 mt-1 text-muted-foreground flex-shrink-0" />
+                  <Link href={t.contact.addressUrl_mi} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:underline hover:text-primary">
+                    {t.contact.address_mi}
+                  </Link>
                 </div>
               </div>
             )}
