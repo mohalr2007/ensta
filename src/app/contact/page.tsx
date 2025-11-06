@@ -1,7 +1,7 @@
 
 "use client";
 
-import React, { useState, FormEvent, Suspense } from 'react';
+import React, { useState, FormEvent, Suspense, useTransition } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,72 +11,44 @@ import { useLanguage } from '@/components/providers/LanguageProvider';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import { Skeleton } from '@/components/ui/skeleton';
+import { sendEmail } from '@/lib/actions/send-email';
 
 function ContactPageContent() {
   const { t } = useLanguage();
   const searchParams = useSearchParams();
   const speciality = searchParams.get('speciality');
   const { toast } = useToast();
+  const [isPending, startTransition] = useTransition();
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  
-  const sheetUrl = process.env.NEXT_PUBLIC_GOOGLE_SHEET_URL;
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setIsSubmitting(true);
+    const formData = new FormData(event.currentTarget);
 
-    if (!sheetUrl) {
-      console.error("Google Sheet URL is not defined.");
-      toast({
-        variant: "destructive",
-        title: "Erreur de configuration",
-        description: "L'URL du script Google n'est pas définie. Veuillez contacter l'administrateur.",
-      });
-      setIsSubmitting(false);
-      return;
-    }
+    startTransition(async () => {
+      const result = await sendEmail(formData);
 
-    const formData = new FormData();
-    formData.append('timestamp', new Date().toISOString());
-    formData.append('name', name);
-    formData.append('email', email);
-    formData.append('subject', subject);
-    formData.append('message', message);
-    formData.append('speciality', speciality || 'N/A');
-
-    try {
-      const response = await fetch(sheetUrl, {
-        method: 'POST',
-        mode: 'no-cors', // Important for Google Apps Script web apps
-        body: formData,
-      });
-
-      // Since it's 'no-cors', we can't read the response, but we can assume success if no network error
-      toast({
-        title: t.contact.form.successTitle,
-        description: t.contact.form.successDescription,
-      });
-      // Reset form
-      setName('');
-      setEmail('');
-      setSubject('');
-      setMessage('');
-      
-    } catch (error) {
-      console.error("Erreur lors de l'envoi:", error);
-      toast({
-        variant: "destructive",
-        title: t.contact.form.errorTitle,
-        description: (error as Error).message || t.contact.form.errorDescription,
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+      if (result.success) {
+        toast({
+          title: t.contact.form.successTitle,
+          description: t.contact.form.successDescription,
+        });
+        setName('');
+        setEmail('');
+        setSubject('');
+        setMessage('');
+      } else {
+        toast({
+          variant: "destructive",
+          title: t.contact.form.errorTitle,
+          description: result.message || t.contact.form.errorDescription,
+        });
+      }
+    });
   }
 
   return (
@@ -98,28 +70,29 @@ function ContactPageContent() {
                   <div className="flex items-center gap-2">
                     <Label>{t.contact.form.specialization}</Label>
                     <Badge variant="secondary" className="uppercase text-base">{speciality}</Badge>
+                    <input type="hidden" name="speciality" value={speciality} />
                   </div>
                 )}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
                         <Label htmlFor="name">{t.contact.form.name}</Label>
-                        <Input id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder={t.contact.form.namePlaceholder} required />
+                        <Input id="name" name="name" value={name} onChange={(e) => setName(e.target.value)} placeholder={t.contact.form.namePlaceholder} required />
                     </div>
                     <div>
                         <Label htmlFor="email">{t.contact.form.email}</Label>
-                        <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder={t.contact.form.emailPlaceholder} required />
+                        <Input id="email" name="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder={t.contact.form.emailPlaceholder} required />
                     </div>
                 </div>
                  <div>
                     <Label htmlFor="subject">{t.contact.form.subject}</Label>
-                    <Input id="subject" value={subject} onChange={(e) => setSubject(e.target.value)} placeholder={t.contact.form.subjectPlaceholder} required />
+                    <Input id="subject" name="subject" value={subject} onChange={(e) => setSubject(e.target.value)} placeholder={t.contact.form.subjectPlaceholder} required />
                 </div>
                 <div>
                     <Label htmlFor="message">{t.contact.form.message}</Label>
-                    <Textarea id="message" value={message} onChange={(e) => setMessage(e.target.value)} placeholder={t.contact.form.messagePlaceholder} required className="min-h-[150px]" />
+                    <Textarea id="message" name="message" value={message} onChange={(e) => setMessage(e.target.value)} placeholder={t.contact.form.messagePlaceholder} required className="min-h-[150px]" />
                 </div>
-                <Button type="submit" size="lg" disabled={isSubmitting}>
-                  {isSubmitting ? "Envoi en cours..." : t.contact.form.submit}
+                <Button type="submit" size="lg" disabled={isPending}>
+                  {isPending ? "Envoi en cours..." : t.contact.form.submit}
                 </Button>
             </form>
         </div>
