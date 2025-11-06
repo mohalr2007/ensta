@@ -6,7 +6,6 @@ import { Facebook, Linkedin, Youtube } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
-import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 
 // X logo SVG component
@@ -53,9 +52,8 @@ function FooterContent() {
 }
 
 export function Footer() {
-  const isMobile = useIsMobile();
   return (
-    <footer className={cn("bg-secondary text-secondary-foreground site-footer", isMobile ? 'pb-24' : '')}>
+    <footer className="bg-secondary text-secondary-foreground site-footer pb-24 sm:pb-0">
       <div className="container py-6 sm:py-8 flex justify-center items-center">
         <FooterContent />
       </div>

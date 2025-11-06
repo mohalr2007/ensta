@@ -88,3 +88,9 @@
   margin: 0 0.25rem; /* Add some space around it */
   align-self: center;
 }
+
+@media (max-width: 767px) {
+  .dock-label {
+    display: none;
+  }
+}

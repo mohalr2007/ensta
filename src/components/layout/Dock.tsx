@@ -5,7 +5,6 @@ import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from
 import { Children, cloneElement, useEffect, useRef, useState, isValidElement } from 'react';
 import './Dock.css';
 import { cn } from '@/lib/utils';
-import { useIsMobile } from '@/hooks/use-mobile';
 
 function DockItem({ children, className = '', onClick, onLongPress, mouseX, spring, distance, magnification, baseItemSize }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -77,17 +76,15 @@ function DockItem({ children, className = '', onClick, onLongPress, mouseX, spri
 
 function DockLabel({ children, className = '', isHovered }) {
   const [isVisible, setIsVisible] = useState(false);
-  const isMobile = useIsMobile();
 
   useEffect(() => {
-    if (isMobile || !isHovered) return;
+    if (!isHovered) return;
     const unsubscribe = isHovered.on('change', latest => {
       setIsVisible(latest === 1);
     });
     return () => unsubscribe();
-  }, [isHovered, isMobile]);
+  }, [isHovered]);
 
-  if (isMobile) return null;
 
   return (
     <AnimatePresence>
@@ -127,31 +124,22 @@ export function Dock({
   items,
   className = '',
 }) {
-  const isMobile = useIsMobile();
   const mouseX = useMotionValue(Infinity);
 
-  const baseItemSize = isMobile ? 36 : 48;
-  const magnification = isMobile ? 42 : 64;
-  const distance = isMobile ? 80 : 120;
+  const baseItemSize = 48; 
+  const magnification = 64; 
+  const distance = 120;
   const spring = { stiffness: 500, damping: 30 };
 
   return (
     <div className="dock-outer">
       <motion.div
-        onMouseMove={({ clientX }) => !isMobile && mouseX.set(clientX)}
-        onMouseLeave={() => !isMobile && mouseX.set(Infinity)}
-        onTouchStart={e => {
-            if (isMobile) {
-                mouseX.set(e.touches[0].clientX);
-            }
-        }}
-        onTouchMove={e => {
-            if (isMobile) {
-                mouseX.set(e.touches[0].clientX);
-            }
-        }}
-        onTouchEnd={() => isMobile && mouseX.set(Infinity)}
-        onTouchCancel={() => isMobile && mouseX.set(Infinity)}
+        onMouseMove={({ clientX }) => mouseX.set(clientX)}
+        onMouseLeave={() => mouseX.set(Infinity)}
+        onTouchStart={e => mouseX.set(e.touches[0].clientX)}
+        onTouchMove={e => mouseX.set(e.touches[0].clientX)}
+        onTouchEnd={() => mouseX.set(Infinity)}
+        onTouchCancel={() => mouseX.set(Infinity)}
         className={cn("dock-panel", className)}
         role="toolbar"
         aria-label="Application dock"
