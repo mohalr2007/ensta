@@ -33,7 +33,6 @@ export async function sendContactForm(data: unknown) {
   }
 
   // 3. Prepare the data to be sent to Google Apps Script.
-  // The script expects the data as URL-encoded form parameters.
   const body = new FormData();
   body.append('name', formData.name);
   body.append('email', formData.email);
@@ -42,27 +41,27 @@ export async function sendContactForm(data: unknown) {
   body.append('speciality', formData.speciality || 'N/A');
 
   try {
-    // 4. Send the data using fetch.
+    // 4. Send the data using fetch. We use 'redirect: manual' because Google Scripts
+    // often respond with a 302 redirect on success.
     const response = await fetch(scriptURL, {
       method: 'POST',
       body,
+      redirect: 'manual', // Important: handle redirects manually
     });
-    
-    // Google Apps Script Web Apps often redirect. We follow the redirect and check the final response.
-    // A successful POST to a doPost script that returns JSON will have a final status of 200.
-    if (response.status === 200) {
-      const jsonResponse = await response.json();
-      if (jsonResponse.result === 'success') {
+
+    // A successful submission to a Google Apps Script doPost function that
+    // redirects will have a response type of 'opaqueredirect' and status 0
+    // when mode is 'no-cors', or a status of 302 when redirect is manual.
+    // We check for 302 as it's a strong indicator of a successful POST.
+    if (response.status === 302 || response.status === 200) {
         return { success: true, message: 'Message sent successfully!' };
-      } else {
-        // The script itself returned an error.
-        console.error('Google Script returned an error:', jsonResponse.error);
-        return { success: false, message: 'An error occurred on the server.' };
-      }
     } else {
-       // The fetch request itself failed.
-      console.error('Fetch to Google Script failed with status:', response.status, response.statusText);
-      return { success: false, message: 'Failed to send message.' };
+       // The fetch request itself might have failed or the script returned an error.
+      console.error('Google Script fetch failed with status:', response.status, response.statusText);
+      // Try to get more info from the response if possible
+      const responseBody = await response.text();
+      console.error('Response body:', responseBody);
+      return { success: false, message: `Failed to send message. Server responded with status ${response.status}.` };
     }
 
   } catch (error: any) {
