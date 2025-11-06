@@ -14,7 +14,9 @@ function DockItem({ children, className = '', onClick, onLongPress, mouseX, spri
 
   const handlePressStart = (e: React.MouseEvent | React.TouchEvent) => {
     // Prevent default context menu on long touch
-    e.preventDefault();
+    if (e.type === 'touchstart') {
+      e.preventDefault();
+    }
     pressTimeout.current = setTimeout(() => {
       if (onLongPress) {
         onLongPress();
@@ -23,7 +25,10 @@ function DockItem({ children, className = '', onClick, onLongPress, mouseX, spri
     }, 1000); // 1 second for long press
   };
 
-  const handlePressEnd = () => {
+  const handlePressEnd = (e: React.MouseEvent | React.TouchEvent) => {
+    if (e.type === 'touchend') {
+        e.preventDefault();
+    }
     if (pressTimeout.current) {
       clearTimeout(pressTimeout.current);
       pressTimeout.current = null;
@@ -129,18 +134,22 @@ export function Dock({
   const { width } = useWindowSize();
   const isMobile = width < 768;
 
-  const baseItemSize = isMobile ? 40 : 48; 
-  const magnification = isMobile ? 52 : 64; 
-  const distance = isMobile ? 100 : 120;
-  const spring = isMobile ? { stiffness: 400, damping: 25 } : { stiffness: 500, damping: 30 };
+  const baseItemSize = isMobile ? 44 : 48; 
+  const magnification = isMobile ? 56 : 64; 
+  const distance = isMobile ? 80 : 120;
+  const spring = { stiffness: 500, damping: 30 };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    mouseX.set(e.touches[0].clientX);
+  }
 
   return (
     <div className="dock-outer">
       <motion.div
         onMouseMove={({ clientX }) => mouseX.set(clientX)}
         onMouseLeave={() => mouseX.set(Infinity)}
-        onTouchStart={e => mouseX.set(e.touches[0].clientX)}
-        onTouchMove={e => mouseax.set(e.touches[0].clientX)}
+        onTouchStart={handleTouchMove}
+        onTouchMove={handleTouchMove}
         onTouchEnd={() => mouseX.set(Infinity)}
         onTouchCancel={() => mouseX.set(Infinity)}
         className={cn("dock-panel", className)}
@@ -173,5 +182,3 @@ export function Dock({
     </div>
   );
 }
-
-    

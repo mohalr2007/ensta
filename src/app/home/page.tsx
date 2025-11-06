@@ -10,12 +10,14 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useState, useRef } from "react";
 import CircularGallery from "@/components/ui/CircularGallery";
 import { motion } from "framer-motion";
 import { useWindowSize } from "@/hooks/use-window-size";
 import { Card, CardContent } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
+
 
 function HomePageContent() {
   const { t } = useLanguage();
@@ -24,6 +26,10 @@ function HomePageContent() {
   const [isClient, setIsClient] = useState(false);
   const { width } = useWindowSize();
   const isMobile = width < 768;
+
+  const plugin = useRef(
+    Autoplay({ delay: 2000, stopOnInteraction: true })
+  );
 
   useEffect(() => {
     setIsClient(true);
@@ -164,11 +170,14 @@ function HomePageContent() {
           </div>
             {isMobile ? (
               <Carousel
+                plugins={[plugin.current]}
                 opts={{
                   align: "start",
                   loop: true,
                 }}
                 className="w-full"
+                onMouseEnter={plugin.current.stop}
+                onMouseLeave={plugin.current.reset}
               >
                 <CarouselContent>
                   {galleryItems.map((item, index) => (
@@ -209,5 +218,3 @@ export default function Home() {
     </Suspense>
   );
 }
-
-    

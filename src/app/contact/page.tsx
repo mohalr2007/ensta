@@ -13,7 +13,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Skeleton } from '@/components/ui/skeleton';
 import { sendEmail } from '@/lib/actions/send-email';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Mail, MapPin, Phone } from 'lucide-react';
+import { Mail, MapPin, Phone, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 
 function ContactPageContent() {
@@ -82,7 +82,7 @@ function ContactPageContent() {
                 <CardTitle className="text-xl font-headline">{t.contact.addressTitle}</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-muted-foreground space-y-2">
+                <div className="text-muted-foreground space-y-4">
                    {(isSt || noSpeciality) && (
                       <div className="space-y-2">
                          <Link href={t.contact.addressUrl_st} target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-primary block">
@@ -102,7 +102,7 @@ function ContactPageContent() {
                       </div>
                    )}
                    {(isMi || noSpeciality) && (
-                      <div className="space-y-2 pt-4">
+                      <div className="space-y-2">
                         <Link href={t.contact.addressUrl_mi} target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-primary block">
                            {t.contact.address_mi}
                         </Link>
@@ -179,7 +179,14 @@ function ContactPageContent() {
                       <Textarea id="message" name="message" value={message} onChange={(e) => setMessage(e.target.value)} placeholder={t.contact.form.messagePlaceholder} required className="min-h-[150px]" />
                   </div>
                   <Button type="submit" size="lg" disabled={isPending} className="w-full">
-                    {isPending ? "Envoi en cours..." : t.contact.form.submit}
+                    {isPending ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Envoi en cours...
+                      </>
+                    ) : (
+                      t.contact.form.submit
+                    )}
                   </Button>
               </form>
           </div>

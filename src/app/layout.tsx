@@ -1,25 +1,22 @@
 
 import type { Metadata } from "next";
-import { Poppins } from 'next/font/google';
+import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { LanguageProvider } from "@/components/providers/LanguageProvider";
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import MainContent from "@/components/layout/MainContent";
+import { Suspense } from "react";
 
-const poppins = Poppins({
+const inter = Inter({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-poppins',
+  variable: '--font-inter',
 });
 
 export const metadata: Metadata = {
   title: "ENSTA",
   description: "A modern school hub with bilingual support.",
-  icons: {
-    icon: 'https://elearning.ensta.edu.dz/pluginfile.php/1/theme_academi/footerlogo/1715699273/ENSTA%20logo.png',
-  },
 };
 
 export default function RootLayout({
@@ -29,10 +26,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn("font-body antialiased", poppins.variable)}>
+       <head>
+          <link rel="icon" href="https://elearning.ensta.edu.dz/pluginfile.php/1/theme_academi/footerlogo/1715699273/ENSTA%20logo.png" sizes="any" />
+       </head>
+      <body className={cn("font-body antialiased", inter.variable)}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <LanguageProvider>
+            <Suspense>
               <MainContent>{children}</MainContent>
+            </Suspense>
               <Toaster />
           </LanguageProvider>
         </ThemeProvider>
