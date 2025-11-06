@@ -3,7 +3,7 @@
 
 import { z } from 'zod';
 
-// Define the schema for the form data
+// Définir le schéma pour les données du formulaire
 const ContactFormSchema = z.object({
   name: z.string(),
   email: z.string().email(),
@@ -17,19 +17,20 @@ type ContactFormInputs = z.infer<typeof ContactFormSchema>;
 export async function sendContactForm(
   data: ContactFormInputs
 ): Promise<{ success: boolean; error?: string }> {
-  // Validate the data on the server
+  // Valider les données côté serveur
   const parsedData = ContactFormSchema.safeParse(data);
 
   if (!parsedData.success) {
     return { success: false, error: 'Invalid form data.' };
   }
 
-  const sheetUrl = process.env.NEXT_PUBLIC_GOOGLE_SHEET_URL;
-  if (!sheetUrl) {
+  const scriptUrl = process.env.NEXT_PUBLIC_GOOGLE_SHEET_URL;
+  if (!scriptUrl) {
     console.error('Google Sheet URL is not defined in environment variables.');
-    return { success: false, error: 'Server configuration error.' };
+    return { success: false, error: 'Server configuration error: Google Sheet URL is missing.' };
   }
 
+  // Créer un corps de formulaire pour la requête POST
   const formData = new URLSearchParams();
   formData.append('timestamp', new Date().toISOString());
   formData.append('name', parsedData.data.name);
@@ -39,25 +40,19 @@ export async function sendContactForm(
   formData.append('speciality', parsedData.data.speciality || 'N/A');
 
   try {
-    const response = await fetch(sheetUrl, {
+    // Envoyer les données au script Google Apps
+    const response = await fetch(scriptUrl, {
       method: 'POST',
       body: formData,
     });
 
-    // Since Google Apps Script can have tricky redirect behavior,
-    // we check for a successful response status (200) or a redirect (302),
-    // which also indicates the script likely executed.
-    if (response.status === 200 || response.status === 302) {
-      // We can optionally check the body for a success flag if the script returns one
-      const result = await response.json();
-      if (result.result === 'success') {
-        return { success: true };
-      } else {
-         return { success: false, error: result.error || 'The script reported an error.' };
-      }
+    const result = await response.json();
+
+    if (result.result === 'success') {
+      return { success: true };
     } else {
-        // The request failed at the network level
-        return { success: false, error: `The server responded with status: ${response.status}` };
+      // Si le script retourne une erreur, la capturer
+      return { success: false, error: result.error || 'The script reported an error.' };
     }
 
   } catch (error) {
