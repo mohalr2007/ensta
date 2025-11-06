@@ -18,6 +18,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { Badge } from "@/components/ui/badge";
+import { sendContactForm } from "@/app/actions/sendContactForm";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -51,53 +52,21 @@ export function ContactForm({ speciality }: { speciality: string | null }) {
   });
 
   async function onSubmit(values: z.infer<typeof translatedFormSchema>) {
-    const sheetdbURL = process.env.NEXT_PUBLIC_GOOGLE_SHEET_URL;
-    if (!sheetdbURL) {
-      console.error("SheetDB URL is not defined in environment variables.");
-      toast({
-        variant: "destructive",
-        title: t.contact.form.errorTitle,
-        description: "The form endpoint is not configured correctly.",
-      });
-      return;
-    }
-
     try {
-      const response = await fetch(sheetdbURL, {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          data: {
-            // A 'timestamp' column will be auto-created by SheetDB if it exists in your sheet
-            timestamp: new Date().toISOString(),
-            name: values.name,
-            email: values.email,
-            subject: values.subject,
-            message: values.message,
-            speciality: values.speciality || 'N/A'
-          }
-        })
-      });
+      const result = await sendContactForm(values);
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to submit form to SheetDB.');
+      if (result.success) {
+        toast({
+          title: t.contact.form.successTitle,
+          description: t.contact.form.successDescription,
+        });
+        form.reset();
+        form.setValue('speciality', speciality || '');
+      } else {
+        throw new Error(result.error || t.contact.form.errorDescription);
       }
-
-      await response.json();
-
-      toast({
-        title: t.contact.form.successTitle,
-        description: t.contact.form.successDescription,
-      });
-      form.reset();
-      form.setValue('speciality', speciality || '');
-
     } catch (error) {
-      console.error("Error submitting form to SheetDB:", error);
+      console.error("Error submitting form:", error);
       toast({
         variant: "destructive",
         title: t.contact.form.errorTitle,
