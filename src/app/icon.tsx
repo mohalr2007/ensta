@@ -12,7 +12,7 @@ export const contentType = 'image/png';
 
 // Image generation
 export default async function Icon() {
-  const imageUrl = 'https://i.ibb.co/yF2Dh8W/ENSTA-logo.png';
+  const imageUrl = 'https://i.ibb.co/yF2Dh8Wb/ENSTA-logo.png';
 
   try {
     // Fetch the image data from the provided URL
