@@ -16,20 +16,45 @@ export default async function Icon() {
   try {
     const response = await fetch(imageUrl);
     if (!response.ok) {
-      throw new Error(`Failed to fetch image: ${response.statusText}`);
+      // If fetching fails, return a default response to avoid breaking the build.
+      return new ImageResponse(
+        (
+          <div
+            style={{
+              fontSize: 24,
+              background: '#f8f9fa',
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#343a40',
+              borderRadius: '50%',
+            }}
+          >
+            E
+          </div>
+        ),
+        {
+          ...size,
+        }
+      );
     }
     const image = await response.arrayBuffer();
 
+    // The 'src' attribute for img in ImageResponse expects a Buffer or a Base64 string.
+    // We cannot pass the ArrayBuffer directly.
     return new ImageResponse(
       (
         <img
           width={size.width}
           height={size.height}
-          src={Buffer.from(image).toString('base64')}
+          src={image as any}
           alt="ENSTA Logo"
           style={{
             width: '100%',
             height: '100%',
+            borderRadius: '50%', // Making it round like a typical favicon
           }}
         />
       ),
@@ -39,7 +64,28 @@ export default async function Icon() {
     );
   } catch (error) {
     console.error('Error generating icon:', error);
-    // Return a default response in case of error
-    return new Response('Error generating icon', { status: 500 });
+    // Return a default response in case of any other error
+    return new ImageResponse(
+      (
+        <div
+          style={{
+            fontSize: 24,
+            background: '#f8f9fa',
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#343a40',
+            borderRadius: '50%',
+          }}
+        >
+          E
+        </div>
+      ),
+      {
+        ...size,
+      }
+    );
   }
 }
