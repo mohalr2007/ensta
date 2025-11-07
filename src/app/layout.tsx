@@ -17,9 +17,6 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "ENSTA",
   description: "A modern school hub with bilingual support.",
-  icons: {
-    icon: "/favicon.ico",
-  },
 };
 
 export default function RootLayout({
@@ -30,7 +27,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/favicon.ico" />
       </head>
       <body className={cn("font-body antialiased", inter.variable)}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
