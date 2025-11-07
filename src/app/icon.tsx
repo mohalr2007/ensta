@@ -8,21 +8,27 @@ export const size = {
 }
 export const contentType = 'image/png'
 
+// Note: This file is simplified to generate a basic icon, 
+// as directly referencing external URLs in this context can be unreliable on some platforms.
+// The most robust method for favicons is placing a static favicon.ico in the /public directory.
 export default function Icon() {
   return new ImageResponse(
     (
       <div
         style={{
           fontSize: 24,
-          background: 'transparent',
+          background: '#00205B', // A color from ENSTA's branding
           width: '100%',
           height: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          color: 'white',
+          borderRadius: '50%',
+          fontWeight: 'bold',
         }}
       >
-        <img src="https://elearning.ensta.edu.dz/pluginfile.php/1/theme_academi/footerlogo/1715699273/ENSTA%20logo.png" alt="ENSTA Logo" />
+        E
       </div>
     ),
     {
