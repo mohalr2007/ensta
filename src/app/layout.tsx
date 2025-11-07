@@ -17,11 +17,6 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "ENSTA",
   description: "A modern school hub with bilingual support.",
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-    apple: '/favicon.ico',
-  },
 };
 
 export default function RootLayout({
