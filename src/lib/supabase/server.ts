@@ -8,10 +8,10 @@ export async function createSupabaseServerClient() {
   const cookieStore = cookies()
 
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
-    throw new Error("Supabase URL not found. Please add NEXT_PUBLIC_SUPABASE_URL to your .env.local file.");
+    throw new Error("Server Error: Missing environment variable NEXT_PUBLIC_SUPABASE_URL. Please add it to your Vercel project settings.");
   }
   if (!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-    throw new Error("Supabase anon key not found. Please add NEXT_PUBLIC_SUPABASE_ANON_KEY to your .env.local file.");
+    throw new Error("Server Error: Missing environment variable NEXT_PUBLIC_SUPABASE_ANON_KEY. Please add it to your Vercel project settings.");
   }
 
   return createServerClient(
